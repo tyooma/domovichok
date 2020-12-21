@@ -1,0 +1,155 @@
+{
+  "project_info": {
+    "project_number": "447205832578",
+    "firebase_url": "https://voda-slav.firebaseio.com",
+    "project_id": "voda-slav",
+    "storage_bucket": "voda-slav.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447205832578:android:22bc180766b115af86c19b",
+        "android_client_info": {
+          "package_name": "com.domovichok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447205832578-qa26mmfh3lmvokcosq4mlmh42oepitmk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBofJZxcOMe8ZlnrHM31dkH4nkMJp-6kDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447205832578-qa26mmfh3lmvokcosq4mlmh42oepitmk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "447205832578-ofuenebvb5f815g7g8172lqogif4rd4u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.domovichok"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447205832578:android:09a2e9c3e1c6fb6886c19b",
+        "android_client_info": {
+          "package_name": "com.domovichoknew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447205832578-qa26mmfh3lmvokcosq4mlmh42oepitmk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBofJZxcOMe8ZlnrHM31dkH4nkMJp-6kDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447205832578-qa26mmfh3lmvokcosq4mlmh42oepitmk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "447205832578-ofuenebvb5f815g7g8172lqogif4rd4u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.domovichok"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447205832578:android:22f4b0f658044a6186c19b",
+        "android_client_info": {
+          "package_name": "com.poligon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447205832578-qa26mmfh3lmvokcosq4mlmh42oepitmk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBofJZxcOMe8ZlnrHM31dkH4nkMJp-6kDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447205832578-qa26mmfh3lmvokcosq4mlmh42oepitmk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "447205832578-ofuenebvb5f815g7g8172lqogif4rd4u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.domovichok"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447205832578:android:41781c8d0c29868286c19b",
+        "android_client_info": {
+          "package_name": "com.taurusquadra.domovichok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447205832578-qa26mmfh3lmvokcosq4mlmh42oepitmk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBofJZxcOMe8ZlnrHM31dkH4nkMJp-6kDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447205832578-qa26mmfh3lmvokcosq4mlmh42oepitmk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "447205832578-ofuenebvb5f815g7g8172lqogif4rd4u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.domovichok"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
