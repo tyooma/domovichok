@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import LinearGradient from 'react-native-linear-gradient'
-import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+// import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 
 import Home from '../screens/Home'
 import Dispatch from '../screens/Dispatch/Dispatch'
@@ -14,7 +14,7 @@ import About from '../screens/About'
 import Policy from '../screens/Policy'
 import Settings from '../screens/Settings'
 import History from '../screens/History/History'
-import { HeaderIcon } from '../components/HeaderIcon'
+// import { HeaderIcon } from '../components/HeaderIcon'
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -43,16 +43,16 @@ const HomeStack = () => (
       name='Home'
       component={Home}
       options={{
-        title: 'Домовичок',
-        headerRight: () => (
-          <HeaderButtons HeaderButtonComponent={HeaderIcon}>
-            <Item
-              title='Instruction'
-              iconName='ios-camera'
-              onPress={() => navigation.push('Instruction')}
-            />
-          </HeaderButtons>
-        )
+        title: 'Домовичок'
+        // headerRight: () => (
+        //   <HeaderButtons HeaderButtonComponent={HeaderIcon}>
+        //     <Item
+        //       title='Instruction'
+        //       iconName='ios-camera'
+        //       onPress={() => navigation.push('Instruction')}
+        //     />
+        //   </HeaderButtons>
+        // )
       }}
     />
     <Stack.Screen
