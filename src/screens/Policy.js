@@ -9,14 +9,14 @@ import { ScrollView } from 'react-native-gesture-handler';
 const Policy = ({ navigation, locale, styles }) => {
   return (
     <SafeAreaView style={styles.Container}>
-      <View style={styles.Header}>
+      {/* <View style={styles.Header}>
         <View style={styles.HeaderLeft}>
           <View style={styles.HeaderIcon}><ActionBack navigation={navigation} /></View>
           <Text style={styles.HeaderCaption}>{locale.policy_caption}</Text>
         </View>
         <View style={styles.HeaderRight}></View>
       </View>
-      <Divider style={styles.Divider} />
+      <Divider style={styles.Divider} /> */}
       <ScrollView style={styles.Policy.Container}>
         <View>
           <Text style={styles.Policy.ParagraphText}>{locale.policy_company}</Text>

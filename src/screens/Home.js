@@ -17,7 +17,7 @@ export default Home = connect(
 
   return (
     <SafeAreaView style={styles.Container}>
-      <View style={styles.Header}>
+      {/* <View style={styles.Header}>
         <View style={styles.HeaderLeft}>
           <View style={styles.HeaderIcon}>
             <ActionMenu navigation={navigation} />
@@ -26,7 +26,7 @@ export default Home = connect(
         </View>
         <View style={styles.HeaderRight}></View>
       </View>
-      <Divider style={styles.Divider} />
+      <Divider style={styles.Divider} /> */}
       <View style={styles.Home.Content}>
         <View style={styles.Home.Profiles}>
           <ProfileList
@@ -122,7 +122,7 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
                 {locale.home_profiles_empty_1}
               </Text>
             </View>
-            <View style={styles.Empty.Section}>
+            {/* <View style={styles.Empty.Section}>
               <Text style={styles.Empty.Label}>
                 {locale.home_profiles_empty_2}
               </Text>
@@ -151,7 +151,7 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
                   {locale.home_profiles_empty_6}
                 </Text>
               </TouchableOpacity>
-            </View>
+            </View> */}
           </View>
           <View style={styles.Empty.Filler}></View>
         </>

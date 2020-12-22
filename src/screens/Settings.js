@@ -23,14 +23,14 @@ const Settings = ({
 
   return (
     <SafeAreaView style={styles.Container}>
-      <View style={styles.Header}>
+      {/* <View style={styles.Header}>
         <View style={styles.HeaderLeft}>
           <View style={styles.HeaderIcon}><ActionBack navigation={navigation}/></View>
           <Text style={styles.HeaderCaption}>{locale.settings_caption}</Text>
         </View>
         <View style={styles.HeaderRight}></View>
       </View>
-      <Divider style={styles.Divider}/>
+      <Divider style={styles.Divider}/> */}
       <View style={styles.Settings.Content}>
         <View style={styles.Settings.Section}>
             <Text style={styles.Settings.SectionCaption}>{locale.settings_lang.toUpperCase()}</Text>

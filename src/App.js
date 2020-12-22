@@ -8,12 +8,12 @@ import { Nav } from './nav/Nav'
 
 const store = createStore(AppReducer)
 
-export default App = () => {
+export default function App() {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     const Init = async () => {
-      await setAppInit(store);       // For PRODUCTION!!!
+      await setAppInit(store) // PROD
 
       // await setAppInitDefault(store) // For DEV, clear AsyncStorage, work only with REDUX
 
@@ -26,7 +26,7 @@ export default App = () => {
 
   useEffect(() => {
     if (loaded) {
-      SplashScreen.hide();
+      SplashScreen.hide()
     }
   }, [loaded])
 

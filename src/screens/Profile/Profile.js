@@ -91,7 +91,7 @@ const Profile = ({locale, styles, profiles, toProfiles, history, toHistory, last
 
   return (
     <SafeAreaView style={styles.Container}>
-      <View style={styles.Header}>
+      {/* <View style={styles.Header}>
         <View style={styles.HeaderLeft}>
           <View style={styles.HeaderIcon}><ActionBack navigation={navigation} screen={!route.params.ProfileID?'CreateProfile':''}/></View>
           <Text style={styles.HeaderCaption}>
@@ -100,7 +100,7 @@ const Profile = ({locale, styles, profiles, toProfiles, history, toHistory, last
         </View>
         <View style={styles.HeaderRight}></View>
       </View>
-      <Divider style={styles.Divider}/>
+      <Divider style={styles.Divider}/> */}
       <View style={styles.Profile.Content}>
         <ScrollView>
           <View style={styles.Profile.InputContainer}>
