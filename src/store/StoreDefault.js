@@ -116,7 +116,6 @@ const UpdateToken = async (store) => {
     const AUTHORIZED = messaging.AuthorizationStatus.AUTHORIZED
     const PROVISIONAL = messaging.AuthorizationStatus.PROVISIONAL
     if (authStatus === AUTHORIZED || authStatus === PROVISIONAL) {
-      console.log('')
       console.log('UpdateToken => Firebase => AuthStatus:', authStatus)
       const tget = await GetToken()
       // console.log('UpdateToken >> tget:', tget);

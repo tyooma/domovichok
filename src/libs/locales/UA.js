@@ -16,12 +16,12 @@ export default {
   menu_exit: "В И Х І Д",
 
   // HOME
-  home_profiles_empty_1: "У вас немає жодного профілю!",
-  home_profiles_empty_2: "Для створення профілю натисніть",
-  home_profiles_empty_3: "на іконку",
-  home_profiles_empty_4: "внизу екрану",
-  home_profiles_empty_5: "Для довідки натисніть на посилання:",
-  home_profiles_empty_6: "Інструкція",
+  home_profiles_empty_1: "У Вас немає жодного профiлю...",
+  // home_profiles_empty_2: "Для створення профілю натисніть",
+  // home_profiles_empty_3: "на іконку",
+  // home_profiles_empty_4: "внизу екрану",
+  // home_profiles_empty_5: "Для довідки натисніть на посилання:",
+  // home_profiles_empty_6: "Інструкція",
 
   // PROFILE
   profile_new_caption: "Створення профілю",

@@ -12,7 +12,7 @@ import { PeriodUpdate } from './Dispatch/DispatchSend';
 const Instruction = ({ locale, styles, media, toPeriod, navigation }) => {
   return (
     <SafeAreaView style={styles.Container}>
-      <View style={styles.Header}>
+      {/* <View style={styles.Header}>
         <View style={styles.HeaderLeft}>
           <View style={styles.HeaderIcon}><ActionBack navigation={navigation} /></View>
           <Text style={styles.HeaderCaption}>{locale.instruction_caption}</Text>
@@ -26,7 +26,7 @@ const Instruction = ({ locale, styles, media, toPeriod, navigation }) => {
           <Text style={styles.HeaderCaption}></Text>
         </View>
       </View>
-      <Divider style={styles.Divider} />
+      <Divider style={styles.Divider} /> */}
       <View style={styles.Help.Container}>
       <ScrollView>
           {/* <Divider style={styles.Divider} /> */}
