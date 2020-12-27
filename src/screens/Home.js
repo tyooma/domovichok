@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import { FlatList, SafeAreaView, Text, View } from 'react-native'
-import { Icon, Divider } from 'react-native-elements'
+import { Icon } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
 import { StateToProps, DispatchToProps } from '../store/MapToProps'
-import { ActionMenu } from './components/Actions'
 import { PeriodUpdate } from './Dispatch/DispatchSend'
 
 export default Home = connect(
@@ -17,16 +16,6 @@ export default Home = connect(
 
   return (
     <SafeAreaView style={styles.Container}>
-      {/* <View style={styles.Header}>
-        <View style={styles.HeaderLeft}>
-          <View style={styles.HeaderIcon}>
-            <ActionMenu navigation={navigation} />
-          </View>
-          <Text style={styles.HeaderCaption}>{locale.project_name}</Text>
-        </View>
-        <View style={styles.HeaderRight}></View>
-      </View>
-      <Divider style={styles.Divider} /> */}
       <View style={styles.Home.Content}>
         <View style={styles.Home.Profiles}>
           <ProfileList
@@ -122,36 +111,6 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
                 {locale.home_profiles_empty_1}
               </Text>
             </View>
-            {/* <View style={styles.Empty.Section}>
-              <Text style={styles.Empty.Label}>
-                {locale.home_profiles_empty_2}
-              </Text>
-              <View style={styles.Empty.SectionRow}>
-                <Text style={styles.Empty.Label}>
-                  {locale.home_profiles_empty_3}&nbsp;&nbsp;
-                </Text>
-                <Icon
-                  name='user-plus'
-                  iconStyle={styles.Empty.Icon}
-                  type='font-awesome-5'
-                />
-                <Text style={styles.Empty.Label}>
-                  &nbsp;&nbsp;{locale.home_profiles_empty_4}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.Empty.Section}>
-              <Text numberOfLines={5} style={styles.Empty.Label}>
-                {locale.home_profiles_empty_5}
-              </Text>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Instruction')}
-              >
-                <Text style={styles.Empty.Link}>
-                  {locale.home_profiles_empty_6}
-                </Text>
-              </TouchableOpacity>
-            </View> */}
           </View>
           <View style={styles.Empty.Filler}></View>
         </>
