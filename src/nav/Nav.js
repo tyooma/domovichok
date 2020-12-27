@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import LinearGradient from 'react-native-linear-gradient'
-// import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 
 import Home from '../screens/Home'
 import Dispatch from '../screens/Dispatch/Dispatch'
@@ -14,12 +14,12 @@ import About from '../screens/About'
 import Policy from '../screens/Policy'
 import Settings from '../screens/Settings'
 import History from '../screens/History/History'
-// import { HeaderIcon } from '../components/HeaderIcon'
+import { HeaderIcon } from '../components/HeaderIcon'
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 
-const HomeStack = () => (
+const HomeStack = ({ navigation }) => (
   <Stack.Navigator
     screenOptions={{
       headerTransparent: true,
@@ -43,16 +43,25 @@ const HomeStack = () => (
       name='Home'
       component={Home}
       options={{
-        title: 'Домовичок'
-        // headerRight: () => (
-        //   <HeaderButtons HeaderButtonComponent={HeaderIcon}>
-        //     <Item
-        //       title='Instruction'
-        //       iconName='ios-camera'
-        //       onPress={() => navigation.push('Instruction')}
-        //     />
-        //   </HeaderButtons>
-        // )
+        title: 'Домовичок',
+        headerRight: () => (
+          <HeaderButtons HeaderButtonComponent={HeaderIcon}>
+            <Item
+              title='Instruction'
+              iconName='ios-help-circle-outline'
+              onPress={() => navigation.push('Instruction')}
+            />
+          </HeaderButtons>
+        ),
+        headerLeft: () => (
+          <HeaderButtons HeaderButtonComponent={HeaderIcon}>
+            <Item
+              title='Drawer'
+              iconName='ios-menu'
+              onPress={() => navigation.toggleDrawer()}
+            />
+          </HeaderButtons>
+        )
       }}
     />
     <Stack.Screen
@@ -86,14 +95,14 @@ const HomeStack = () => (
   </Stack.Navigator>
 )
 
-const SettingsStack = () => (
+const SettingsStack = ({ navigation }) => (
   <Stack.Navigator
     screenOptions={{
       headerTransparent: true,
       headerTitleAlign: 'center',
       headerTitleStyle: {
         fontFamily: 'Montserrat-SemiBold',
-        fontSize: 22
+        fontSize: 20
       },
       headerTintColor: '#fff',
       headerBackground: () => (
@@ -110,20 +119,29 @@ const SettingsStack = () => (
       name='Settings'
       component={Settings}
       options={{
-        title: 'Налаштування'
+        title: 'Налаштування',
+        headerLeft: () => (
+          <HeaderButtons HeaderButtonComponent={HeaderIcon}>
+            <Item
+              title='Drawer'
+              iconName='ios-arrow-back'
+              onPress={() => navigation.goBack()}
+            />
+          </HeaderButtons>
+        )
       }}
     />
   </Stack.Navigator>
 )
 
-const InstructionStack = () => (
+const InstructionStack = ({ navigation }) => (
   <Stack.Navigator
     screenOptions={{
       headerTransparent: true,
       headerTitleAlign: 'center',
       headerTitleStyle: {
         fontFamily: 'Montserrat-SemiBold',
-        fontSize: 22
+        fontSize: 20
       },
       headerTintColor: '#fff',
       headerBackground: () => (
@@ -140,20 +158,29 @@ const InstructionStack = () => (
       name='Instruction'
       component={Instruction}
       options={{
-        title: 'Інструкція'
+        title: 'Інструкція',
+        headerLeft: () => (
+          <HeaderButtons HeaderButtonComponent={HeaderIcon}>
+            <Item
+              title='Drawer'
+              iconName='ios-arrow-back'
+              onPress={() => navigation.goBack()}
+            />
+          </HeaderButtons>
+        )
       }}
     />
   </Stack.Navigator>
 )
 
-const PolicyStack = () => (
+const PolicyStack = ({ navigation }) => (
   <Stack.Navigator
     screenOptions={{
       headerTransparent: true,
       headerTitleAlign: 'center',
       headerTitleStyle: {
         fontFamily: 'Montserrat-SemiBold',
-        fontSize: 22
+        fontSize: 20
       },
       headerTintColor: '#fff',
       headerBackground: () => (
@@ -170,20 +197,29 @@ const PolicyStack = () => (
       name='Policy'
       component={Policy}
       options={{
-        title: 'Політика конфіденційності'
+        title: 'Політика конфіденційності',
+        headerLeft: () => (
+          <HeaderButtons HeaderButtonComponent={HeaderIcon}>
+            <Item
+              title='Drawer'
+              iconName='ios-arrow-back'
+              onPress={() => navigation.goBack()}
+            />
+          </HeaderButtons>
+        )
       }}
     />
   </Stack.Navigator>
 )
 
-const AboutStack = () => (
+const AboutStack = ({ navigation }) => (
   <Stack.Navigator
     screenOptions={{
       headerTransparent: true,
       headerTitleAlign: 'center',
       headerTitleStyle: {
         fontFamily: 'Montserrat-SemiBold',
-        fontSize: 22
+        fontSize: 20
       },
       headerTintColor: '#fff',
       headerBackground: () => (
@@ -200,7 +236,16 @@ const AboutStack = () => (
       name='About'
       component={About}
       options={{
-        title: 'Довідка'
+        title: 'Довідка',
+        headerLeft: () => (
+          <HeaderButtons HeaderButtonComponent={HeaderIcon}>
+            <Item
+              title='Drawer'
+              iconName='ios-arrow-back'
+              onPress={() => navigation.goBack()}
+            />
+          </HeaderButtons>
+        )
       }}
     />
   </Stack.Navigator>
