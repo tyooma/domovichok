@@ -243,11 +243,7 @@ const Dispatch = ({
       {modalFooter}
     </View>
   );
-
-  // -----------END  Modal WArninig-----------
-  // -----------Start  Modal PREVIEW-----------
-  const modalContainer = <View style={styles.Warning.modalContainer}></View>;
-  // -----------END  Modal PREVIEW-----------
+ 
   return (
     <SafeAreaView style={styles.Container}>
       {/* Напоминание о дате */}
