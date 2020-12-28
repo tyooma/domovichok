@@ -5,13 +5,13 @@ export default {
   ActionSpinner: { size: 'large', color: '#007BFF', style: { padding: 20 } },
   ActionSpinnerStyle: { padding: 20 },
   //--------------------------------------------------------------------------------------------------
-  InputRequired: { color: 'red' },
+  InputRequired: { color: '#FF7171' },
   InputSelection: '#FFFFFF',
-  PlaceholderTextColor: '#007BFF',
+  PlaceholderTextColor: '#725cae66',
   //--------------------------------------------------------------------------------------------------
-  SwitchTrackColor: { true: '#81B0FF', false: '#767577' },
-  SwitchThumbColor: { true: '#007BFF', false: '#F4F3F4' },
-  SwitchIOSBackgroundColor: '#3E3E3E',
+  SwitchTrackColor: { true: '#6e6685e1', false: '#7C7C7C' },
+  SwitchThumbColor: { true: '#725CAE', false: '#A7A7A7' },
+  SwitchIOSBackgroundColor: '#7C7C7C',
   //--------------------------------------------------------------------------------------------------
   ColorNone: { color: '#00000000' },
   DisplayNone: { display: 'none' },
@@ -135,48 +135,74 @@ export default {
 
   Profile: {
     Content: {
+      marginTop: 50,
+
       flex: 1,
       flexDirection: 'column',
       justifyContent: 'space-between'
     },
 
+    ScrollView: {
+      paddingTop: 30,
+      paddingHorizontal: 15
+    },
+
     InputContainer: { paddingHorizontal: 7 },
     InputSection: { marginBottom: 7 },
-    InputItem: { marginBottom: 10 },
-    InputCaption: { fontSize: 17, fontWeight: 'bold', color: 'gray' },
+    InputItem: { marginBottom: 13 },
+    InputCaption: {
+      marginBottom: 10,
+      fontSize: 13,
+      fontWeight: 'normal',
+      color: '#fff'
+    },
 
     InputDefault: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: '#007BFF',
-      borderColor: 'gray',
+      paddingVertical: 2,
+      paddingHorizontal: 7,
+
+      fontSize: 12,
+      fontWeight: 'normal',
+      color: '#fff',
+
+      borderColor: '#725CAE',
       borderWidth: 1,
-      padding: 0,
-      paddingHorizontal: 5,
-      margin: 0
+      borderRadius: 6
     },
     InputNotModif: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: '#007BFF',
       padding: 0,
       paddingHorizontal: 5,
-      margin: 0
+      margin: 0,
+
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: '#725CAE'
     },
 
     EnumeratorContainer: {
+      marginBottom: 10,
+
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between'
     },
     EnumeratorCaption: {
-      fontSize: 17,
+      paddingBottom: 10,
+      marginBottom: 10,
+
+      fontSize: 14,
       fontWeight: 'bold',
-      color: 'gray',
-      borderColor: 'gray',
+      color: '#fff',
+
+      borderColor: '#725cae66',
       borderBottomWidth: 1
     },
-    EnumeratorItem: { fontSize: 18, color: 'gray', marginTop: 0 },
+    EnumeratorItem: {
+      fontSize: 13,
+      fontWeight: 'normal',
+      color: '#fff',
+      marginTop: 0
+    },
 
     DeleteIcon: { color: '#FF4D4D', fontSize: 35 },
     SaveIcon: { color: '#007BFF', fontSize: 35 },
