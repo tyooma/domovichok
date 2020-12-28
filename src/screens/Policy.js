@@ -1,17 +1,16 @@
-import React, { useCallback } from "react";
+import React, { useCallback } from 'react'
 import {
   SafeAreaView,
   Text,
   View,
   Linking,
-  TouchableOpacity,
-} from "react-native";
-import { Divider } from "react-native-elements";
-import { connect } from "react-redux";
-import { StateToProps } from "../store/MapToProps";
-import { ActionBack } from "./components/Actions";
-import { ScrollView } from "react-native-gesture-handler";
-import NoNetwork from "./NoNetwork";
+  TouchableOpacity
+} from 'react-native'
+import { Divider } from 'react-native-elements'
+import { connect } from 'react-redux'
+import { StateToProps } from '../store/MapToProps'
+import { ActionBack } from './components/Actions'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const Policy = ({ navigation, locale, styles }) => {
   return (
@@ -153,22 +152,21 @@ const Policy = ({ navigation, locale, styles }) => {
         </View>
       </ScrollView>
     </SafeAreaView>
-  );
-};
+  )
+}
 
-const urlPolicy = "https://tau-quadra.com/privacy-policy";
+const urlPolicy = 'https://tau-quadra.com/privacy-policy'
 
 const OpenUrlTouchableOpacity = ({ url, children }) => {
   const handlePress = useCallback(async () => {
-    const supported = await Linking.canOpenURL(url);
+    const supported = await Linking.canOpenURL(url)
     if (supported) {
       await Linking.openURL(url);
     } else {
-      //Alert.alert(`${locale.err_check_link} ${url}`);
-      <NoNetwork />;
+      Alert.alert(`${locale.err_check_link} ${url}`)
     }
-  }, [url]);
-  return <TouchableOpacity onPress={handlePress}>{children}</TouchableOpacity>;
-};
+  }, [url])
+  return <TouchableOpacity onPress={handlePress}>{children}</TouchableOpacity>
+}
 
-export default connect(StateToProps())(Policy);
+export default connect(StateToProps())(Policy)
