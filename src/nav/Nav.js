@@ -31,7 +31,7 @@ const HomeStack = ({ navigation }) => (
       headerTintColor: '#fff',
       headerBackground: () => (
         <LinearGradient
-          colors={['#00aeef', '#72a4ee']}
+          colors={['#555555', '#725CAE']}
           style={StyleSheet.absoluteFill}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}

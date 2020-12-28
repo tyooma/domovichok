@@ -1,32 +1,6 @@
 export default {
   // MAIN
-  Container: { flex: 1, backgroundColor: '#212529' },
-  Header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 5,
-    marginTop: 5
-  },
-  HeaderLeft: { flexDirection: 'row', paddingHorizontal: 0 },
-  HeaderRight: { flexDirection: 'row' },
-  HeaderCaption: { fontSize: 23, fontWeight: 'bold', color: '#007BFF' },
-  HeaderIcon: { justifyContent: 'center', paddingHorizontal: 0 },
-  HeaderIconRight: { justifyContent: 'center', paddingHorizontal: 10 },
-  //--------------------------------------------------------------------------------------------------
-  ActionMenuIcon: {
-    color: '#007BFF',
-    fontSize: 23,
-    paddingHorizontal: 15,
-    paddingVertical: 3
-  },
-  ActionBackIcon: {
-    color: '#007BFF',
-    fontSize: 23,
-    paddingHorizontal: 15,
-    paddingVertical: 3
-  },
-  //--------------------------------------------------------------------------------------------------
-  Divider: { backgroundColor: '#007BFF', height: 1 },
+  Container: { flex: 1, backgroundColor: '#212121' },
   //--------------------------------------------------------------------------------------------------
   ActionSpinner: { size: 'large', color: '#007BFF', style: { padding: 20 } },
   ActionSpinnerStyle: { padding: 20 },
@@ -49,17 +23,20 @@ export default {
   },
 
   Empty: {
-    Content: { alignItems: 'center', justifyContent: 'center' },
-    Center: { alignItems: 'center', justifyContent: 'center' },
-    Filler: { height: '30%' },
-    Section: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 5,
-      margin: 0
+    Content: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+    Label: {
+      marginBottom: 6,
+      fontWeight: 'normal',
+      fontSize: 14,
+      color: '#fff',
+      textAlign: 'center'
     },
-    Label: { fontSize: 18, color: 'gray', textAlign: 'center' },
-    Icon: { color: '#007BFF', fontSize: 20 },
+    SubLabel: {
+      fontWeight: 'normal',
+      fontSize: 10,
+      color: '#ccc',
+      textAlign: 'center'
+    },
     SectionRow: { flexDirection: 'row', alignItems: 'center' },
     Link: {
       fontSize: 18,
@@ -112,7 +89,7 @@ export default {
       color: '#FFFFFF'
     },
     ProfileDetails: {
-      backgroundColor: '#212529',
+      backgroundColor: '#212121',
       borderColor: '#007BFF',
       borderWidth: 1,
       borderStyle: 'solid',
@@ -137,27 +114,28 @@ export default {
     ProfileDispatchIcon: { color: '#FFFFFF', fontSize: 30 },
 
     ProfileCreateContainer: {
-      backgroundColor: '#212529',
+      padding: 30,
+
       alignItems: 'flex-end',
-      justifyContent: 'space-between',
-      padding: 10
+      justifyContent: 'space-between'
     },
     ProfileCreateSection: {
-      alignItems: 'center',
-      justifyContent: 'center',
+      padding: 15,
+
       width: 60,
       height: 60,
-      borderColor: '#007BFF',
-      borderWidth: 2,
-      borderStyle: 'solid',
-      borderRadius: 15
+
+      alignItems: 'center',
+      justifyContent: 'center',
+
+      borderRadius: 20
     },
-    ProfileCreateIcon: { color: '#007BFF', fontSize: 30 }
+    ProfileCreateIcon: { color: '#fff', fontSize: 30 }
   },
 
   Profile: {
     Content: {
-      flex: 9,
+      flex: 1,
       flexDirection: 'column',
       justifyContent: 'space-between'
     },
@@ -295,14 +273,14 @@ export default {
   Feedback: {
     ViewArea: {
       flex: 1,
-      backgroundColor: '#212529',
+      backgroundColor: '#212121',
       alignItems: 'center',
       justifyContent: 'center'
     },
     Container: {
       width: '80%',
       height: '60%',
-      backgroundColor: '#212529',
+      backgroundColor: '#212121',
       borderColor: '#007BFF',
       borderWidth: 2,
       padding: 0,
@@ -450,7 +428,7 @@ export default {
   Menu: {
     Container: {
       flex: 1,
-      backgroundColor: '#212529',
+      backgroundColor: '#212121',
       justifyContent: 'space-between'
     },
     Content: { height: '95%' },

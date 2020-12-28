@@ -3,6 +3,8 @@ import { FlatList, SafeAreaView, Text, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient'
+
 import { StateToProps, DispatchToProps } from '../store/MapToProps'
 import { PeriodUpdate } from './Dispatch/DispatchSend'
 
@@ -31,13 +33,19 @@ export default Home = connect(
             onPress={() =>
               navigation.navigate('Profile', { ProfileID: undefined })
             }
-            style={styles.Home.ProfileCreateSection}
           >
-            <Icon
-              name='user-plus'
-              iconStyle={styles.Home.ProfileCreateIcon}
-              type='font-awesome-5'
-            />
+            <LinearGradient
+              colors={['#555555', '#725CAE']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.Home.ProfileCreateSection}
+            >
+              <Icon
+                name='plus'
+                iconStyle={styles.Home.ProfileCreateIcon}
+                type='font-awesome'
+              ></Icon>
+            </LinearGradient>
           </TouchableOpacity>
         </View>
       </View>
@@ -104,15 +112,14 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
     } else {
       content = (
         <>
-          <View style={styles.Empty.Filler}></View>
           <View style={styles.Empty.Content}>
-            <View style={styles.Empty.Section}>
-              <Text style={styles.Empty.Label}>
-                {locale.home_profiles_empty_1}
-              </Text>
-            </View>
+            <Text style={styles.Empty.Label}>
+              {locale.home_profiles_empty_1}
+            </Text>
+            <Text style={styles.Empty.SubLabel}>
+              {locale.home_profiles_empty_2}
+            </Text>
           </View>
-          <View style={styles.Empty.Filler}></View>
         </>
       )
     }
