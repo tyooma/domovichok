@@ -1,6 +1,6 @@
 export default {
   // MAIN
-  Container: { flex: 10, backgroundColor: '#212529' },
+  Container: { marginTop: 55, flex: 1, backgroundColor: "#212529" },  
   Header: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5, marginTop: 5 },
   HeaderLeft: { flexDirection: 'row', paddingHorizontal: 0 },
   HeaderRight: { flexDirection: 'row' },
@@ -344,5 +344,24 @@ export default {
     Link: { color: '#007BFF', },
     Link_2: { color: '#007BFF', marginBottom: 15, textDecorationLine: 'underline' },
     Version: { color: '#007BFF', alignSelf: "flex-end", fontSize: 10 }
+  },
+
+  NoNetwork: {
+    ContainerCenter: {
+      padding: 7,
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#212529",
+    },        
+    Image: { marginBottom: 50 },
+    ContainerCaption: { alignItems: "center", marginVertical: 30 },
+    CaptionText: { color: "#212121", alignItems: "center", textAlign: 'center', fontSize: 28, fontWeight: "bold" },    
+    retryText: {
+      marginTop: 10,
+      fontSize: 20,
+      color: "#72A4EE",
+      fontWeight: "bold"
+    },
   },
 };

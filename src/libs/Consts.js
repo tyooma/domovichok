@@ -17,6 +17,7 @@ export const PROFILE = {
   bathCold: 'BATHCOLD',
   watering: 'WATERING',
   sewage: 'SEWAGE',
+  policy: 'POLICY'
 }
 
 export const DISPATCH = {
@@ -27,7 +28,7 @@ export const DISPATCH = {
   bathCold: 'BATHCOLD',
   watering: 'WATERING',
   sewage: 'SEWAGE',
-  motes: 'NOTES',
+  motes: 'NOTES',  
 }
 
 export const LASTVALUE = {

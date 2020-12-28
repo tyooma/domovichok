@@ -1,19 +1,24 @@
-import React, { useEffect } from 'react'
-import { FlatList, SafeAreaView, Text, View } from 'react-native'
-import { Icon, Divider } from 'react-native-elements'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { connect } from 'react-redux'
-import { StateToProps, DispatchToProps } from '../store/MapToProps'
-import { ActionMenu } from './components/Actions'
-import { PeriodUpdate } from './Dispatch/DispatchSend'
+import React, { useEffect, useReducer } from "react";
+
+import { FlatList, SafeAreaView, Text, Image, View } from "react-native";
+import { Icon, Divider } from "react-native-elements";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { connect } from "react-redux";
+import { StateToProps, DispatchToProps } from "../store/MapToProps";
+import { ActionMenu } from "./components/Actions";
+import { PeriodUpdate } from "./Dispatch/DispatchSend";
+import { getProfile } from "../libs/Tools";
+
+import { runHistorySearch } from "./Profile/ProfileActions";
+import { StackRouter } from "react-navigation";
 
 export default Home = connect(
   StateToProps(),
   DispatchToProps()
 )(({ navigation, styles, locale, toPeriod, profiles, profilesDetails }) => {
   useEffect(() => {
-    PeriodUpdate(locale, toPeriod, 'HOME', navigation)
-  }, [])
+    PeriodUpdate(locale, toPeriod, "HOME", navigation);
+  }, []);
 
   return (
     <SafeAreaView style={styles.Container}>
@@ -40,32 +45,32 @@ export default Home = connect(
         <View style={styles.Home.ProfileCreateContainer}>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('Profile', { ProfileID: undefined })
+              navigation.navigate("Profile", { ProfileID: undefined })
             }
             style={styles.Home.ProfileCreateSection}
           >
             <Icon
-              name='user-plus'
+              name="user-plus"
               iconStyle={styles.Home.ProfileCreateIcon}
-              type='font-awesome-5'
+              type="font-awesome-5"
             />
           </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
-  )
-})
+  );
+});
 
 const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
-  let validate = false
-  let errors = false
-  let content = undefined
+  let validate = false;
+  let errors = false;
+  let content = undefined;
   if (profiles && styles && locale && navigation) {
     if (profiles.length > 0) {
-      validate = true
+      validate = true;
     }
   } else {
-    errors = true
+    errors = true;
   }
 
   if (!errors) {
@@ -79,7 +84,7 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
               <View style={styles.Home.ProfileSection}>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('Profile', { ProfileID: item.id })
+                    navigation.navigate("Profile", { ProfileID: item.id })
                   }
                 >
                   <Text style={styles.Home.ProfileCaption}>{item.address}</Text>
@@ -91,27 +96,44 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
                     </View>
                   )}
                 </TouchableOpacity>
-              </View>
-              <View style={styles.Home.ProfileDispatchSection}>
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate('Dispatch', {
-                      ProfileID: item.id,
-                      IsNewDispatch: true
-                    })
-                  }
-                >
-                  <Icon
-                    name='sign-out-alt'
-                    iconStyle={styles.Home.ProfileDispatchIcon}
-                    type='font-awesome-5'
-                  />
-                </TouchableOpacity>
+                <View style={styles.Home.ProfileDispatchSection}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      //runHistorySearch(history, profile)
+                      navigation.navigate("History", {
+                        ProfileID: item.id,
+                        ProfileName: item.address,
+                        NeedLoad: true,
+                      })
+                    }
+                  >
+                    <Image
+                      style={styles.Home.ProfileDispatchIcon}
+                      source={require("../libs/assets/images/Vector.png")}
+                    />
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.Home.ProfileDispatchSection}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate("Dispatch", {
+                        ProfileID: item.id,
+                        IsNewDispatch: true,
+                      })
+                    }
+                  >
+                    <Icon
+                      name="sign-out-alt"
+                      iconStyle={styles.Home.ProfileDispatchIcon}
+                      type="font-awesome-5"
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           )}
         />
-      )
+      );
     } else {
       content = (
         <>
@@ -155,7 +177,7 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
           </View>
           <View style={styles.Empty.Filler}></View>
         </>
-      )
+      );
     }
   } else {
     content = (
@@ -171,8 +193,8 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
         </View>
         <View style={styles.Empty.Filler}></View>
       </>
-    )
+    );
   }
 
-  return content
-}
+  return content;
+};

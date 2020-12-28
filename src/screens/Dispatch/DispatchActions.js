@@ -142,17 +142,18 @@ const saveHistory = (dispatch, history, toHistory, lastValue, toLastValue, local
 
 //--------------------------------------------------------------------------------------------------------------
 
-export const Validation = (dispatch, locale) => {
+export const Validation = (dispatch, locale) => {  
   const fixVal = (value) => {
     return value.replace(',','.');
   }
 
   const checkVal = (inValue) => {
+    console.log("inValue ===<",inValue)
     let result = false;
     const fixed = fixVal(inValue);
     try {
       const value = parseFloat(fixed);
-      if (value>0) {
+      if (value>=0) {
         result = true;
       }
     } catch (error) {
@@ -162,6 +163,7 @@ export const Validation = (dispatch, locale) => {
   }
 
   const getWarnings = (field) => {
+    console.log('ValidgetWarningsation => field:', field);
     const item = field.replace(':', '');
     const message = locale.valid_dispatch_required.replace('#', item);
     return `${message}\n\n`;
@@ -178,7 +180,7 @@ export const Validation = (dispatch, locale) => {
       details += getWarnings(`${locale.profile_kitchen}->${locale.profile_kitchen_hot}`);
     }
   }
-  if (profile.kitchenCold) {
+  if (profile.kitchenCold) {    
     if (!kitchenCold || !checkVal(kitchenCold)) {
       result = false;
       details += getWarnings(`${locale.profile_kitchen}->${locale.profile_kitchen_cold}`);

@@ -114,7 +114,7 @@ export default {
   about_appDisclaimer: "This application was developed in the Slavutich city and it will work only for the water supply of the Slavutych city.",
   about_appPhone: "Water supply phone: 2-22-22",
   about_appLink: "Link to the water supply website: https://vodaslav.com.ua/",
-  about_appVersion: "Version: v2.0.1",
+  about_appVersion: "Version: v2.0.2",
 
   // INSTRUCTION
   // ----------------------------------------------------------------------------------------
