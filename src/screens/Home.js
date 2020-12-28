@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
-import { FlatList, SafeAreaView, Text, View,Image } from 'react-native'
-import { Icon } from 'react-native-elements'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { connect } from 'react-redux'
-import LinearGradient from 'react-native-linear-gradient'
+import React, { useEffect } from "react";
+import { FlatList, SafeAreaView, Text, View, Image } from "react-native";
+import { Icon } from "react-native-elements";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { connect } from "react-redux";
+import LinearGradient from "react-native-linear-gradient";
 
-import { StateToProps, DispatchToProps } from '../store/MapToProps'
-import { PeriodUpdate } from './Dispatch/DispatchSend'
+import { StateToProps, DispatchToProps } from "../store/MapToProps";
+import { PeriodUpdate } from "./Dispatch/DispatchSend";
 
 export default Home = connect(
   StateToProps(),
@@ -35,15 +35,15 @@ export default Home = connect(
             }
           >
             <LinearGradient
-              colors={['#555555', '#725CAE']}
+              colors={["#555555", "#725CAE"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               style={styles.Home.ProfileCreateSection}
             >
               <Icon
-                name='plus'
+                name="plus"
                 iconStyle={styles.Home.ProfileCreateIcon}
-                type='font-awesome'
+                type="font-awesome-5"
               ></Icon>
             </LinearGradient>
           </TouchableOpacity>
@@ -73,20 +73,32 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <View style={styles.Home.Profile}>
-              <View style={styles.Home.ProfileSection}>
+              <TouchableOpacity
+                style={styles.Home.ProfileInfo}
+                onPress={() =>
+                  navigation.navigate("Dispatch", {
+                    ProfileID: item.id,
+                    IsNewDispatch: true,
+                  })
+                }
+              >
+                <Text style={styles.Home.ProfileCaption}>{item.address}</Text>
+                <Text style={styles.Home.ProfileCaption}>
+                  О/Р:&nbsp;{item.id}
+                </Text>
+              </TouchableOpacity>
+
+              <View style={styles.Home.ProfileIcons}>
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate("Profile", { ProfileID: item.id })
                   }
                 >
-                  <Text style={styles.Home.ProfileCaption}>{item.address}</Text>
-                  {isDetails && (
-                    <View style={styles.Home.ProfileDetails}>
-                      <Text style={styles.Home.ProfileDetailsText}>
-                        {locale.profile_id}&nbsp;&nbsp;{item.id}
-                      </Text>
-                    </View>
-                  )}
+                  <Icon
+                    name="edit"
+                    iconStyle={styles.Home.ProfileIcon}
+                    type="font-awesome-5"
+                  ></Icon>
                 </TouchableOpacity>
                 <View style={styles.Home.ProfileDispatchSection}>
                   <TouchableOpacity
@@ -123,6 +135,40 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
                 </View>
               </View>
             </View>
+            // <View style={styles.Home.Profile}>
+            //   <View style={styles.Home.ProfileSection}>
+            //     <TouchableOpacity
+            // onPress={() =>
+            //   navigation.navigate('Profile', { ProfileID: item.id })
+            // }
+            //     >
+            //       <Text style={styles.Home.ProfileCaption}>{item.address}</Text>
+            //       {isDetails && (
+            //         <View style={styles.Home.ProfileDetails}>
+            //           <Text style={styles.Home.ProfileDetailsText}>
+            //             {locale.profile_id}&nbsp;&nbsp;{item.id}
+            //           </Text>
+            //         </View>
+            //       )}
+            //     </TouchableOpacity>
+            //   </View>
+            //   <View style={styles.Home.ProfileDispatchSection}>
+            //     <TouchableOpacity
+            // onPress={() =>
+            //   navigation.navigate('Dispatch', {
+            //     ProfileID: item.id,
+            //     IsNewDispatch: true
+            //   })
+            // }
+            //     >
+            //       <Icon
+            //         name='sign-out-alt'
+            //         iconStyle={styles.Home.ProfileDispatchIcon}
+            //         type='font-awesome-5'
+            //       />
+            //     </TouchableOpacity>
+            //   </View>
+            // </View>
           )}
         />
       );

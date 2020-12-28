@@ -72,44 +72,56 @@ export default {
   },
 
   Home: {
-    Content: { flex: 9, justifyContent: 'space-between' },
+    Content: {
+      paddingHorizontal: 15,
+      flex: 1,
+      justifyContent: 'space-between'
+    },
 
-    Profiles: { flex: 9, justifyContent: 'space-between' },
+    Profiles: {
+      marginTop: 50,
+      paddingTop: 30,
+      flex: 1,
+      justifyContent: 'space-between'
+    },
+
     Profile: {
+      marginBottom: 15,
+
       flexDirection: 'row',
       justifyContent: 'space-between',
-      margin: 5,
-      padding: 5
-    },
-    ProfileSection: {
-      width: '80%',
-      backgroundColor: '#007BFF',
-      marginRight: 0,
-      borderTopLeftRadius: 7,
-      borderTopRightRadius: 7,
-      borderBottomLeftRadius: 7,
-      borderBottomRightRadius: 7
-    },
-    ProfileCaption: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      marginHorizontal: 5,
-      padding: 5,
-      color: '#FFFFFF'
-    },
-    ProfileDetails: {
-      backgroundColor: '#212121',
-      borderColor: '#007BFF',
+
       borderWidth: 1,
       borderStyle: 'solid',
-      borderBottomLeftRadius: 7,
-      borderBottomRightRadius: 7
+      borderColor: '#725CAE',
+      borderRadius: 6
     },
-    ProfileDetailsText: {
-      fontSize: 16,
-      color: '#007BFF',
-      marginHorizontal: 5,
-      marginVertical: 3
+
+    ProfileInfo: {
+      paddingTop: 14,
+      paddingLeft: 17,
+    },
+
+    ProfileCaption: {
+      marginBottom: 8, 
+
+      fontSize: 14,
+      fontWeight: 'normal',
+      color: '#fff'
+    },
+
+    ProfileIcons: {
+      paddingTop: 8,
+      paddingRight: 11,
+      paddingBottom: 11
+    },
+
+    ProfileIcon: {
+      marginBottom: 10, 
+
+      fontSize: 26,
+      fontWeight: 'normal',
+      color: '#725CAE'
     },
 
     ProfileDispatchSection: {
@@ -120,7 +132,6 @@ export default {
       backgroundColor: 'green',
       borderRadius: 10
     },
-    ProfileDispatchIcon: { color: '#FFFFFF', fontSize: 30 },
 
     ProfileCreateContainer: {
       padding: 30,

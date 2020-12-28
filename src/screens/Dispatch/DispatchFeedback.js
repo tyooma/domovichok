@@ -18,6 +18,7 @@ const DispatchFeedback = ({
   navigation,
   theme,
 }) => {
+  console.log("dispatch ==>", dispatch, "setModal", setModal);  
   const needLoad = useRef(true);
   const [content, setContent] = useState(
     <View style={styles.NoNetwork.ContainerCenter}>

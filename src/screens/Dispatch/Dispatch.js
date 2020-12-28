@@ -6,17 +6,15 @@ import React, {
   useState,
 } from "react";
 import {
-  Alert,
   Modal,
   SafeAreaView,
   ScrollView,
   Text,
   TextInput,
-  View,
-  FlatList,
+  View,  
   TouchableOpacity,
 } from "react-native";
-import NetInfo from "@react-native-community/netinfo";
+
 import { Divider, Icon, Input } from "react-native-elements";
 //import { TouchableOpacity } from "react-native-gesture-handler";
 import { connect } from "react-redux";
@@ -29,11 +27,11 @@ import {
   FixNotesInput,
   Success4Dispatch,
 } from "../../libs/Tools";
-import { Validation } from "./DispatchActions";
+// import { Validation } from "./DispatchActions";
 
-import DispatchFeedback from "./DispatchFeedback";
+// import DispatchFeedback from "./DispatchFeedback";
 
-import NoNetwork from "../NoNetwork";
+// import NoNetwork from "../NoNetwork";
 import { PeriodUpdate } from "./DispatchSend";
 
 const ReducerDispatch = (state, action) => {
@@ -80,9 +78,8 @@ const Dispatch = ({
     sewage: "",
     notes: "",
   });
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalPreviewVisible, setModalPreviewVisible] = useState(false);
 
   useEffect(() => {
     PeriodUpdate(locale, toPeriod, "HOME", navigation);
@@ -134,42 +131,7 @@ const Dispatch = ({
     }
   }, []);
 
-  const SendOnline = useCallback(() => {
-    const validate = Validation(send, locale);
-    if (validate.state) {
-      NetInfo.fetch().then((state) => {
-        if (state.isConnected) {
-          if (Success4Dispatch(period)) {
-            setModal(true);
-          } else {
-            Alert.alert(
-              locale.info_warning,
-              `${locale.info_dispatch_unperiod_notification}`,
-              [
-                { text: locale.action_ok, onPress: () => setModal(true) },
-                { text: locale.action_cancel, onPress: () => null },
-              ],
-              { cancelable: false }
-            );
-          }
-        } else {
-          <NoNetwork />;
-          // Alert.alert(
-          //   locale.err_main_caption, locale.err_check_link,
-          //   [{ text: locale.action_ok, onPress: () => null }], { cancelable: false },
-          // );
-        }
-      });
-    } else {
-      Alert.alert(
-        locale.valid_main_caption,
-        `${validate.details}`,
-        [{ text: "OK", onPress: () => null }],
-        { cancelable: false }
-      );
-    }
-  }, [send, setModal]);
-
+ 
   // Init fields
   useEffect(() => {
     const Init = (profiles, route) => {
@@ -219,8 +181,7 @@ const Dispatch = ({
         <TouchableOpacity
           style={{ ...styles.Warning.actions, backgroundColor: "#0080ff" }}
           onPress={() => {
-            setModalVisible(!modalVisible);
-            //setModalVisible(!true);
+            setModalVisible(!modalVisible);            
           }}
         >
           <Text style={styles.Warning.actionText}>{locale.action_ok}</Text>
@@ -479,14 +440,19 @@ const Dispatch = ({
               <View>{modalContainer}</View>
             </View>
           </Modal>
-          
         </ScrollView>
 
         <Divider style={styles.Divider} />
         <View style={styles.Dispatch.Toolbar}>
           {/* <TouchableOpacity onPress={() => SendOnline()}>           */}
           <TouchableOpacity
-            onPress={() => setModalPreviewVisible(!modalPreviewVisible)}
+            onPress={
+              () =>             
+              navigation.navigate("PreviewDispatchFeedback", {
+                send: send,
+                period:period
+              })
+            }
           >
             <Icon
               name="envelope"
@@ -495,19 +461,7 @@ const Dispatch = ({
             />
           </TouchableOpacity>
         </View>
-      </View>
-      <Modal
-        visible={modal}
-        onRequestClose={() => console.log("Modal => Close")}
-        animationType="fade"
-        transparent={false}
-      >
-        <DispatchFeedback
-          dispatch={send}
-          navigation={navigation}
-          setModal={setModal}
-        />
-      </Modal>
+      </View>     
     </SafeAreaView>
   );
 };
