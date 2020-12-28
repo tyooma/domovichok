@@ -14,6 +14,7 @@ import About from '../screens/About'
 import Policy from '../screens/Policy'
 import Settings from '../screens/Settings'
 import History from '../screens/History/History'
+import PreviewDispatchFeedback from '../screens/Dispatch/PreviewDispatchFeedback'
 import { HeaderIcon } from '../components/HeaderIcon'
 
 const Stack = createStackNavigator()
@@ -90,6 +91,13 @@ const HomeStack = ({ navigation }) => (
       component={History}
       options={{
         title: 'Історія'
+      }}
+    />
+    <Stack.Screen
+      name='PreviewDispatchFeedback'
+      component={PreviewDispatchFeedback}
+      options={{
+        title: 'Підтвердження показань'
       }}
     />
   </Stack.Navigator>
@@ -251,6 +259,9 @@ const AboutStack = ({ navigation }) => (
   </Stack.Navigator>
 )
 
+
+
+
 const MainDrawer = () => (
   <Drawer.Navigator>
     <Drawer.Screen
@@ -288,6 +299,7 @@ const MainDrawer = () => (
         title: 'Довідка'
       }}
     />
+  
   </Drawer.Navigator>
 )
 

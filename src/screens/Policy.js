@@ -161,7 +161,7 @@ const OpenUrlTouchableOpacity = ({ url, children }) => {
   const handlePress = useCallback(async () => {
     const supported = await Linking.canOpenURL(url)
     if (supported) {
-      await Linking.openURL(url)
+      await Linking.openURL(url);
     } else {
       Alert.alert(`${locale.err_check_link} ${url}`)
     }

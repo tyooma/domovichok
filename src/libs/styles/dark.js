@@ -1,6 +1,15 @@
+import { Dimensions } from "react-native";
+
+const screen = Dimensions.get("window");
+
+export const sWidth = screen.width;
+
+export const sHeight = screen.height;
+
 export default {
   // MAIN
   Container: { flex: 1, backgroundColor: '#212121' },
+  ContainerHeader: { marginTop: 55, flex: 1 },
   //--------------------------------------------------------------------------------------------------
   ActionSpinner: { size: 'large', color: '#007BFF', style: { padding: 20 } },
   ActionSpinnerStyle: { padding: 20 },
@@ -618,5 +627,112 @@ export default {
       textDecorationLine: 'underline'
     },
     Version: { color: '#007BFF', alignSelf: 'flex-end', fontSize: 14 }
-  }
+  },
+  NoNetwork: {
+    ContainerCenter: {
+      padding: 7,
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#212529",
+    },
+    Image: { marginBottom: 50 },
+    ContainerCaption: { alignItems: "center", marginVertical: 30 },
+    CaptionText: {
+      color: "#ffffff",
+      alignItems: "center",
+      textAlign: "center",
+      fontSize: 28,
+      fontWeight: "bold",
+    },
+    retryText: {
+      marginTop: 10,
+      fontSize: 20,
+      color: "#725CAE",
+      fontWeight: "bold",
+    },
+  },
+  Checkbox: {
+    checkboxContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      width: sWidth,
+      paddingRight: 20,
+    },
+    checkboxStyle: {
+      height: 20,
+      width: 20,
+      borderRadius: 5,
+      borderWidth: 0.3,
+      borderColor: "#a0a0a0",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    checkboxTextStyle: {
+      marginLeft: 14,
+      color: "#050505",
+      lineHeight: 24,
+      fontSize: 12,
+    },
+    checkboxImage: {
+      height: 10,
+      width: 14,
+      resizeMode: "contain",
+    },
+  },
+  // ----------- Modal WArninig-----------
+  Warning: {
+    container: {
+      flex: 1,
+      backgroundColor: "#fff",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    modal: {
+      backgroundColor: "#00000099",
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    modalContainer: {
+      backgroundColor: "#fff",
+      borderRadius: 5,
+    },
+    modalHeader: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    title: {
+      fontWeight: "bold",
+      fontSize: 20,
+      padding: 15,
+      color: "#000",
+    },
+    divider: {
+      width: "100%",
+      height: 1,
+      backgroundColor: "lightgray",
+    },
+    modalBody: {
+      backgroundColor: "#fff",
+      paddingVertical: 20,
+      paddingHorizontal: 10,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    bodyText: {
+      fontSize: 20,
+    },
+    modalFooter: {},
+    actions: {
+      borderRadius: 5,
+      marginHorizontal: 10,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+    },
+    actionText: {
+      color: "#fff",
+    },
+  },
+  // -----------END Header Modal WArninig-----------
 }

@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react'
-import { FlatList, SafeAreaView, Text, View } from 'react-native'
-import { Icon } from 'react-native-elements'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { connect } from 'react-redux'
-import LinearGradient from 'react-native-linear-gradient'
+import React, { useEffect } from "react";
+import { FlatList, SafeAreaView, Text, View, Image } from "react-native";
+import { Icon } from "react-native-elements";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { connect } from "react-redux";
+import LinearGradient from "react-native-linear-gradient";
 
-import { StateToProps, DispatchToProps } from '../store/MapToProps'
-import { PeriodUpdate } from './Dispatch/DispatchSend'
+import { StateToProps, DispatchToProps } from "../store/MapToProps";
+import { PeriodUpdate } from "./Dispatch/DispatchSend";
 
 export default Home = connect(
   StateToProps(),
   DispatchToProps()
 )(({ navigation, styles, locale, toPeriod, profiles, profilesDetails }) => {
   useEffect(() => {
-    PeriodUpdate(locale, toPeriod, 'HOME', navigation)
-  }, [])
+    PeriodUpdate(locale, toPeriod, "HOME", navigation);
+  }, []);
 
   return (
     <SafeAreaView style={styles.Container}>
@@ -31,38 +31,38 @@ export default Home = connect(
         <View style={styles.Home.ProfileCreateContainer}>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('Profile', { ProfileID: undefined })
+              navigation.navigate("Profile", { ProfileID: undefined })
             }
           >
             <LinearGradient
-              colors={['#555555', '#725CAE']}
+              colors={["#555555", "#725CAE"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               style={styles.Home.ProfileCreateSection}
             >
               <Icon
-                name='plus'
+                name="plus"
                 iconStyle={styles.Home.ProfileCreateIcon}
-                type='font-awesome-5'
+                type="font-awesome-5"
               ></Icon>
             </LinearGradient>
           </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
-  )
-})
+  );
+});
 
 const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
-  let validate = false
-  let errors = false
-  let content = undefined
+  let validate = false;
+  let errors = false;
+  let content = undefined;
   if (profiles && styles && locale && navigation) {
     if (profiles.length > 0) {
-      validate = true
+      validate = true;
     }
   } else {
-    errors = true
+    errors = true;
   }
 
   if (!errors) {
@@ -76,9 +76,9 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
               <TouchableOpacity
                 style={styles.Home.ProfileInfo}
                 onPress={() =>
-                  navigation.navigate('Dispatch', {
+                  navigation.navigate("Dispatch", {
                     ProfileID: item.id,
-                    IsNewDispatch: true
+                    IsNewDispatch: true,
                   })
                 }
               >
@@ -91,22 +91,48 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
               <View style={styles.Home.ProfileIcons}>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('Profile', { ProfileID: item.id })
+                    navigation.navigate("Profile", { ProfileID: item.id })
                   }
                 >
                   <Icon
-                    name='edit'
+                    name="edit"
                     iconStyle={styles.Home.ProfileIcon}
-                    type='font-awesome-5'
+                    type="font-awesome-5"
                   ></Icon>
                 </TouchableOpacity>
-                <TouchableOpacity >
-                  <Icon
-                    name='inbox'
-                    iconStyle={styles.Home.ProfileIcon}
-                    type='font-awesome-5'
-                  ></Icon>
-                </TouchableOpacity>
+                <View style={styles.Home.ProfileDispatchSection}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      //runHistorySearch(history, profile)
+                      navigation.navigate("History", {
+                        ProfileID: item.id,
+                        ProfileName: item.address,
+                        NeedLoad: true,
+                      })
+                    }
+                  >
+                    <Image
+                      style={styles.Home.ProfileDispatchIcon}
+                      source={require("../libs/assets/images/Vector.png")}
+                    />
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.Home.ProfileDispatchSection}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate("Dispatch", {
+                        ProfileID: item.id,
+                        IsNewDispatch: true,
+                      })
+                    }
+                  >
+                    <Icon
+                      name="sign-out-alt"
+                      iconStyle={styles.Home.ProfileDispatchIcon}
+                      type="font-awesome-5"
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
             // <View style={styles.Home.Profile}>
@@ -145,7 +171,7 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
             // </View>
           )}
         />
-      )
+      );
     } else {
       content = (
         <>
@@ -158,7 +184,7 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
             </Text>
           </View>
         </>
-      )
+      );
     }
   } else {
     content = (
@@ -174,8 +200,8 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
         </View>
         <View style={styles.Empty.Filler}></View>
       </>
-    )
+    );
   }
 
-  return content
-}
+  return content;
+};

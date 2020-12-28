@@ -42,7 +42,7 @@ export default {
   profile_bath_cold: "Холодная:",
   profile_other: "Разное",
   profile_other_watering: "Полив:",
-  profile_other_sewage: "Стоки:",
+  profile_other_sewage: "Обратка:",
   profile_notes: "Примечание:",
 
   // DISPATCH

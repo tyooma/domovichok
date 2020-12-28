@@ -12,6 +12,7 @@ const History = ({locale, styles, history, toHistory, lastValue, toLastValue, na
   const needLoad = useRef(route.params.NeedLoad);
   const [sort, setSort] = useState(true);
   const [filter, setFilter] = useState(undefined);
+console.log("route.params in HISTORY ==>",route.params)
 
   useEffect(() => {
     setSort(true);

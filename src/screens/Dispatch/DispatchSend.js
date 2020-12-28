@@ -2,6 +2,7 @@ import { Alert } from 'react-native';
 import NetInfo from "@react-native-community/netinfo";
 import firestore from '@react-native-firebase/firestore';
 import RNSmtpMailer from "react-native-smtp-mailer";
+import NoNetwork from '../NoNetwork';
 
 const dbDispatch = 'Indication';
 const dbPeriod = 'constants';
@@ -136,8 +137,8 @@ export const getDispatchPeriod = async () => {
   return result;
 }
 
-export const PeriodUpdate = async (locale, toPeriod, screen, navigation) => {
-  const buildPeriodMessage = (period, locale) => {
+export const PeriodUpdate = async (locale, toPeriod, screen, navigation) => {  
+  const buildPeriodMessage = (period, locale) => {    
     let descr = locale.info_period_update_descr.replace('#begin#', period.begin);
     descr = descr.replace('#end#', period.end);
     // return `${locale.info_period_update_head}\n\n${descr}`;
@@ -156,7 +157,7 @@ export const PeriodUpdate = async (locale, toPeriod, screen, navigation) => {
 					console.log('PeriodUpdate => getPeriod success: ', period.data);
 					try {
 						toPeriod(period.data);
-            console.log('PeriodUpdate => savePeriod: success!');
+            console.log('PeriodUpdate => savePeriod: success!', screen);
             if (!screen) {
               Alert.alert(
                 locale.project_name, `${buildPeriodMessage(period.data, locale)}`,
@@ -191,10 +192,11 @@ export const PeriodUpdate = async (locale, toPeriod, screen, navigation) => {
           ], { cancelable: false },
         );
       } else {
-        Alert.alert(
-          locale.info_warning, `${locale.err_check_link}`,
-          [{ text: locale.action_ok, onPress: () => null }], { cancelable: false },
-        );
+        <NoNetwork />
+        // Alert.alert(
+        //   locale.info_warning, `${locale.err_check_link}`,
+        //   [{ text: locale.action_ok, onPress: () => null }], { cancelable: false },
+        // );
       }
 		}
 	});
