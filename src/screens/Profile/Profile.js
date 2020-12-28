@@ -170,7 +170,7 @@ const Profile = ({
       </View>
       <Divider style={styles.Divider}/> */}
       <View style={styles.Profile.Content}>
-        <ScrollView>
+        <ScrollView style={styles.Profile.ScrollView}>
           <View style={styles.Profile.InputContainer}>
             <View style={styles.Profile.InputSection}>
               <View style={styles.Profile.InputItem}>
@@ -197,19 +197,6 @@ const Profile = ({
                     <Text style={styles.InputRequired}>*</Text>
                   )}
                 </Text>
-                {/*********************************************************************************/}
-                {/* <TextInput
-                  editable={!route.params.ProfileID}
-                  onChangeText={text => onChange(PROFILE.id, text)}
-                  selectionColor={styles.InputSelection}
-                  placeholder={locale.profile_id_placeholder}
-                  placeholderTextColor={styles.PlaceholderTextColor}
-                  maxLength={10}
-                  keyboardType="number-pad"
-                  value={profile.id}
-                  style={{color: '#007BFF'}}
-                  // style={route.params.ProfileID?styles.Profile.InputDefault:styles.Profile.InputNotModif}
-                /> */}
                 {!route.params.ProfileID && (
                   <TextInput
                     editable={true}
@@ -236,7 +223,6 @@ const Profile = ({
                     style={styles.Profile.InputNotModif}
                   />
                 )}
-                {/*********************************************************************************/}
               </View>
               <View style={styles.Profile.InputItem}>
                 <Text style={styles.Profile.InputCaption}>
@@ -384,7 +370,7 @@ const Profile = ({
           </View>
         </ScrollView>
         <View style={styles.Toolbar.Container}>
-          <Divider style={styles.Divider} />
+          {/* <Divider style={styles.Divider} /> */}
           <View style={styles.Toolbar.Icons}>
             <View style={styles.Toolbar.Icon}>
               <TouchableOpacity
