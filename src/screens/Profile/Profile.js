@@ -12,21 +12,24 @@ import {
   ScrollView,
   Switch,
   Text,
+  Image,
+  TouchableWithoutFeedback,
   TextInput,
-  View
-} from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Icon, Divider } from 'react-native-elements'
-import { connect } from 'react-redux'
-import { StateToProps, DispatchToProps } from '../../store/MapToProps'
-import { ActionBack } from './../components/Actions'
-import { PROFILE } from '../../libs/Consts'
-import { getProfile } from '../../libs/Tools'
+  View,
+  Dimensions,
+} from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Icon, Divider } from "react-native-elements";
+import { connect } from "react-redux";
+import { StateToProps, DispatchToProps } from "../../store/MapToProps";
+import { ActionBack } from "./../components/Actions";
+import { PROFILE } from "../../libs/Consts";
+import { getProfile } from "../../libs/Tools";
 import {
   runProfileSave,
   runProfileDelete,
-  runHistorySearch
-} from './ProfileActions'
+  runHistorySearch,
+} from "./ProfileActions";
 import {
   FixAddressInput,
   FixDigitInput,
@@ -72,53 +75,67 @@ const Profile = ({
   lastValue,
   toLastValue,
   navigation,
-  route
+  route,
 }) => {
   const [profile, setProfile] = useReducer(
     ReducerProfile,
     getProfile(profiles, route)
-  )
-  const isNew = useRef(true)
+  );
+  const isNew = useRef(true);
+  const [changeProfile, setChangeProfile] = useState(true);
+  const [lookHistory, setLookHistory] = useState(true);
+  const [checkPolicy, setCheckPolicy] = useState(false);
 
   const onChange = useCallback(
     (inType, inValue) => {
       switch (inType) {
         case PROFILE.id:
-          setProfile({ type: PROFILE.id, value: FixDigitInput(inValue) })
-          break
+          setChangeProfile(false);
+          setProfile({ type: PROFILE.id, value: FixDigitInput(inValue) });
+          break;
         case PROFILE.fio:
-          setProfile({ type: PROFILE.fio, value: FixNameInput(inValue) })
-          break
+          setChangeProfile(false);
+          setProfile({ type: PROFILE.fio, value: FixNameInput(inValue) });
+          break;
         case PROFILE.address:
-          setProfile({ type: PROFILE.address, value: FixAddressInput(inValue) })
-          break
+          setChangeProfile(false);
+          setProfile({
+            type: PROFILE.address,
+            value: FixAddressInput(inValue),
+          });
+          break;
         case PROFILE.phone:
-          setProfile({ type: PROFILE.phone, value: FixPhoneInput(inValue) })
-          break
+          setChangeProfile(false);
+          setProfile({ type: PROFILE.phone, value: FixPhoneInput(inValue) });
+          break;
         case PROFILE.kitchenHot:
-          setProfile({ type: PROFILE.kitchenHot, value: inValue })
-          break
+          setProfile({ type: PROFILE.kitchenHot, value: inValue });
+          break;
         case PROFILE.kitchenCold:
-          setProfile({ type: PROFILE.kitchenCold, value: inValue })
-          break
+          setChangeProfile(false);
+          setProfile({ type: PROFILE.kitchenCold, value: inValue });
+          break;
         case PROFILE.bathHot:
-          setProfile({ type: PROFILE.bathHot, value: inValue })
-          break
+          setProfile({ type: PROFILE.bathHot, value: inValue });
+          break;
         case PROFILE.bathCold:
-          setProfile({ type: PROFILE.bathCold, value: inValue })
-          break
+          setChangeProfile(false);
+          setProfile({ type: PROFILE.bathCold, value: inValue });
+          break;
         case PROFILE.watering:
-          setProfile({ type: PROFILE.watering, value: inValue })
-          break
+          setChangeProfile(false);
+          setProfile({ type: PROFILE.watering, value: inValue });
+          break;
         case PROFILE.sewage:
-          setProfile({ type: PROFILE.sewage, value: inValue })
-          break
+          setChangeProfile(false);
+          setProfile({ type: PROFILE.sewage, value: inValue });
+          break;
         default:
-          break
+          break;
       }
     },
     [setProfile]
-  )
+  );
 
   const onBackPress = () => {
     if (!route.params.ProfileID) {
@@ -127,42 +144,44 @@ const Profile = ({
         locale.info_profile_without_save,
         [
           { text: locale.action_ok, onPress: () => navigation.goBack() },
-          { text: locale.action_cancel, onPress: () => null }
+          { text: locale.action_cancel, onPress: () => null },
         ],
         { cancelable: false }
-      )
-      return true
+      );
+      return true;
     }
   };
 
   // Init fields
   useEffect(() => {
     if (!route.params.ProfileID) {
-      BackHandler.addEventListener('hardwareBackPress', onBackPress)
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
     }
     return () =>
-      BackHandler.removeEventListener('hardwareBackPress', onBackPress)
-  }, [route.params.ProfileID])
+      BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+  }, [route.params.ProfileID]);
 
   // Init fields
   useEffect(() => {
     const Init = (init) => {
-      setProfile({ type: PROFILE.id, value: init.id })
-      setProfile({ type: PROFILE.fio, value: init.fio })
-      setProfile({ type: PROFILE.address, value: init.address })
-      setProfile({ type: PROFILE.phone, value: init.phone })
-      setProfile({ type: PROFILE.kitchenHot, value: init.kitchenHot })
-      setProfile({ type: PROFILE.kitchenCold, value: init.kitchenCold })
-      setProfile({ type: PROFILE.bathHot, value: init.bathHot })
-      setProfile({ type: PROFILE.bathCold, value: init.bathCold })
-      setProfile({ type: PROFILE.watering, value: init.watering })
-      setProfile({ type: PROFILE.sewage, value: init.sewage })
-      isNew.current = false
-    }
+      setProfile({ type: PROFILE.id, value: init.id });
+      setProfile({ type: PROFILE.fio, value: init.fio });
+      setProfile({ type: PROFILE.address, value: init.address });
+      setProfile({ type: PROFILE.phone, value: init.phone });
+      setProfile({ type: PROFILE.kitchenHot, value: init.kitchenHot });
+      setProfile({ type: PROFILE.kitchenCold, value: init.kitchenCold });
+      setProfile({ type: PROFILE.bathHot, value: init.bathHot });
+      setProfile({ type: PROFILE.bathCold, value: init.bathCold });
+      setProfile({ type: PROFILE.watering, value: init.watering });
+      setProfile({ type: PROFILE.sewage, value: init.sewage });
+      isNew.current = false;
+    };
     if (isNew) {
-      Init(getProfile(profiles, route))
+      Init(getProfile(profiles, route));
     }
-  }, [profiles, route, setProfile])
+  }, [profiles, route, setProfile]);
+
+  // console.log('Profile => lastValue:', lastValue);
 
   return (
     <SafeAreaView style={styles.Container}>
@@ -177,7 +196,7 @@ const Profile = ({
       </View>
       <Divider style={styles.Divider}/> */}
       <View style={styles.Profile.Content}>
-        <ScrollView style={styles.Profile.ScrollView}>
+        <ScrollView>
           <View style={styles.Profile.InputContainer}>
             <View style={styles.Profile.InputSection}>
               <View style={styles.Profile.InputItem}>
@@ -204,6 +223,19 @@ const Profile = ({
                     <Text style={styles.InputRequired}>*</Text>
                   )}
                 </Text>
+                {/*********************************************************************************/}
+                {/* <TextInput
+                  editable={!route.params.ProfileID}
+                  onChangeText={text => onChange(PROFILE.id, text)}
+                  selectionColor={styles.InputSelection}
+                  placeholder={locale.profile_id_placeholder}
+                  placeholderTextColor={styles.PlaceholderTextColor}
+                  maxLength={10}
+                  keyboardType="number-pad"
+                  value={profile.id}
+                  style={{color: '#007BFF'}}
+                  // style={route.params.ProfileID?styles.Profile.InputDefault:styles.Profile.InputNotModif}
+                /> */}
                 {!route.params.ProfileID && (
                   <TextInput
                     editable={true}
@@ -212,7 +244,7 @@ const Profile = ({
                     placeholder={locale.profile_id_placeholder}
                     placeholderTextColor={styles.PlaceholderTextColor}
                     maxLength={10}
-                    keyboardType='number-pad'
+                    keyboardType="number-pad"
                     value={profile.id}
                     style={styles.Profile.InputDefault}
                   />
@@ -225,11 +257,12 @@ const Profile = ({
                     placeholder={locale.profile_id_placeholder}
                     placeholderTextColor={styles.PlaceholderTextColor}
                     maxLength={10}
-                    keyboardType='number-pad'
+                    keyboardType="number-pad"
                     value={profile.id}
                     style={styles.Profile.InputNotModif}
                   />
                 )}
+                {/*********************************************************************************/}
               </View>
               <View style={styles.Profile.InputItem}>
                 <Text style={styles.Profile.InputCaption}>
@@ -255,7 +288,7 @@ const Profile = ({
                   placeholder={locale.profile_phone_placeholder}
                   placeholderTextColor={styles.PlaceholderTextColor}
                   maxLength={36}
-                  keyboardType='phone-pad'
+                  keyboardType="phone-pad"
                   value={profile.phone}
                   style={styles.Profile.InputDefault}
                 />
@@ -412,7 +445,7 @@ const Profile = ({
           </View>
         </ScrollView>
         <View style={styles.Toolbar.Container}>
-          {/* <Divider style={styles.Divider} /> */}
+          <Divider style={styles.Divider} />
           <View style={styles.Toolbar.Icons}>
             <View style={styles.Toolbar.Icon}>
               <TouchableOpacity
@@ -433,18 +466,19 @@ const Profile = ({
                 }
               >
                 <Icon
-                  name='trash-alt'
+                  name="trash-alt"
                   iconStyle={
                     route.params.ProfileID
                       ? styles.Profile.DeleteIcon
                       : styles.ColorNone
                   }
-                  type='font-awesome-5'
+                  type="font-awesome-5"
                 />
               </TouchableOpacity>
             </View>
             <View style={styles.Toolbar.Icon}>
               <TouchableOpacity
+                disabled={changeProfile}
                 onPress={() =>
                   runProfileSave(
                     profile,
@@ -454,37 +488,39 @@ const Profile = ({
                     toProfiles,
                     lastValue,
                     toLastValue,
-                    navigation
+                    navigation,
+                    checkPolicy
                   )
                 }
               >
                 <Icon
-                  name='save'
+                  name="save"
                   iconStyle={styles.Profile.SaveIcon}
-                  type='font-awesome-5'
+                  type="font-awesome-5"
                 />
               </TouchableOpacity>
             </View>
             <View style={styles.Toolbar.Icon}>
               <TouchableOpacity
+                disabled={setLookHistory}
                 onPress={() =>
                   runHistorySearch(history, profile)
-                    ? navigation.navigate('History', {
+                    ? navigation.navigate("History", {
                         ProfileID: profile.id,
                         ProfileName: profile.address,
-                        NeedLoad: true
+                        NeedLoad: true,
                       })
-                    : null
+                    : setLookHistory(false)
                 }
               >
                 <Icon
-                  name='history'
+                  name="history"
                   iconStyle={
-                    runHistorySearch(history, profile)
+                    route.params.ProfileID
                       ? styles.Profile.HistoryIcon
                       : styles.ColorNone
                   }
-                  type='font-awesome-5'
+                  type="font-awesome-5"
                 />
               </TouchableOpacity>
             </View>
@@ -492,7 +528,7 @@ const Profile = ({
         </View>
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default connect(StateToProps(), DispatchToProps())(Profile)
+export default connect(StateToProps(), DispatchToProps())(Profile);

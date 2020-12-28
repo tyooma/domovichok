@@ -13,6 +13,7 @@ import {
   Text,
   TextInput,
   View,
+  FlatList,
   TouchableOpacity,
 } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
@@ -34,7 +35,6 @@ import DispatchFeedback from "./DispatchFeedback";
 
 import NoNetwork from "../NoNetwork";
 import { PeriodUpdate } from "./DispatchSend";
-import { SCLAlert, SCLAlertButton } from "react-native-scl-alert";
 
 const ReducerDispatch = (state, action) => {
   switch (action.type) {
@@ -138,8 +138,6 @@ const Dispatch = ({
     const validate = Validation(send, locale);
     if (validate.state) {
       NetInfo.fetch().then((state) => {
-        //console.log("Connection type", state.type);
-        //console.log("Is connected?", state.isConnected);
         if (state.isConnected) {
           if (Success4Dispatch(period)) {
             setModal(true);
@@ -243,7 +241,7 @@ const Dispatch = ({
       {modalFooter}
     </View>
   );
- 
+
   return (
     <SafeAreaView style={styles.Container}>
       {/* Напоминание о дате */}
@@ -481,24 +479,7 @@ const Dispatch = ({
               <View>{modalContainer}</View>
             </View>
           </Modal>
-
-          <Modal transparent={false} visible={modalPreviewVisible}>
-            <View style={styles.Warning.modal}>
-              <View>{modalPreviewContainer}</View>
-            </View>
-          </Modal>
-
-          {/* <SCLAlert
-            theme="success"
-            show={alertShow}
-            title={locale.info_warning
-            subtitle={locale.info_warning_pokaz}
-            onRequestClose={() => setAlertShow(false)}
-          >
-            <SCLAlertButton theme="info" onPress={() => setAlertShow(false)}>
-              {locale.action_ok}
-            </SCLAlertButton>
-          </SCLAlert> */}
+          
         </ScrollView>
 
         <Divider style={styles.Divider} />
