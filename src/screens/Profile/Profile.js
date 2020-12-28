@@ -368,86 +368,85 @@ const Profile = ({
               </View>
             </View>
           </View>
-        </ScrollView>
-        <View style={styles.Toolbar.Container}>
-          {/* <Divider style={styles.Divider} /> */}
-          <View style={styles.Toolbar.Icons}>
-            <View style={styles.Toolbar.Icon}>
-              <TouchableOpacity
-                onPress={() =>
-                  route.params.ProfileID
-                    ? runProfileDelete(
-                        profile.id,
-                        profiles,
-                        toProfiles,
-                        locale,
-                        history,
-                        toHistory,
-                        lastValue,
-                        toLastValue,
-                        navigation
-                      )
-                    : null
-                }
-              >
-                <Icon
-                  name='trash-alt'
-                  iconStyle={
+          <View style={styles.Toolbar.Container}>
+            <View style={styles.Toolbar.Icons}>
+              <View style={styles.Toolbar.Icon}>
+                <TouchableOpacity
+                  onPress={() =>
                     route.params.ProfileID
-                      ? styles.Profile.DeleteIcon
-                      : styles.ColorNone
+                      ? runProfileDelete(
+                          profile.id,
+                          profiles,
+                          toProfiles,
+                          locale,
+                          history,
+                          toHistory,
+                          lastValue,
+                          toLastValue,
+                          navigation
+                        )
+                      : null
                   }
-                  type='font-awesome-5'
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.Toolbar.Icon}>
-              <TouchableOpacity
-                onPress={() =>
-                  runProfileSave(
-                    profile,
-                    route.params.ProfileID,
-                    locale,
-                    profiles,
-                    toProfiles,
-                    lastValue,
-                    toLastValue,
-                    navigation
-                  )
-                }
-              >
-                <Icon
-                  name='save'
-                  iconStyle={styles.Profile.SaveIcon}
-                  type='font-awesome-5'
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.Toolbar.Icon}>
-              <TouchableOpacity
-                onPress={() =>
-                  runHistorySearch(history, profile)
-                    ? navigation.navigate('History', {
-                        ProfileID: profile.id,
-                        ProfileName: profile.address,
-                        NeedLoad: true
-                      })
-                    : null
-                }
-              >
-                <Icon
-                  name='history'
-                  iconStyle={
+                >
+                  <Icon
+                    name='trash-alt'
+                    iconStyle={
+                      route.params.ProfileID
+                        ? styles.Profile.DeleteIcon
+                        : styles.ColorNone
+                    }
+                    type='font-awesome-5'
+                  />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.Toolbar.Icon}>
+                <TouchableOpacity
+                  onPress={() =>
+                    runProfileSave(
+                      profile,
+                      route.params.ProfileID,
+                      locale,
+                      profiles,
+                      toProfiles,
+                      lastValue,
+                      toLastValue,
+                      navigation
+                    )
+                  }
+                >
+                  <Icon
+                    name='save'
+                    iconStyle={styles.Profile.SaveIcon}
+                    type='font-awesome-5'
+                  />
+                </TouchableOpacity>
+              </View>
+              {/* <View style={styles.Toolbar.Icon}>
+                <TouchableOpacity
+                  onPress={() =>
                     runHistorySearch(history, profile)
-                      ? styles.Profile.HistoryIcon
-                      : styles.ColorNone
+                      ? navigation.navigate('History', {
+                          ProfileID: profile.id,
+                          ProfileName: profile.address,
+                          NeedLoad: true
+                        })
+                      : null
                   }
-                  type='font-awesome-5'
-                />
-              </TouchableOpacity>
+                >
+                  <Icon
+                    name='history'
+                    iconStyle={
+                      runHistorySearch(history, profile)
+                        ? styles.Profile.HistoryIcon
+                        : styles.ColorNone
+                    }
+                    type='font-awesome-5'
+                  />
+                </TouchableOpacity>
+              </View> */}
             </View>
           </View>
-        </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   )

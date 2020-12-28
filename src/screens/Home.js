@@ -43,7 +43,7 @@ export default Home = connect(
               <Icon
                 name='plus'
                 iconStyle={styles.Home.ProfileCreateIcon}
-                type='font-awesome'
+                type='font-awesome-5'
               ></Icon>
             </LinearGradient>
           </TouchableOpacity>
@@ -73,39 +73,76 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <View style={styles.Home.Profile}>
-              <View style={styles.Home.ProfileSection}>
+              <TouchableOpacity
+                style={styles.Home.ProfileInfo}
+                onPress={() =>
+                  navigation.navigate('Dispatch', {
+                    ProfileID: item.id,
+                    IsNewDispatch: true
+                  })
+                }
+              >
+                <Text style={styles.Home.ProfileCaption}>{item.address}</Text>
+                <Text style={styles.Home.ProfileCaption}>
+                  О/Р:&nbsp;{item.id}
+                </Text>
+              </TouchableOpacity>
+
+              <View style={styles.Home.ProfileIcons}>
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate('Profile', { ProfileID: item.id })
                   }
                 >
-                  <Text style={styles.Home.ProfileCaption}>{item.address}</Text>
-                  {isDetails && (
-                    <View style={styles.Home.ProfileDetails}>
-                      <Text style={styles.Home.ProfileDetailsText}>
-                        {locale.profile_id}&nbsp;&nbsp;{item.id}
-                      </Text>
-                    </View>
-                  )}
-                </TouchableOpacity>
-              </View>
-              <View style={styles.Home.ProfileDispatchSection}>
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate('Dispatch', {
-                      ProfileID: item.id,
-                      IsNewDispatch: true
-                    })
-                  }
-                >
                   <Icon
-                    name='sign-out-alt'
-                    iconStyle={styles.Home.ProfileDispatchIcon}
+                    name='edit'
+                    iconStyle={styles.Home.ProfileIcon}
                     type='font-awesome-5'
-                  />
+                  ></Icon>
+                </TouchableOpacity>
+                <TouchableOpacity >
+                  <Icon
+                    name='inbox'
+                    iconStyle={styles.Home.ProfileIcon}
+                    type='font-awesome-5'
+                  ></Icon>
                 </TouchableOpacity>
               </View>
             </View>
+            // <View style={styles.Home.Profile}>
+            //   <View style={styles.Home.ProfileSection}>
+            //     <TouchableOpacity
+            // onPress={() =>
+            //   navigation.navigate('Profile', { ProfileID: item.id })
+            // }
+            //     >
+            //       <Text style={styles.Home.ProfileCaption}>{item.address}</Text>
+            //       {isDetails && (
+            //         <View style={styles.Home.ProfileDetails}>
+            //           <Text style={styles.Home.ProfileDetailsText}>
+            //             {locale.profile_id}&nbsp;&nbsp;{item.id}
+            //           </Text>
+            //         </View>
+            //       )}
+            //     </TouchableOpacity>
+            //   </View>
+            //   <View style={styles.Home.ProfileDispatchSection}>
+            //     <TouchableOpacity
+            // onPress={() =>
+            //   navigation.navigate('Dispatch', {
+            //     ProfileID: item.id,
+            //     IsNewDispatch: true
+            //   })
+            // }
+            //     >
+            //       <Icon
+            //         name='sign-out-alt'
+            //         iconStyle={styles.Home.ProfileDispatchIcon}
+            //         type='font-awesome-5'
+            //       />
+            //     </TouchableOpacity>
+            //   </View>
+            // </View>
           )}
         />
       )
