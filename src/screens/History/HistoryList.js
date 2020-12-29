@@ -20,9 +20,10 @@ export const HistoryList = connect(StateToProps())(({ProfileID, history, sort, f
     return (
       <FlatList
         data={HistorySort(dataList, sort, locale)}
-        keyExtractor={item => (item.timestamp).toString()}
+        keyExtractor={item => (item.timestamp)} //keyExtractor={item => (item.timestamp).toString()
         renderItem={({item}) => (
-          <View style={styles.History.Record} key={(item.timestamp).toString()}>
+          <View style={styles.History.Record} key={(item.timestamp)//key={(item.timestamp).toString()
+          }> 
             <View style={styles.History.RecordHead}>
               <Text style={styles.History.RecordHeadCaption}>{locale.history_record_caption}</Text>
               <Text style={styles.History.RecordHeadCaption}>{item.datetime}</Text>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { FlatList, SafeAreaView, Text, View } from 'react-native'
+import { Alert, FlatList, SafeAreaView, Text, View } from 'react-native'
 import { Icon, Divider } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
@@ -17,7 +17,7 @@ export default Home = connect(
 
   return (
     <SafeAreaView style={styles.Container}>
-      {/* <View style={styles.Header}>
+      <View style={styles.Header}>
         <View style={styles.HeaderLeft}>
           <View style={styles.HeaderIcon}>
             <ActionMenu navigation={navigation} />
@@ -26,7 +26,7 @@ export default Home = connect(
         </View>
         <View style={styles.HeaderRight}></View>
       </View>
-      <Divider style={styles.Divider} /> */}
+      <Divider style={styles.Divider} />
       <View style={styles.Home.Content}>
         <View style={styles.Home.Profiles}>
           <ProfileList
@@ -50,6 +50,7 @@ export default Home = connect(
               type='font-awesome-5'
             />
           </TouchableOpacity>
+
         </View>
       </View>
     </SafeAreaView>

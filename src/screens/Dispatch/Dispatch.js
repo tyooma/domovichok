@@ -48,7 +48,7 @@ const Dispatch = ({profiles, locale, styles, period, lastValue, navigation, rout
       case DISPATCH.sewage:
         setSend({type: DISPATCH.sewage, value: FixEnumeratorInput(inValue)}); break;
       case DISPATCH.notes:
-        setSend({type: DISPATCH.notes, value: FixNotesInput(inValue)}); break;
+        setSend({type: DISPATCH.notes, value: FixNotesInput(inValue)}); break;//testing data from json profiles // inValue default from Larin
       case DISPATCH.profile:
         setSend({type: DISPATCH.profile, value: inValue}); break;
       default: break;

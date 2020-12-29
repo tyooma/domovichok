@@ -1,89 +1,176 @@
-import React, { useCallback, useEffect, useReducer, useRef } from 'react';
-import { Alert, BackHandler, SafeAreaView, ScrollView, Switch, Text, TextInput, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Icon, Divider } from 'react-native-elements';
-import { connect } from 'react-redux';
-import { StateToProps, DispatchToProps } from '../../store/MapToProps';
-import { ActionBack } from './../components/Actions';
-import { PROFILE } from '../../libs/Consts';
-import { getProfile } from '../../libs/Tools';
-import { runProfileSave, runProfileDelete, runHistorySearch } from './ProfileActions';
-import { FixAddressInput, FixDigitInput, FixNameInput, FixPhoneInput } from '../../libs/Tools';
+import React, {
+  useCallback,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
+import {
+  Alert,
+  BackHandler,
+  Button,
+  SafeAreaView,
+  ScrollView,
+  Switch,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import DocumentPicker from "react-native-document-picker";
+import * as RNFS from "react-native-fs";
+import { Icon, Divider } from "react-native-elements";
+import { connect } from "react-redux";
+import { runFeedback } from "../Dispatch/DispatchActions";
+import { StateToProps, DispatchToProps } from "../../store/MapToProps";
+import { ActionBack } from "./../components/Actions";
+import { PROFILE } from "../../libs/Consts";
+import { getProfile } from "../../libs/Tools";
+import {
+  runProfileSave,
+  runProfileDelete,
+  runHistorySearch,
+  ExecuteProfileSave,
+} from "./ProfileActions";
+import {
+  FixAddressInput,
+  FixDigitInput,
+  FixNameInput,
+  FixPhoneInput,
+} from "../../libs/Tools";
+import moment from 'moment';
 
 const ReducerProfile = (state, action) => {
   // console.log('ReducerProfile => ['+action.type+']: <'+action.value+'> => STATE:', state);
-  switch(action.type) {
-    case PROFILE.id: return {...state, id: action.value}
-    case PROFILE.fio: return {...state, fio: action.value}
-    case PROFILE.address: return {...state, address: action.value}
-    case PROFILE.phone: return {...state, phone: action.value}
-    case PROFILE.kitchenHot: return {...state, kitchenHot: action.value}
-    case PROFILE.kitchenCold: return {...state, kitchenCold: action.value}
-    case PROFILE.bathHot: return {...state, bathHot: action.value}
-    case PROFILE.bathCold: return {...state, bathCold: action.value}
-    case PROFILE.watering: return {...state, watering: action.value}
-    case PROFILE.sewage: return {...state, sewage: action.value}
-    default: return state;
+  switch (action.type) {
+    case PROFILE.id:
+      return { ...state, id: action.value };
+    case PROFILE.fio:
+      return { ...state, fio: action.value };
+    case PROFILE.address:
+      return { ...state, address: action.value };
+    case PROFILE.phone:
+      return { ...state, phone: action.value };
+    case PROFILE.kitchenHot:
+      return { ...state, kitchenHot: action.value };
+    case PROFILE.kitchenCold:
+      return { ...state, kitchenCold: action.value };
+    case PROFILE.bathHot:
+      return { ...state, bathHot: action.value };
+    case PROFILE.bathCold:
+      return { ...state, bathCold: action.value };
+    case PROFILE.watering:
+      return { ...state, watering: action.value };
+    case PROFILE.sewage:
+      return { ...state, sewage: action.value };
+    default:
+      return state;
   }
-}
+};
 
-const Profile = ({locale, styles, profiles, toProfiles, history, toHistory, lastValue, toLastValue, navigation, route}) => {
-  const [profile, setProfile] = useReducer(ReducerProfile, getProfile(profiles, route));
+const Profile = ({
+  locale,
+  styles,
+  profiles,
+  toProfiles,
+  history,
+  toHistory,
+  lastValue,
+  toLastValue,
+  navigation,
+  route,
+}) => {
+
+  const [profile, setProfile] = useReducer(
+    ReducerProfile,
+    getProfile(profiles, route)
+  );
   const isNew = useRef(true);
-
-  const onChange = useCallback((inType, inValue) => {
-    switch(inType) {
-      case PROFILE.id: setProfile({type: PROFILE.id, value: FixDigitInput(inValue)}); break;
-      case PROFILE.fio: setProfile({type: PROFILE.fio, value: FixNameInput(inValue)}); break;
-      case PROFILE.address: setProfile({type: PROFILE.address, value: FixAddressInput(inValue)}); break;
-      case PROFILE.phone: setProfile({type: PROFILE.phone, value: FixPhoneInput(inValue)}); break;
-      case PROFILE.kitchenHot: setProfile({type: PROFILE.kitchenHot, value: inValue}); break;
-      case PROFILE.kitchenCold: setProfile({type: PROFILE.kitchenCold, value: inValue}); break;
-      case PROFILE.bathHot: setProfile({type: PROFILE.bathHot, value: inValue}); break;
-      case PROFILE.bathCold: setProfile({type: PROFILE.bathCold, value: inValue}); break;
-      case PROFILE.watering: setProfile({type: PROFILE.watering, value: inValue}); break;
-      case PROFILE.sewage: setProfile({type: PROFILE.sewage, value: inValue}); break;
-      default: break;
-    }
-  }, [setProfile]);
+  const [prevHistory, setPrevHistory] = useState(history);
+  const onChange = useCallback(
+    (inType, inValue) => {
+      switch (inType) {
+        case PROFILE.id:
+          setProfile({ type: PROFILE.id, value: FixDigitInput(inValue) });
+          break;
+        case PROFILE.fio:
+          setProfile({ type: PROFILE.fio, value: FixNameInput(inValue) });
+          break;
+        case PROFILE.address:
+          setProfile({
+            type: PROFILE.address,
+            value: FixAddressInput(inValue),
+          });
+          break;
+        case PROFILE.phone:
+          setProfile({ type: PROFILE.phone, value: FixPhoneInput(inValue) });
+          break;
+        case PROFILE.kitchenHot:
+          setProfile({ type: PROFILE.kitchenHot, value: inValue });
+          break;
+        case PROFILE.kitchenCold:
+          setProfile({ type: PROFILE.kitchenCold, value: inValue });
+          break;
+        case PROFILE.bathHot:
+          setProfile({ type: PROFILE.bathHot, value: inValue });
+          break;
+        case PROFILE.bathCold:
+          setProfile({ type: PROFILE.bathCold, value: inValue });
+          break;
+        case PROFILE.watering:
+          setProfile({ type: PROFILE.watering, value: inValue });
+          break;
+        case PROFILE.sewage:
+          setProfile({ type: PROFILE.sewage, value: inValue });
+          break;
+        default:
+          break;
+      }
+    },
+    [setProfile]
+  );
 
   const onBackPress = () => {
     if (!route.params.ProfileID) {
       Alert.alert(
-        locale.info_warning, locale.info_profile_without_save,
-        [ { text: locale.action_ok, onPress: () => navigation.goBack() },
-          { text: locale.action_cancel, onPress: () => null }
-        ], { cancelable: false },
+        locale.info_warning,
+        locale.info_profile_without_save,
+        [
+          { text: locale.action_ok, onPress: () => navigation.goBack() },
+          { text: locale.action_cancel, onPress: () => null },
+        ],
+        { cancelable: false }
       );
       return true;
     }
-  }
+  };
 
   // Init fields
   useEffect(() => {
     if (!route.params.ProfileID) {
-      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
     }
-    return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", onBackPress);
   }, [route.params.ProfileID]);
 
   // Init fields
   useEffect(() => {
     const Init = (init) => {
-      setProfile({type: PROFILE.id, value: init.id});
-      setProfile({type: PROFILE.fio, value: init.fio});
-      setProfile({type: PROFILE.address, value: init.address});
-      setProfile({type: PROFILE.phone, value: init.phone});
-      setProfile({type: PROFILE.kitchenHot, value: init.kitchenHot});
-      setProfile({type: PROFILE.kitchenCold, value: init.kitchenCold});
-      setProfile({type: PROFILE.bathHot, value: init.bathHot});
-      setProfile({type: PROFILE.bathCold, value: init.bathCold});
-      setProfile({type: PROFILE.watering, value: init.watering});
-      setProfile({type: PROFILE.sewage, value: init.sewage});
+      setProfile({ type: PROFILE.id, value: init.id });
+      setProfile({ type: PROFILE.fio, value: init.fio });
+      setProfile({ type: PROFILE.address, value: init.address });
+      setProfile({ type: PROFILE.phone, value: init.phone });
+      setProfile({ type: PROFILE.kitchenHot, value: init.kitchenHot });
+      setProfile({ type: PROFILE.kitchenCold, value: init.kitchenCold });
+      setProfile({ type: PROFILE.bathHot, value: init.bathHot });
+      setProfile({ type: PROFILE.bathCold, value: init.bathCold });
+      setProfile({ type: PROFILE.watering, value: init.watering });
+      setProfile({ type: PROFILE.sewage, value: init.sewage });
       isNew.current = false;
-    }
-    if(isNew) {
-      Init( getProfile(profiles, route) );
+    };
+    if (isNew) {
+      Init(getProfile(profiles, route));
     }
   }, [profiles, route, setProfile]);
 
@@ -101,17 +188,181 @@ const Profile = ({locale, styles, profiles, toProfiles, history, toHistory, last
         <View style={styles.HeaderRight}></View>
       </View>
       <Divider style={styles.Divider}/> */}
-      <View style={styles.Profile.Content}>
+      <View style={{ marginTop: 50 }}>
         <ScrollView>
           <View style={styles.Profile.InputContainer}>
             <View style={styles.Profile.InputSection}>
               <View style={styles.Profile.InputItem}>
+                <TouchableOpacity
+                  onPress={async () => {
+                    try {
+                      const res = await DocumentPicker.pick({
+                        type: [DocumentPicker.types.plainText],
+                      });
+                      RNFS.readFile(res.uri).then((res) => {
+                        const toStore = JSON.parse(JSON.parse(res));
+                        const personalNumber = toStore.personalNumber.slice(
+                          0,
+                          10
+                        );
+                        const storeFromFile = {
+                          address: toStore.personalNumber,
+                          bathCold: toStore.years[0].months[0].countersValues
+                            .toiletHotCounter
+                            ? true
+                            : false,
+                          bathHot: false,
+                          fio: "",
+                          id: toStore.personalNumber.slice(0, 10),
+                          kitchenCold: false,
+                          kitchenHot: toStore.years[0].months[0].countersValues
+                            .kitchenHotCounter
+                            ? true
+                            : false,
+                          phone: "",
+                          sewage: false,
+                          watering: false,
+                        };
+                        const counters = [];
+                        toStore.years.map((item) => {
+                          item.months.map((item) => {
+                            let obj = {};
+                            obj.bathHot = item.countersValues.toiletHotCounter
+                              ? item.countersValues.toiletHotCounter
+                              : "";
+                            obj.kitchenHot = item.countersValues
+                              .kitchenHotCounter
+                              ? item.countersValues.kitchenHotCounter
+                              : "";
+                            obj.bathCold = "";
+                            obj.kitchenCold = "";
+                            obj.sewage = "";
+                            obj.watering = "";
+                            obj.datetime =
+                            moment(item.countersValuesDate.kitchenHotCounter).format('DD.MM.YYYY, h:mm:ss');
+                            counters.push(obj);
+                          });
+                        });
+                        counters.filter(function (date, i, array) {
+                          return array.indexOf(date) === i;
+                        })
+                        const historyFromFile = {
+                          [personalNumber]: counters,
+                        };
+
+                        console.log(
+                          "historyFromFile===================================================>",
+                          historyFromFile[route.params.ProfileID]
+                        );
+
+                        console.log("id=======>", route.params.ProfileID);
+
+                        runProfileSave(
+                          storeFromFile,
+                          route.params.ProfileID,
+                          locale,
+                          profiles,
+                          toProfiles,
+                          lastValue,
+                          toLastValue,
+                          navigation
+                        );
+                        toHistory(historyFromFile);
+
+                      });
+                    } catch (err) {
+                      if (DocumentPicker.isCancel(err)) {
+                        console.log(err);
+                      } else {
+                        throw err;
+                      }
+                    }
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      textAlign: "center",
+                      padding: 30,
+                      backgroundColor: "green",
+                      color: "#fff",
+                      marginBottom: 50,
+                    }}
+                  >
+                    Импортувати профиль
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={async () => {
+                    try {
+                      const res = await DocumentPicker.pick({
+                        type: [DocumentPicker.types.plainText],
+                      });
+                      RNFS.readFile(res.uri).then((res) => {
+                        const toStore = JSON.parse(JSON.parse(res));
+                        const personalNumber = toStore.personalNumber.slice(
+                          0,
+                          10
+                        );
+
+                        const counters = [];
+                        toStore.years.map((item) => {
+                          item.months.map((item) => {
+                            let obj = {};
+                            obj.bathHot = item.countersValues.toiletHotCounter
+                              ? item.countersValues.toiletHotCounter
+                              : "";
+                            obj.kitchenHot = item.countersValues
+                              .kitchenHotCounter
+                              ? item.countersValues.kitchenHotCounter
+                              : "";
+                            obj.bathCold = "";
+                            obj.kitchenCold = "";
+                            obj.sewage = "";
+                            obj.watering = "";
+                            obj.datetime = moment(item.countersValuesDate.kitchenHotCounter).format('DD.MM.YYYY, h:mm:ss');
+                            counters.push(obj);
+                          });
+                        });
+
+                        counters.filter(function (date, i, array) {
+                          return array.indexOf(date) === i;
+                       })
+
+                        setPrevHistory((prevState) => ({
+                          prevState: prevState[route.params.ProfileID].push(...counters)
+                        }));
+
+                      });
+                    } catch (err) {
+                      if (DocumentPicker.isCancel(err)) {
+                        console.log(err);
+                      } else {
+                        throw err;
+                      }
+                    }
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      textAlign: "center",
+                      padding: 10,
+                      backgroundColor: "green",
+                      color: "#fff",
+                    }}
+                  >
+                    Импортувати покази
+                  </Text>
+                </TouchableOpacity>
                 <Text style={styles.Profile.InputCaption}>
                   {locale.profile_name}&nbsp;
-                  {!route.params.ProfileID && <Text style={styles.InputRequired}>*</Text>}
+                  {!route.params.ProfileID && (
+                    <Text style={styles.InputRequired}>*</Text>
+                  )}
                 </Text>
                 <TextInput
-                  onChangeText={text => onChange(PROFILE.address, text)}
+                  onChangeText={(text) => onChange(PROFILE.address, text)}
                   selectionColor={styles.InputSelection}
                   placeholder={locale.profile_name_placeholder}
                   placeholderTextColor={styles.PlaceholderTextColor}
@@ -123,7 +374,9 @@ const Profile = ({locale, styles, profiles, toProfiles, history, toHistory, last
               <View style={styles.Profile.InputItem}>
                 <Text style={styles.Profile.InputCaption}>
                   {locale.profile_id}&nbsp;
-                  {!route.params.ProfileID && <Text style={styles.InputRequired}>*</Text>}
+                  {!route.params.ProfileID && (
+                    <Text style={styles.InputRequired}>*</Text>
+                  )}
                 </Text>
                 {/*********************************************************************************/}
                 {/* <TextInput
@@ -138,38 +391,40 @@ const Profile = ({locale, styles, profiles, toProfiles, history, toHistory, last
                   style={{color: '#007BFF'}}
                   // style={route.params.ProfileID?styles.Profile.InputDefault:styles.Profile.InputNotModif}
                 /> */}
-                { !route.params.ProfileID &&
-                <TextInput
-                  editable={true}
-                  onChangeText={text => onChange(PROFILE.id, text)}
-                  selectionColor={styles.InputSelection}
-                  placeholder={locale.profile_id_placeholder}
-                  placeholderTextColor={styles.PlaceholderTextColor}
-                  maxLength={10}
-                  keyboardType="number-pad"
-                  value={profile.id}
-                  style={styles.Profile.InputDefault}
-                />
-                }
-                { route.params.ProfileID &&
-                <TextInput
-                  editable={false}
-                  onChangeText={text => onChange(PROFILE.id, text)}
-                  selectionColor={styles.InputSelection}
-                  placeholder={locale.profile_id_placeholder}
-                  placeholderTextColor={styles.PlaceholderTextColor}
-                  maxLength={10}
-                  keyboardType="number-pad"
-                  value={profile.id}
-                  style={styles.Profile.InputNotModif}
-                />
-                }
+                {!route.params.ProfileID && (
+                  <TextInput
+                    editable={true}
+                    onChangeText={(text) => onChange(PROFILE.id, text)}
+                    selectionColor={styles.InputSelection}
+                    placeholder={locale.profile_id_placeholder}
+                    placeholderTextColor={styles.PlaceholderTextColor}
+                    maxLength={10}
+                    keyboardType="number-pad"
+                    value={profile.id}
+                    style={styles.Profile.InputDefault}
+                  />
+                )}
+                {route.params.ProfileID && (
+                  <TextInput
+                    editable={false}
+                    onChangeText={(text) => onChange(PROFILE.id, text)}
+                    selectionColor={styles.InputSelection}
+                    placeholder={locale.profile_id_placeholder}
+                    placeholderTextColor={styles.PlaceholderTextColor}
+                    maxLength={10}
+                    keyboardType="number-pad"
+                    value={profile.id}
+                    style={styles.Profile.InputNotModif}
+                  />
+                )}
                 {/*********************************************************************************/}
               </View>
               <View style={styles.Profile.InputItem}>
-                <Text style={styles.Profile.InputCaption}>{locale.profile_fio}</Text>
+                <Text style={styles.Profile.InputCaption}>
+                  {locale.profile_fio}
+                </Text>
                 <TextInput
-                  onChangeText={text => onChange(PROFILE.fio, text)}
+                  onChangeText={(text) => onChange(PROFILE.fio, text)}
                   selectionColor={styles.InputSelection}
                   placeholder={locale.profile_fio_placeholder}
                   placeholderTextColor={styles.PlaceholderTextColor}
@@ -179,9 +434,11 @@ const Profile = ({locale, styles, profiles, toProfiles, history, toHistory, last
                 />
               </View>
               <View style={styles.Profile.InputItem}>
-                <Text style={styles.Profile.InputCaption}>{locale.profile_phone}</Text>
+                <Text style={styles.Profile.InputCaption}>
+                  {locale.profile_phone}
+                </Text>
                 <TextInput
-                  onChangeText={text => onChange(PROFILE.phone, text)}
+                  onChangeText={(text) => onChange(PROFILE.phone, text)}
                   selectionColor={styles.InputSelection}
                   placeholder={locale.profile_phone_placeholder}
                   placeholderTextColor={styles.PlaceholderTextColor}
@@ -193,70 +450,114 @@ const Profile = ({locale, styles, profiles, toProfiles, history, toHistory, last
               </View>
             </View>
             <View style={styles.Profile.InputSection}>
-              <Text style={styles.Profile.EnumeratorCaption}>{locale.profile_kitchen}</Text>
+              <Text style={styles.Profile.EnumeratorCaption}>
+                {locale.profile_kitchen}
+              </Text>
               <View style={styles.Profile.EnumeratorContainer}>
-                <Text style={styles.Profile.EnumeratorItem}>{locale.profile_kitchen_hot}</Text>
+                <Text style={styles.Profile.EnumeratorItem}>
+                  {locale.profile_kitchen_hot}
+                </Text>
                 <Switch
                   trackColor={styles.SwitchTrackColor}
-                  thumbColor={profile.kitchenHot ? styles.SwitchThumbColor.true:styles.SwitchThumbColor.false}
+                  thumbColor={
+                    profile.kitchenHot
+                      ? styles.SwitchThumbColor.true
+                      : styles.SwitchThumbColor.false
+                  }
                   ios_backgroundColor={styles.SwitchIOSBackgroundColor}
-                  onValueChange={value => onChange(PROFILE.kitchenHot, value)}
+                  onValueChange={(value) => onChange(PROFILE.kitchenHot, value)}
                   value={profile.kitchenHot}
                 />
               </View>
               <View style={styles.Profile.EnumeratorContainer}>
-                <Text style={styles.Profile.EnumeratorItem}>{locale.profile_kitchen_cold}</Text>
+                <Text style={styles.Profile.EnumeratorItem}>
+                  {locale.profile_kitchen_cold}
+                </Text>
                 <Switch
                   trackColor={styles.SwitchTrackColor}
-                  thumbColor={profile.kitchenCold ? styles.SwitchThumbColor.true:styles.SwitchThumbColor.false}
+                  thumbColor={
+                    profile.kitchenCold
+                      ? styles.SwitchThumbColor.true
+                      : styles.SwitchThumbColor.false
+                  }
                   ios_backgroundColor={styles.SwitchIOSBackgroundColor}
-                  onValueChange={value => onChange(PROFILE.kitchenCold, value)}
+                  onValueChange={(value) =>
+                    onChange(PROFILE.kitchenCold, value)
+                  }
                   value={profile.kitchenCold}
                 />
               </View>
             </View>
             <View style={styles.Profile.InputSection}>
-              <Text style={styles.Profile.EnumeratorCaption}>{locale.profile_bath}</Text>
+              <Text style={styles.Profile.EnumeratorCaption}>
+                {locale.profile_bath}
+              </Text>
               <View style={styles.Profile.EnumeratorContainer}>
-                <Text style={styles.Profile.EnumeratorItem}>{locale.profile_bath_hot}</Text>
+                <Text style={styles.Profile.EnumeratorItem}>
+                  {locale.profile_bath_hot}
+                </Text>
                 <Switch
                   trackColor={styles.SwitchTrackColor}
-                  thumbColor={profile.bathHot ? styles.SwitchThumbColor.true:styles.SwitchThumbColor.false}
+                  thumbColor={
+                    profile.bathHot
+                      ? styles.SwitchThumbColor.true
+                      : styles.SwitchThumbColor.false
+                  }
                   ios_backgroundColor={styles.SwitchIOSBackgroundColor}
-                  onValueChange={value => onChange(PROFILE.bathHot, value)}
+                  onValueChange={(value) => onChange(PROFILE.bathHot, value)}
                   value={profile.bathHot}
                 />
               </View>
               <View style={styles.Profile.EnumeratorContainer}>
-                <Text style={styles.Profile.EnumeratorItem}>{locale.profile_bath_cold}</Text>
+                <Text style={styles.Profile.EnumeratorItem}>
+                  {locale.profile_bath_cold}
+                </Text>
                 <Switch
                   trackColor={styles.SwitchTrackColor}
-                  thumbColor={profile.bathCold ? styles.SwitchThumbColor.true:styles.SwitchThumbColor.false}
+                  thumbColor={
+                    profile.bathCold
+                      ? styles.SwitchThumbColor.true
+                      : styles.SwitchThumbColor.false
+                  }
                   ios_backgroundColor={styles.SwitchIOSBackgroundColor}
-                  onValueChange={value => onChange(PROFILE.bathCold, value)}
+                  onValueChange={(value) => onChange(PROFILE.bathCold, value)}
                   value={profile.bathCold}
                 />
               </View>
             </View>
             <View style={styles.Profile.InputSection}>
-              <Text style={styles.Profile.EnumeratorCaption}>{locale.profile_other}</Text>
+              <Text style={styles.Profile.EnumeratorCaption}>
+                {locale.profile_other}
+              </Text>
               <View style={styles.Profile.EnumeratorContainer}>
-                <Text style={styles.Profile.EnumeratorItem}>{locale.profile_other_watering}</Text>
+                <Text style={styles.Profile.EnumeratorItem}>
+                  {locale.profile_other_watering}
+                </Text>
                 <Switch
                   trackColor={styles.SwitchTrackColor}
-                  thumbColor={profile.watering ? styles.SwitchThumbColor.true:styles.SwitchThumbColor.false}
+                  thumbColor={
+                    profile.watering
+                      ? styles.SwitchThumbColor.true
+                      : styles.SwitchThumbColor.false
+                  }
                   ios_backgroundColor={styles.SwitchIOSBackgroundColor}
-                  onValueChange={value => onChange(PROFILE.watering, value)}
+                  onValueChange={(value) => onChange(PROFILE.watering, value)}
                   value={profile.watering}
                 />
               </View>
               <View style={styles.Profile.EnumeratorContainer}>
-                <Text style={styles.Profile.EnumeratorItem}>{locale.profile_other_sewage}</Text>
+                <Text style={styles.Profile.EnumeratorItem}>
+                  {locale.profile_other_sewage}
+                </Text>
                 <Switch
                   trackColor={styles.SwitchTrackColor}
-                  thumbColor={profile.sewage ? styles.SwitchThumbColor.true:styles.SwitchThumbColor.false}
+                  thumbColor={
+                    profile.sewage
+                      ? styles.SwitchThumbColor.true
+                      : styles.SwitchThumbColor.false
+                  }
                   ios_backgroundColor={styles.SwitchIOSBackgroundColor}
-                  onValueChange={value => onChange(PROFILE.sewage, value)}
+                  onValueChange={(value) => onChange(PROFILE.sewage, value)}
                   value={profile.sewage}
                 />
               </View>
@@ -264,21 +565,80 @@ const Profile = ({locale, styles, profiles, toProfiles, history, toHistory, last
           </View>
         </ScrollView>
         <View style={styles.Toolbar.Container}>
-          <Divider style={styles.Divider}/>
+          <Divider style={styles.Divider} />
           <View style={styles.Toolbar.Icons}>
             <View style={styles.Toolbar.Icon}>
-              <TouchableOpacity onPress={() => route.params.ProfileID ? runProfileDelete(profile.id, profiles, toProfiles, locale, history, toHistory, lastValue, toLastValue, navigation):null}>
-                <Icon name="trash-alt" iconStyle={route.params.ProfileID ? styles.Profile.DeleteIcon:styles.ColorNone} type="font-awesome-5"/>
+              <TouchableOpacity
+                onPress={() =>
+                  route.params.ProfileID
+                    ? runProfileDelete(
+                        profile.id,
+                        profiles,
+                        toProfiles,
+                        locale,
+                        history,
+                        toHistory,
+                        lastValue,
+                        toLastValue,
+                        navigation
+                      )
+                    : null
+                }
+              >
+                <Icon
+                  name="trash-alt"
+                  iconStyle={
+                    route.params.ProfileID
+                      ? styles.Profile.DeleteIcon
+                      : styles.ColorNone
+                  }
+                  type="font-awesome-5"
+                />
               </TouchableOpacity>
             </View>
             <View style={styles.Toolbar.Icon}>
-              <TouchableOpacity onPress={() => runProfileSave(profile, route.params.ProfileID, locale, profiles, toProfiles, lastValue, toLastValue, navigation)}>
-                <Icon name="save" iconStyle={styles.Profile.SaveIcon} type="font-awesome-5"/>
+              <TouchableOpacity
+                onPress={() =>
+                  runProfileSave(
+                    profile,
+                    route.params.ProfileID,
+                    locale,
+                    profiles,
+                    toProfiles,
+                    lastValue,
+                    toLastValue,
+                    navigation
+                  )
+                }
+              >
+                <Icon
+                  name="save"
+                  iconStyle={styles.Profile.SaveIcon}
+                  type="font-awesome-5"
+                />
               </TouchableOpacity>
             </View>
             <View style={styles.Toolbar.Icon}>
-              <TouchableOpacity onPress={() => runHistorySearch(history, profile) ? navigation.navigate('History', { ProfileID: profile.id, ProfileName: profile.address, NeedLoad: true }):null}>
-                <Icon name="history" iconStyle={runHistorySearch(history, profile) ? styles.Profile.HistoryIcon:styles.ColorNone} type="font-awesome-5"/>
+              <TouchableOpacity
+                onPress={() =>
+                  runHistorySearch(history, profile)
+                    ? navigation.navigate("History", {
+                        ProfileID: profile.id,
+                        ProfileName: profile.address,
+                        NeedLoad: true,
+                      })
+                    : null
+                }
+              >
+                <Icon
+                  name="history"
+                  iconStyle={
+                    runHistorySearch(history, profile)
+                      ? styles.Profile.HistoryIcon
+                      : styles.ColorNone
+                  }
+                  type="font-awesome-5"
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -286,6 +646,6 @@ const Profile = ({locale, styles, profiles, toProfiles, history, toHistory, last
       </View>
     </SafeAreaView>
   );
-}
+};
 
 export default connect(StateToProps(), DispatchToProps())(Profile);

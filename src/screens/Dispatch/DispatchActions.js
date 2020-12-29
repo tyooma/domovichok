@@ -2,7 +2,7 @@ import { HISTORYEMPTY } from '../../libs/Consts';
 import { getLocaleDT } from '../../libs/Utils';
 import { SendFirebase, SendMail } from './DispatchSend';
 
-export const runFeedback = async (dispatch, locale, history, toHistory, lastValue, toLastValue, toPeriod) => {
+export const runFeedback = async (dispatch, locale, history, toHistory, lastValue, toLastValue) => {
   let feedback = { status: true, head: '', body: '' }
 
   const currentTime = new Date();
@@ -98,8 +98,8 @@ const updateLastValue = (profileID, data, lastValue, toLastValue) => {
 }
 
 //--------------------------------------------------------------------------------------------------------------
-
-const saveHistory = (dispatch, history, toHistory, lastValue, toLastValue, locale) => {
+//Default from Larin not export
+export const saveHistory = (dispatch, history, toHistory, lastValue, toLastValue, locale) => {
   let answer = { status: true, head: '', body: '' };
   try {
     const profile = dispatch.profile;

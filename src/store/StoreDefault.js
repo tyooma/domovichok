@@ -4,7 +4,7 @@ import firestore from '@react-native-firebase/firestore'
 import { LANG, THEME } from '../libs/Consts'
 import { getLocale, getStyles, getMedia } from '../libs/Tools'
 import * as RCreator from './Creators'
-import { STORAGE } from '../storage/Actions'
+import { STORAGE } from '../storage/Actions' 
 
 const dbTokens = 'PushSubscribers'
 
@@ -12,8 +12,8 @@ export const DefaultInit = {
   lang: LANG.ua,
   locale: getLocale(LANG.ua),
   theme: THEME.dark,
-  styles: getStyles(THEME.dark),
-  profiles: [],
+  styles: getStyles(THEME.light),
+  profiles: [],//default value from Larin= []   
   profilesDetails: true,
   history: [],
   lastValue: {},

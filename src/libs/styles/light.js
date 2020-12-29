@@ -1,6 +1,6 @@
 export default {
   // MAIN
-  Container: { flex: 10, backgroundColor: '#212529' },
+  Container: { flex: 10, backgroundColor: '#ffffff' },//default #212529
   Header: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5, marginTop: 5 },
   HeaderLeft: { flexDirection: 'row', paddingHorizontal: 0 },
   HeaderRight: { flexDirection: 'row' },

@@ -3,7 +3,7 @@ import { STORAGE } from './Actions'
 
 export const SaveToStorage = (action, value) => {
   try {
-    let parse = undefined
+    let parse = null;// JSON.stringify(profiles)
     switch (action) {
       case STORAGE.lang:
         parse = value
@@ -18,6 +18,7 @@ export const SaveToStorage = (action, value) => {
         parse = JSON.stringify(value)
     }
     AsyncStorage.setItem(action, parse)
+    console.log(`action:::${action},value---${value}`, value)
   } catch (err) {
     console.log(
       'SaveToStorage: ERROR => action: ' + action + ' value: ' + value + ' >',
