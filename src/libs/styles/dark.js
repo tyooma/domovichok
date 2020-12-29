@@ -1,12 +1,19 @@
-import { Dimensions } from "react-native";
+import { Dimensions } from 'react-native'
 
-const screen = Dimensions.get("window");
+const screen = Dimensions.get('window')
 
-export const sWidth = screen.width;
+export const sWidth = screen.width
 
-export const sHeight = screen.height;
+export const sHeight = screen.height
 
 export default {
+  //MAIN COLOR
+  GradientColorFirst: {
+    color: '#555555'
+  },
+  GradientColorSecond: {
+    color: '#725CAE'
+  },
   // MAIN
   Container: { flex: 1, backgroundColor: '#212121' },
   ContainerHeader: { marginTop: 55, flex: 1 },
@@ -99,11 +106,11 @@ export default {
 
     ProfileInfo: {
       paddingTop: 14,
-      paddingLeft: 17,
+      paddingLeft: 17
     },
 
     ProfileCaption: {
-      marginBottom: 8, 
+      marginBottom: 8,
 
       fontSize: 14,
       fontWeight: 'normal',
@@ -113,11 +120,14 @@ export default {
     ProfileIcons: {
       paddingTop: 8,
       paddingRight: 11,
-      paddingBottom: 11
+      paddingBottom: 11,
+
+      flexDirection: 'column',
+      justifyContent: 'center'
     },
 
     ProfileIcon: {
-      marginBottom: 10, 
+      marginBottom: 10,
 
       fontSize: 26,
       fontWeight: 'normal',
@@ -134,7 +144,8 @@ export default {
     },
 
     ProfileCreateContainer: {
-      padding: 30,
+      paddingRight: 15,
+      paddingBottom: 40,
 
       alignItems: 'flex-end',
       justifyContent: 'space-between'
@@ -230,63 +241,96 @@ export default {
   },
 
   Dispatch: {
-    Container: { flex: 9, justifyContent: 'space-between' },
+    Container: {
+      paddingTop: 30,
+      paddingBottom: 50,
+      paddingHorizontal: 15,
+      marginTop: 50,
+
+      flex: 1
+    },
     Content: { paddingHorizontal: 10, paddingTop: 5 },
 
+    HeaderRememberSection: {
+      paddingVertical: 6,
+      paddingHorizontal: 16,
+      marginBottom: 15,
+
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+
+      backgroundColor: '#725CAE',
+
+      borderRadius: 6
+    },
+    HeaderRememberCaption: {
+      fontSize: 14,
+      color: '#fff'
+    },
     Profile: { marginBottom: 0 },
-    ProfileItem: { paddingBottom: 5, padding: 0, margin: 0 },
+    ProfileItem: { marginBottom: 20 },
     ProfileItemCaption: {
-      fontSize: 18,
+      paddingBottom: 8,
+      marginBottom: 12,
+
+      fontSize: 16,
       fontWeight: 'bold',
-      color: 'gray',
-      borderColor: 'gray',
+      color: '#fff',
+
+      borderColor: '#725CAE',
       borderBottomWidth: 1
     },
-    ProfileItemLabel: { fontSize: 16, fontWeight: 'bold', color: '#007BFF' },
+    ProfileItemLabel: { fontSize: 13, fontWeight: 'normal', color: '#fff' },
 
-    Enumerators: { padding: 0 },
+    Enumerators: {},
     EnumeratorSection: { marginBottom: 10 },
     EnumeratorCaption: {
-      fontSize: 18,
+      paddingBottom: 8,
+      marginBottom: 12,
+
+      fontSize: 16,
       fontWeight: 'bold',
-      color: 'gray',
-      borderColor: 'gray',
-      borderBottomWidth: 1.5,
-      paddingTop: 5,
-      marginBottom: 5
+      color: '#fff',
+
+      borderColor: '#725CAE',
+      borderBottomWidth: 1
     },
 
     EnumeratorContainer: {
+      marginBottom: 10,
+
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
-      marginBottom: 5
+      justifyContent: 'space-between'
     },
     EnumeratorItem: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: 'gray',
-      width: '50%'
+      width: '20%',
+
+      fontSize: 13,
+      fontWeight: 'normal',
+      color: '#fff'
     },
     EnumeratorInput: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: '#007BFF',
-      borderColor: 'gray',
-      borderWidth: 1,
       paddingVertical: 0,
       paddingHorizontal: 10,
-      margin: 0,
-      width: '25%',
-      textAlign: 'right'
+
+      width: '80%',
+
+      fontSize: 13,
+      fontWeight: 'normal',
+      color: '#725CAE',
+
+      borderColor: '#725CAE',
+      borderWidth: 1,
+      borderRadius: 6
     },
     EnumeratorLastValue: {
-      fontSize: 14,
-      color: '#007BFF',
-      textAlign: 'right',
       padding: 0,
       margin: 0,
-      width: '25%'
+
+      fontSize: 11,
+      color: '#725CAE'
     },
 
     InputEnumerator: 7,
@@ -295,25 +339,45 @@ export default {
     EnumeratorContainerNotes: { marginBottom: 5 },
     EnumeratorInputNotesSize: { minHeight: 120 },
     EnumeratorInputNotes: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      textAlignVertical: 'top',
-      color: '#007BFF',
-      borderColor: 'gray',
-      borderWidth: 1,
       paddingVertical: 6,
       paddingHorizontal: 15,
       margin: 0,
-      height: 120
+
+      height: 120,
+
+      fontSize: 13,
+      fontWeight: 'normal',
+      textAlignVertical: 'top',
+      color: '#fff',
+
+      borderColor: '#725CAE',
+      borderWidth: 1,
+      borderRadius: 10
     },
 
     Toolbar: {
+      padding: 5,
+      marginBottom: 50,
+
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'center',
-      padding: 5
+      justifyContent: 'center'
     },
-    SendIcon: { color: 'green', fontSize: 45 }
+
+    SendBtn: {
+      paddingVertical: 10,
+      paddingHorizontal: 30,
+
+      width: '40%',
+
+      borderRadius: 10
+    },
+
+    SendBtnText: {
+      fontSize: 16,
+      fontWeight: 'normal',
+      color: '#fff'
+    }
   },
 
   Feedback: {
@@ -632,107 +696,107 @@ export default {
     ContainerCenter: {
       padding: 7,
       flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "#212529",
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#212529'
     },
     Image: { marginBottom: 50 },
-    ContainerCaption: { alignItems: "center", marginVertical: 30 },
+    ContainerCaption: { alignItems: 'center', marginVertical: 30 },
     CaptionText: {
-      color: "#ffffff",
-      alignItems: "center",
-      textAlign: "center",
+      color: '#ffffff',
+      alignItems: 'center',
+      textAlign: 'center',
       fontSize: 28,
-      fontWeight: "bold",
+      fontWeight: 'bold'
     },
     retryText: {
       marginTop: 10,
       fontSize: 20,
-      color: "#725CAE",
-      fontWeight: "bold",
-    },
+      color: '#725CAE',
+      fontWeight: 'bold'
+    }
   },
   Checkbox: {
     checkboxContainer: {
-      flexDirection: "row",
-      alignItems: "center",
+      flexDirection: 'row',
+      alignItems: 'center',
       width: sWidth,
-      paddingRight: 20,
+      paddingRight: 20
     },
     checkboxStyle: {
       height: 20,
       width: 20,
       borderRadius: 5,
       borderWidth: 0.3,
-      borderColor: "#a0a0a0",
-      justifyContent: "center",
-      alignItems: "center",
+      borderColor: '#a0a0a0',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     checkboxTextStyle: {
       marginLeft: 14,
-      color: "#050505",
+      color: '#050505',
       lineHeight: 24,
-      fontSize: 12,
+      fontSize: 12
     },
     checkboxImage: {
       height: 10,
       width: 14,
-      resizeMode: "contain",
-    },
+      resizeMode: 'contain'
+    }
   },
   // ----------- Modal WArninig-----------
   Warning: {
     container: {
       flex: 1,
-      backgroundColor: "#fff",
-      alignItems: "center",
-      justifyContent: "center",
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     modal: {
-      backgroundColor: "#00000099",
+      backgroundColor: '#00000099',
       flex: 1,
-      alignItems: "center",
-      justifyContent: "center",
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     modalContainer: {
-      backgroundColor: "#fff",
-      borderRadius: 5,
+      backgroundColor: '#fff',
+      borderRadius: 5
     },
     modalHeader: {
-      alignItems: "center",
-      justifyContent: "center",
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     title: {
-      fontWeight: "bold",
+      fontWeight: 'bold',
       fontSize: 20,
       padding: 15,
-      color: "#000",
+      color: '#000'
     },
     divider: {
-      width: "100%",
+      width: '100%',
       height: 1,
-      backgroundColor: "lightgray",
+      backgroundColor: 'lightgray'
     },
     modalBody: {
-      backgroundColor: "#fff",
+      backgroundColor: '#fff',
       paddingVertical: 20,
       paddingHorizontal: 10,
-      alignItems: "center",
-      justifyContent: "center",
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     bodyText: {
-      fontSize: 20,
+      fontSize: 20
     },
     modalFooter: {},
     actions: {
       borderRadius: 5,
       marginHorizontal: 10,
       paddingVertical: 10,
-      paddingHorizontal: 20,
+      paddingHorizontal: 20
     },
     actionText: {
-      color: "#fff",
-    },
-  },
+      color: '#fff'
+    }
+  }
   // -----------END Header Modal WArninig-----------
 }

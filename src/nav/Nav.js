@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import LinearGradient from 'react-native-linear-gradient'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import { connect } from 'react-redux'
+import { StateToProps, DispatchToProps } from '../store/MapToProps'
 
 import Home from '../screens/Home'
 import Dispatch from '../screens/Dispatch/Dispatch'
@@ -20,7 +22,10 @@ import { HeaderIcon } from '../components/HeaderIcon'
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 
-const HomeStack = ({ navigation }) => (
+const HomeStack = connect(
+  StateToProps(),
+  DispatchToProps()
+)(({ navigation, styles }) => (
   <Stack.Navigator
     screenOptions={{
       headerTransparent: true,
@@ -32,7 +37,10 @@ const HomeStack = ({ navigation }) => (
       headerTintColor: '#fff',
       headerBackground: () => (
         <LinearGradient
-          colors={['#555555', '#725CAE']}
+          colors={[
+            styles.GradientColorFirst.color,
+            styles.GradientColorSecond.color
+          ]}
           style={StyleSheet.absoluteFill}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
@@ -101,9 +109,12 @@ const HomeStack = ({ navigation }) => (
       }}
     />
   </Stack.Navigator>
-)
+))
 
-const SettingsStack = ({ navigation }) => (
+const SettingsStack = connect(
+  StateToProps(),
+  DispatchToProps()
+)(({ navigation, styles }) => (
   <Stack.Navigator
     screenOptions={{
       headerTransparent: true,
@@ -115,7 +126,10 @@ const SettingsStack = ({ navigation }) => (
       headerTintColor: '#fff',
       headerBackground: () => (
         <LinearGradient
-          colors={['#00aeef', '#72a4ee']}
+          colors={[
+            styles.GradientColorFirst.color,
+            styles.GradientColorSecond.color
+          ]}
           style={StyleSheet.absoluteFill}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
@@ -140,9 +154,12 @@ const SettingsStack = ({ navigation }) => (
       }}
     />
   </Stack.Navigator>
-)
+))
 
-const InstructionStack = ({ navigation }) => (
+const InstructionStack = connect(
+  StateToProps(),
+  DispatchToProps()
+)(({ navigation, styles }) => (
   <Stack.Navigator
     screenOptions={{
       headerTransparent: true,
@@ -154,7 +171,10 @@ const InstructionStack = ({ navigation }) => (
       headerTintColor: '#fff',
       headerBackground: () => (
         <LinearGradient
-          colors={['#00aeef', '#72a4ee']}
+          colors={[
+            styles.GradientColorFirst.color,
+            styles.GradientColorSecond.color
+          ]}
           style={StyleSheet.absoluteFill}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
@@ -179,9 +199,12 @@ const InstructionStack = ({ navigation }) => (
       }}
     />
   </Stack.Navigator>
-)
+))
 
-const PolicyStack = ({ navigation }) => (
+const PolicyStack = connect(
+  StateToProps(),
+  DispatchToProps()
+)(({ navigation, styles }) => (
   <Stack.Navigator
     screenOptions={{
       headerTransparent: true,
@@ -193,7 +216,10 @@ const PolicyStack = ({ navigation }) => (
       headerTintColor: '#fff',
       headerBackground: () => (
         <LinearGradient
-          colors={['#00aeef', '#72a4ee']}
+          colors={[
+            styles.GradientColorFirst.color,
+            styles.GradientColorSecond.color
+          ]}
           style={StyleSheet.absoluteFill}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
@@ -218,9 +244,12 @@ const PolicyStack = ({ navigation }) => (
       }}
     />
   </Stack.Navigator>
-)
+))
 
-const AboutStack = ({ navigation }) => (
+const AboutStack = connect(
+  StateToProps(),
+  DispatchToProps()
+)(({ navigation, styles }) => (
   <Stack.Navigator
     screenOptions={{
       headerTransparent: true,
@@ -232,7 +261,10 @@ const AboutStack = ({ navigation }) => (
       headerTintColor: '#fff',
       headerBackground: () => (
         <LinearGradient
-          colors={['#00aeef', '#72a4ee']}
+          colors={[
+            styles.GradientColorFirst.color,
+            styles.GradientColorSecond.color
+          ]}
           style={StyleSheet.absoluteFill}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
@@ -257,10 +289,7 @@ const AboutStack = ({ navigation }) => (
       }}
     />
   </Stack.Navigator>
-)
-
-
-
+))
 
 const MainDrawer = () => (
   <Drawer.Navigator>
@@ -299,7 +328,6 @@ const MainDrawer = () => (
         title: 'Довідка'
       }}
     />
-  
   </Drawer.Navigator>
 )
 
