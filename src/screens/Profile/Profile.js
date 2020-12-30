@@ -189,7 +189,7 @@ const Profile = ({
           <View style={styles.Profile.InputContainer}>
             <View style={styles.Profile.InputSection}>
               <View style={styles.Profile.InputItem}>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   onPress={() =>
                     importProfileFromFile(
                       route.params.ProfileID,
@@ -232,7 +232,7 @@ const Profile = ({
                   >
                     Импортувати покази
                   </Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <Text style={styles.Profile.InputCaption}>
                   {locale.profile_name}&nbsp;
                   {!route.params.ProfileID && (
