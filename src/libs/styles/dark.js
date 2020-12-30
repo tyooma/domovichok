@@ -3,10 +3,11 @@ import { Dimensions } from 'react-native'
 const screen = Dimensions.get('window')
 
 export const sWidth = screen.width
-
 export const sHeight = screen.height
 
 export default {
+  //DRAWER
+
   //MAIN COLOR
   GradientColorFirst: {
     color: '#555555'
@@ -64,18 +65,6 @@ export default {
     },
     WarningSection: { alignItems: 'center', margin: 5 },
     WarningCaption: { fontSize: 18, fontWeight: 'bold', color: 'yellow' }
-  },
-
-  Toolbar: {
-    // HISTORY
-    Container: { flexDirection: 'column', padding: 0, margin: 0 },
-    Icons: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      paddingVertical: 5,
-      paddingHorizontal: 20
-    },
-    Icon: { alignItems: 'center', justifyContent: 'center' }
   },
 
   Home: {
@@ -235,9 +224,35 @@ export default {
       marginTop: 0
     },
 
-    DeleteIcon: { color: '#FF4D4D', fontSize: 35 },
-    SaveIcon: { color: '#007BFF', fontSize: 35 },
-    HistoryIcon: { color: 'orange', fontSize: 35 }
+    Toolbar: {
+      marginBottom: 50,
+
+      flexDirection: 'column'
+    },
+
+    Btns: {
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+
+    BtnContainer: {
+      marginBottom: 15
+    },
+
+    Btn: {
+      paddingVertical: 10,
+      paddingHorizontal: 30,
+
+      width: '40%',
+
+      borderRadius: 10
+    },
+
+    BtnText: {
+      fontSize: 16,
+      fontWeight: 'normal',
+      color: '#fff'
+    }
   },
 
   Dispatch: {
@@ -673,24 +688,33 @@ export default {
   },
 
   About: {
-    Container: { flex: 1, padding: 30 },
-    ContainerCaption: { alignItems: 'center', marginVertical: 30 },
-    CaptionText: { color: '#007BFF', fontSize: 28, fontWeight: 'bold' },
+    Container: {
+      paddingVertical: 30,
+      paddingHorizontal: 15,
+      marginTop: 50,
+      flex: 1
+    },
+    ContainerCaption: {
+      marginBottom: 30,
+
+      alignItems: 'center'
+    },
+    CaptionText: { color: '#fff', fontSize: 25, fontWeight: 'bold' },
     ContainerDetails: { flex: 1 },
-    Disclaimer: { color: '#007BFF', marginBottom: 15 },
-    Telephone: { color: '#007BFF' },
+    Disclaimer: { color: '#fff', marginBottom: 15 },
+    Telephone: { color: '#fff' },
     Telephone_2: {
-      color: '#007BFF',
+      color: '#725CAE',
       marginBottom: 15,
       textDecorationLine: 'underline'
     },
-    Link: { color: '#007BFF' },
+    Link: { color: '#fff' },
     Link_2: {
-      color: '#007BFF',
+      color: '#725CAE',
       marginBottom: 15,
       textDecorationLine: 'underline'
     },
-    Version: { color: '#007BFF', alignSelf: 'flex-end', fontSize: 14 }
+    Version: { color: '#725CAE', alignSelf: 'flex-end', fontSize: 14 }
   },
   NoNetwork: {
     ContainerCenter: {
@@ -717,34 +741,55 @@ export default {
     }
   },
   Checkbox: {
-    checkboxContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
+    marginBottom: 40,
+
+    CheckboxContainer: {
       width: sWidth,
-      paddingRight: 20
+
+      flexDirection: 'row',
+      alignItems: 'flex-start'
     },
-    checkboxStyle: {
+
+    CheckboxStyle: {
       height: 20,
       width: 20,
+
+      justifyContent: 'center',
+      alignItems: 'center',
+
       borderRadius: 5,
       borderWidth: 0.3,
-      borderColor: '#a0a0a0',
-      justifyContent: 'center',
-      alignItems: 'center'
+      borderColor: '#725CAE'
     },
-    checkboxTextStyle: {
-      marginLeft: 14,
-      color: '#050505',
+
+    CheckboxTextStyle: {
+      fontSize: 12,
       lineHeight: 24,
-      fontSize: 12
+      color: '#725CAE'
     },
-    checkboxImage: {
+
+    CheckboxImage: {
       height: 10,
       width: 14,
       resizeMode: 'contain'
+    },
+
+    PolicyTextContainer: {
+      width: '100%'
+    },
+ 
+    PolicyText: {
+      flexDirection: 'row',
+      alignItems: 'center',
+  
+      color: '#fff'
+    },
+
+    PolicyTouch: {
+      color: '#725CAE'
     }
   },
-  // ----------- Modal WArninig-----------
+  // ----------- Modal Warninig-----------
   Warning: {
     container: {
       flex: 1,

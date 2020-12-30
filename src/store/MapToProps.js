@@ -1,5 +1,5 @@
-import { bindActionCreators } from 'redux';
-import * as App from './Creators';
+import { bindActionCreators } from 'redux'
+import * as App from './Creators'
 
 export const StateToProps = () => {
   return (state) => {
@@ -14,8 +14,8 @@ export const StateToProps = () => {
       lastValue: state.lastValue,
       period: state.period,
       media: state.media,
-      fbtoken: state.fbtoken,
-    };
+      fbtoken: state.fbtoken
+    }
   }
 }
 
@@ -32,7 +32,7 @@ export const DispatchToProps = () => {
       toLastValue: bindActionCreators(App.saveLastValue, dispatch),
       toPeriod: bindActionCreators(App.savePeriod, dispatch),
       toMedia: bindActionCreators(App.saveMedia, dispatch),
-      toFBToken: bindActionCreators(App.saveFBToken, dispatch),
+      toFBToken: bindActionCreators(App.saveFBToken, dispatch)
     }
   }
 }

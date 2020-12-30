@@ -19,6 +19,8 @@ import {
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import LinearGradient from 'react-native-linear-gradient'
 import { StateToProps, DispatchToProps } from '../../store/MapToProps'
 import { ActionBack } from './../components/Actions'
 import { PROFILE } from '../../libs/Consts'
@@ -179,16 +181,6 @@ const Profile = ({
 
   return (
     <SafeAreaView style={styles.Container}>
-      {/* <View style={styles.Header}>
-        <View style={styles.HeaderLeft}>
-          <View style={styles.HeaderIcon}><ActionBack navigation={navigation} screen={!route.params.ProfileID?'CreateProfile':''}/></View>
-          <Text style={styles.HeaderCaption}>
-            {!route.params.ProfileID ? locale.profile_new_caption : locale.profile_edit_caption}
-          </Text>
-        </View>
-        <View style={styles.HeaderRight}></View>
-      </View>
-      <Divider style={styles.Divider}/> */}
       <View style={styles.Profile.Content}>
         <ScrollView style={styles.Profile.ScrollView}>
           <View style={styles.Profile.InputContainer}>
@@ -387,118 +379,106 @@ const Profile = ({
                 />
               </View>
             </View>
-            {!route.params.ProfileID && (
-              <TouchableOpacity
-                style={styles.Checkbox.checkboxContainer}
-                onPress={() => setCheckPolicy(!checkPolicy)}
-              >
-                <View style={styles.Checkbox.checkboxStyle}>
-                  {checkPolicy ? (
-                    <Image
-                      source={require('../../libs/assets/images/041-tick2.png')}
-                      style={styles.Checkbox.checkboxImage}
-                      key={'tickCheckbox'}
-                    />
-                  ) : (
-                    <View style={styles.Checkbox.checkboxStyle} />
-                  )}
-                </View>
-                <Text style={styles.Home.PolicyText}>
-                  {locale.profile_policy1}
-                </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Policy')}>
-                  <Text style={styles.Home.PolicyTouch}>
-                    {locale.profile_policy2}
-                  </Text>
+            <View style={styles.Checkbox}>
+              {!route.params.ProfileID && (
+                <TouchableOpacity
+                  style={styles.Checkbox.CheckboxContainer}
+                  onPress={() => setCheckPolicy(!checkPolicy)}
+                >
+                  <View style={styles.Checkbox.CheckboxStyle}>
+                    {checkPolicy ? (
+                      <Image
+                        source={require('../../libs/assets/images/checkbox.png')}
+                        style={styles.Checkbox.CheckboxImage}
+                        key={'tickCheckbox'}
+                      />
+                    ) : (
+                      <View style={styles.Checkbox.CheckboxStyle} />
+                    )}
+                  </View>
+                  <View style={styles.Checkbox.PolicyTextContainer}>
+                    <Text style={styles.Checkbox.PolicyText}>
+                      {locale.profile_policy1}
+                      <TouchableOpacity
+                        onPress={() => navigation.navigate('Policy')}
+                      >
+                        <Text style={styles.Checkbox.PolicyTouch}>
+                          {locale.profile_policy2}
+                        </Text>
+                      </TouchableOpacity>
+                      {locale.profile_policy3}
+                    </Text>
+                  </View>
                 </TouchableOpacity>
-              </TouchableOpacity>
-            )}
-            {!route.params.ProfileID && (
-              <TouchableOpacity onPress={() => setCheckPolicy(!checkPolicy)}>
-                <Text style={styles.Home.PolicyText}>
-                  {locale.profile_policy3}
-                </Text>
-              </TouchableOpacity>
-            )}
+              )}
+            </View>
           </View>
-          <View style={styles.Toolbar.Container}>
-            <View style={styles.Toolbar.Icons}>
-              <View style={styles.Toolbar.Icon}>
-                <TouchableOpacity
-                  onPress={() =>
-                    route.params.ProfileID
-                      ? runProfileDelete(
-                          profile.id,
-                          profiles,
-                          toProfiles,
-                          locale,
-                          history,
-                          toHistory,
-                          lastValue,
-                          toLastValue,
-                          navigation
-                        )
-                      : null
-                  }
-                >
-                  <Icon
-                    name='trash-alt'
-                    iconStyle={
-                      route.params.ProfileID
-                        ? styles.Profile.DeleteIcon
-                        : styles.ColorNone
-                    }
-                    type='font-awesome-5'
-                  />
-                </TouchableOpacity>
-              </View>
-              <View style={styles.Toolbar.Icon}>
-                <TouchableOpacity
+          <View style={styles.Profile.Toolbar}>
+            <View style={styles.Profile.Btns}>
+              <View style={styles.Profile.BtnContainer}>
+                <LinearGradient
                   disabled={changeProfile}
-                  onPress={() =>
-                    runProfileSave(
-                      profile,
-                      route.params.ProfileID,
-                      locale,
-                      profiles,
-                      toProfiles,
-                      lastValue,
-                      toLastValue,
-                      navigation,
-                      checkPolicy
-                    )
-                  }
+                  colors={[
+                    styles.GradientColorFirst.color,
+                    styles.GradientColorSecond.color
+                  ]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.Profile.Btn}
                 >
-                  <Icon
-                    name='save'
-                    iconStyle={styles.Profile.SaveIcon}
-                    type='font-awesome-5'
-                  />
-                </TouchableOpacity>
-              </View>
-              {/* <View style={styles.Toolbar.Icon}>
-                <TouchableOpacity
-                  onPress={() =>
-                    runHistorySearch(history, profile)
-                      ? navigation.navigate('History', {
-                          ProfileID: profile.id,
-                          ProfileName: profile.address,
-                          NeedLoad: true
-                        })
-                      : null
-                  }
-                >
-                  <Icon
-                    name='history'
-                    iconStyle={
-                      runHistorySearch(history, profile)
-                        ? styles.Profile.HistoryIcon
-                        : styles.ColorNone
+                  <TouchableOpacity
+                    onPress={() =>
+                      runProfileSave(
+                        profile,
+                        route.params.ProfileID,
+                        locale,
+                        profiles,
+                        toProfiles,
+                        lastValue,
+                        toLastValue,
+                        navigation,
+                        checkPolicy
+                      )
                     }
-                    type='font-awesome-5'
-                  />
-                </TouchableOpacity>
-              </View> */}
+                  >
+                    <Text style={styles.Profile.BtnText}>Зберегти</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
+              </View>
+              <View
+                style={
+                  route.params.ProfileID
+                    ? styles.Profile.BtnContainer
+                    : { display: 'none' }
+                }
+              >
+                <LinearGradient
+                  colors={['#f33', '#f33']}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.Profile.Btn}
+                >
+                  <TouchableOpacity
+                    onPress={() =>
+                      route.params.ProfileID
+                        ? runProfileDelete(
+                            profile.id,
+                            profiles,
+                            toProfiles,
+                            locale,
+                            history,
+                            toHistory,
+                            lastValue,
+                            toLastValue,
+                            navigation
+                          )
+                        : null
+                    }
+                  >
+                    <Text style={styles.Profile.BtnText}>Видалити</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
+              </View>
             </View>
           </View>
         </ScrollView>

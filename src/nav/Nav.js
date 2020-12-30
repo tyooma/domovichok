@@ -6,7 +6,6 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import LinearGradient from 'react-native-linear-gradient'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { connect } from 'react-redux'
-import { StateToProps, DispatchToProps } from '../store/MapToProps'
 
 import Home from '../screens/Home'
 import Dispatch from '../screens/Dispatch/Dispatch'
@@ -18,6 +17,10 @@ import Settings from '../screens/Settings'
 import History from '../screens/History/History'
 import PreviewDispatchFeedback from '../screens/Dispatch/PreviewDispatchFeedback'
 import { HeaderIcon } from '../components/HeaderIcon'
+import { StateToProps, DispatchToProps } from '../store/MapToProps'
+import { CustomDrawerHead } from './CustomDrawerHead'
+import { runProfileDelete } from '../screens/Profile/ProfileActions'
+import { getProfile } from '../libs/Tools'
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -292,7 +295,7 @@ const AboutStack = connect(
 ))
 
 const MainDrawer = () => (
-  <Drawer.Navigator>
+  <Drawer.Navigator drawerContent={(props) => <CustomDrawerHead />}>
     <Drawer.Screen
       name='Home'
       component={HomeStack}
