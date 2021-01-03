@@ -1,6 +1,6 @@
-import React, { useRef, useCallback, useState } from "react";
+import React, { useRef, useCallback, useState } from 'react'
 
-import moment from 'moment';
+import moment from 'moment'
 
 import {
   SafeAreaView,
@@ -8,23 +8,21 @@ import {
   View,
   Modal,
   TouchableOpacity,
-  FlatList,
-} from "react-native";
-import { Divider, Icon } from "react-native-elements";
-import { connect } from "react-redux";
-import { StateToProps, DispatchToProps } from "../../store/MapToProps";
-import { ActionBack, Spinner } from "../components/Actions";
-import { Validation } from "./DispatchActions";
+  FlatList
+} from 'react-native'
+import { Divider, Icon } from 'react-native-elements'
+import { connect } from 'react-redux'
+import { StateToProps, DispatchToProps } from '../../store/MapToProps'
+import { ActionBack, Spinner } from '../components/Actions'
+import { Validation } from './DispatchActions'
 
-import DispatchFeedback from "./DispatchFeedback";
+import DispatchFeedback from './DispatchFeedback'
 
-import NoNetwork from "../NoNetwork";
+import NoNetwork from '../NoNetwork'
 
-import NetInfo from "@react-native-community/netinfo";
+import NetInfo from '@react-native-community/netinfo'
 
-import {   
-    Success4Dispatch,
-  } from "../../libs/Tools";
+import { Success4Dispatch } from '../../libs/Tools'
 
 const PreviewDispatchFeedback = ({
   send,
@@ -32,56 +30,46 @@ const PreviewDispatchFeedback = ({
   styles,
   navigation,
   route,
-  period,
+  period
 }) => {
-  console.log("route ==>", route, "period  ==>", period);
-  const needLoad = useRef(route.params.NeedLoad);
-  const [modal, setModal] = useState(false);
+  console.log('route ==>', route, 'period  ==>', period)
+  const needLoad = useRef(route.params.NeedLoad)
+  const [modal, setModal] = useState(false)
 
   const SendOnline = useCallback(() => {
-    const validate = Validation(route.params.send, locale);
+    const validate = Validation(route.params.send, locale)
     if (validate.state) {
       NetInfo.fetch().then((state) => {
         if (state.isConnected) {
           if (Success4Dispatch(period)) {
-            setModal(true);
+            setModal(true)
           } else {
             Alert.alert(
               locale.info_warning,
               `${locale.info_dispatch_unperiod_notification}`,
               [
                 { text: locale.action_ok, onPress: () => setModal(true) },
-                { text: locale.action_cancel, onPress: () => null },
+                { text: locale.action_cancel, onPress: () => null }
               ],
               { cancelable: false }
-            );
+            )
           }
         } else {
-          <NoNetwork />;
+          ;<NoNetwork />
         }
-      });
+      })
     } else {
       Alert.alert(
         locale.valid_main_caption,
         `${validate.details}`,
-        [{ text: "OK", onPress: () => null }],
+        [{ text: 'OK', onPress: () => null }],
         { cancelable: false }
-      );
+      )
     }
-  }, [route.params.send, setModal]);
+  }, [route.params.send, setModal])
 
   return (
     <SafeAreaView style={styles.Container}>
-      <View style={styles.Header}>
-        <View style={styles.HeaderLeft}>
-          <View style={styles.HeaderIcon}>
-            <ActionBack navigation={navigation} />
-          </View>
-          <Text style={styles.HeaderCaption}>{locale.history_caption}</Text>
-        </View>
-        <View style={styles.HeaderRight}></View>
-      </View>
-      <Divider style={styles.Divider} />
       {needLoad && (
         <>
           <View style={styles.History.Content}>
@@ -117,8 +105,7 @@ const PreviewDispatchFeedback = ({
                         {moment().format('DD.MM.YYYY')}
                       </Text>
                     </View>
-                    {(item.kitchenHot !== '' ||
-                      item.kitchenCold !== '') && (
+                    {(item.kitchenHot !== '' || item.kitchenCold !== '') && (
                       <View style={styles.History.RecordSection}>
                         <Text style={styles.History.RecordSectionCaption}>
                           {locale.profile_kitchen}
@@ -147,10 +134,8 @@ const PreviewDispatchFeedback = ({
                         </View>
                       </View>
                     )}
-                    
 
-                    {(item.bathHot !== '' ||
-                      item.bathCold !== '') && (
+                    {(item.bathHot !== '' || item.bathCold !== '') && (
                       <View style={styles.History.RecordSection}>
                         <Text style={styles.History.RecordSectionCaption}>
                           {locale.profile_bath}
@@ -179,8 +164,7 @@ const PreviewDispatchFeedback = ({
                         </View>
                       </View>
                     )}
-                    {(item.watering !== '' ||
-                      item.sewage !== '') && (
+                    {(item.watering !== '' || item.sewage !== '') && (
                       <View style={styles.History.RecordSection}>
                         <Text style={styles.History.RecordSectionCaption}>
                           {locale.profile_other}
@@ -228,9 +212,9 @@ const PreviewDispatchFeedback = ({
           <View style={styles.Dispatch.Toolbar}>
             <TouchableOpacity onPress={() => SendOnline()}>
               <Icon
-                name="envelope"
+                name='envelope'
                 iconStyle={styles.Dispatch.SendIcon}
-                type="font-awesome-5"
+                type='font-awesome-5'
               />
             </TouchableOpacity>
           </View>
@@ -248,8 +232,8 @@ const PreviewDispatchFeedback = ({
       )}
       <Modal
         visible={modal}
-        onRequestClose={() => console.log("Modal => Close")}
-        animationType="fade"
+        onRequestClose={() => console.log('Modal => Close')}
+        animationType='fade'
         transparent={false}
       >
         <DispatchFeedback
@@ -259,10 +243,10 @@ const PreviewDispatchFeedback = ({
         />
       </Modal>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 export default connect(
   StateToProps(),
   DispatchToProps()
-)(PreviewDispatchFeedback);
+)(PreviewDispatchFeedback)

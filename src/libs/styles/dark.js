@@ -385,7 +385,7 @@ export default {
     InputNotes: 200,
 
     EnumeratorContainerNotes: { marginBottom: 5 },
-    EnumeratorInputNotesSize: { minHeight: 120 },
+    EnumeratorInputNotesSize: { minHeight: 120, borderBottomWidth: 0 },
     EnumeratorInputNotes: {
       paddingVertical: 6,
       paddingHorizontal: 15,
