@@ -139,7 +139,9 @@ export default {
       alignItems: 'flex-end',
       justifyContent: 'space-between'
     },
+
     ProfileCreateSection: {
+      marginTop: 2,
       padding: 15,
 
       width: 60,
@@ -150,7 +152,39 @@ export default {
 
       borderRadius: 20
     },
-    ProfileCreateIcon: { color: '#fff', fontSize: 30 }
+
+    ProfileCreateIcon: { fontSize: 30, color: '#fff' },
+
+    ProfileSubBtn: {
+      marginBottom: 8,
+
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'flex-end'
+    },
+
+    ProfileCreateSubSection: {
+      padding: 10,
+
+      width: 50,
+      height: 50,
+
+      alignItems: 'center',
+      justifyContent: 'center',
+
+      borderRadius: 20
+    },
+
+    ProfileSubBtnText: {
+      marginRight: 10,
+
+      color: '#fff'
+    },
+
+    ProfileCreateSubIcon: {
+      fontSize: 20,
+      color: '#fff'
+    }
   },
 
   Profile: {
@@ -191,7 +225,6 @@ export default {
     },
     InputNotModif: {
       padding: 0,
-      paddingHorizontal: 5,
       margin: 0,
 
       fontSize: 16,
@@ -741,14 +774,10 @@ export default {
     }
   },
   Checkbox: {
+    marginTop: 10,
     marginBottom: 40,
 
-    CheckboxContainer: {
-      width: sWidth,
-
-      flexDirection: 'row',
-      alignItems: 'flex-start'
-    },
+    flexDirection: 'row',
 
     CheckboxStyle: {
       height: 20,
@@ -762,26 +791,20 @@ export default {
       borderColor: '#725CAE'
     },
 
-    CheckboxTextStyle: {
-      fontSize: 12,
-      lineHeight: 24,
-      color: '#725CAE'
-    },
-
     CheckboxImage: {
       height: 10,
       width: 14,
       resizeMode: 'contain'
     },
 
-    PolicyTextContainer: {
-      width: '100%'
-    },
- 
-    PolicyText: {
+    Policy: {
+      marginLeft: 10,
+
       flexDirection: 'row',
-      alignItems: 'center',
-  
+      flexWrap: 'wrap'
+    },
+
+    PolicyText: {
       color: '#fff'
     },
 
