@@ -37,11 +37,42 @@ export default Home = connect(
                   setDrowDown(!dropDown)
                   navigation.navigate('Profile', { ProfileID: undefined })
                 }}
+                style={styles.Home.ProfileSubBtn}
               >
-                <Text>Створити</Text>
+                <Text style={styles.Home.ProfileSubBtnText}>Створити</Text>
+                <LinearGradient
+                  colors={[
+                    styles.GradientColorFirst.color,
+                    styles.GradientColorSecond.color
+                  ]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.Home.ProfileCreateSubSection}
+                >
+                  <Icon
+                    name='user-plus'
+                    iconStyle={styles.Home.ProfileCreateSubIcon}
+                    type='font-awesome-5'
+                  ></Icon>
+                </LinearGradient>
               </TouchableOpacity>
-              <TouchableOpacity>
-                <Text>Імпортувати</Text>
+              <TouchableOpacity style={styles.Home.ProfileSubBtn}>
+                <Text style={styles.Home.ProfileSubBtnText}>Імпортувати</Text>
+                <LinearGradient
+                  colors={[
+                    styles.GradientColorFirst.color,
+                    styles.GradientColorSecond.color
+                  ]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.Home.ProfileCreateSubSection}
+                >
+                  <Icon
+                    name='upload'
+                    iconStyle={styles.Home.ProfileCreateSubIcon}
+                    type='font-awesome-5'
+                  ></Icon>
+                </LinearGradient>
               </TouchableOpacity>
             </View>
           ) : null}
