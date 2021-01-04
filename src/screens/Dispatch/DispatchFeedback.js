@@ -55,11 +55,11 @@ const DispatchFeedback = ({
             ]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            style={styles.Home.ProfileCreateSubSection}
+            style={styles.NoNetwork.Gradient}
           >
             <Icon
               name='check-circle'
-              iconStyle={styles.Home.ProfileCreateSubIcon}
+              iconStyle={styles.NoNetwork.SuccessIcon}
               type='font-awesome-5'
             />
           </LinearGradient>

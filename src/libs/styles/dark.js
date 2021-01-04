@@ -19,7 +19,7 @@ export default {
   Container: { flex: 1, backgroundColor: '#212121' },
   ContainerHeader: { flex: 1 },
   //--------------------------------------------------------------------------------------------------
-  ActionSpinner: { size: 'large', color: '#007BFF', style: { padding: 20 } },
+  ActionSpinner: { size: 'large', color: '#725CAE', style: { padding: 20 } },
   ActionSpinnerStyle: { padding: 20 },
   //--------------------------------------------------------------------------------------------------
   InputRequired: { color: '#FF7171' },
@@ -762,7 +762,7 @@ export default {
 
       alignItems: 'center'
     },
-    CaptionText: { color: '#fff', fontSize: 25, fontWeight: 'bold' },
+    CaptionText: { fontSize: 18, fontWeight: 'regular', color: '#fff' },
     ContainerDetails: { flex: 1 },
     Disclaimer: { color: '#fff', marginBottom: 15 },
     Telephone: { color: '#fff' },
@@ -785,22 +785,40 @@ export default {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#212529'
+      backgroundColor: '#212121'
     },
     Image: { marginBottom: 50 },
+
     ContainerCaption: { alignItems: 'center', marginVertical: 30 },
-    CaptionText: {
-      color: '#ffffff',
-      alignItems: 'center',
-      textAlign: 'center',
-      fontSize: 28,
-      fontWeight: 'bold'
+
+    Gradient: {
+      padding: 10,
+
+      borderRadius: 50
     },
+
+    SuccessIcon: {
+      fontSize: 60,
+      color: '#fff'
+    },
+
+    CaptionText: {
+      marginTop: 15,
+
+      alignItems: 'center',
+
+      fontSize: 18,
+      fontWeight: 'normal',
+      textAlign: 'center',
+      color: '#fff'
+    },
+
     retryText: {
       marginTop: 10,
-      fontSize: 20,
-      color: '#725CAE',
-      fontWeight: 'bold'
+
+      fontSize: 14,
+      fontWeight: 'bold',
+      color: '#725CAE'
     }
   },
   Checkbox: {
