@@ -69,7 +69,7 @@ export const runProfileSave = (
       details += locale.valid_profile_enumerators_unchecked;
     }
     if (checkPolicy) {
-    } else {     
+    } else {
       if (ProfileID == undefined) result = false;
       details += `${locale.valid_profile_policy_read}\n`;
     }

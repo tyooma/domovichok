@@ -3,10 +3,11 @@ import React, {
   useEffect,
   useReducer,
   useRef,
-  useState
-} from 'react'
+  useState,
+} from "react";
 import {
   Modal,
+  Alert,
   SafeAreaView,
   ScrollView,
   Text,
@@ -14,38 +15,38 @@ import {
   View,
   TouchableOpacity
 } from 'react-native'
-
+import NetInfo from "@react-native-community/netinfo";
 import { Input } from 'react-native-elements'
 import { connect } from 'react-redux'
 import LinearGradient from 'react-native-linear-gradient'
 import { StateToProps, DispatchToProps } from '../../store/MapToProps'
 import { DISPATCH } from '../../libs/Consts'
-import { getProfile, FixEnumeratorInput, FixNotesInput } from '../../libs/Tools'
-
+import { getProfile, FixEnumeratorInput, Success4Dispatch,FixNotesInput } from '../../libs/Tools'
+import { Validation } from "./DispatchActions";
 import { PeriodUpdate } from './DispatchSend'
 
 const ReducerDispatch = (state, action) => {
   switch (action.type) {
     case DISPATCH.kitchenHot:
-      return { ...state, kitchenHot: action.value }
+      return { ...state, kitchenHot: action.value };
     case DISPATCH.kitchenCold:
-      return { ...state, kitchenCold: action.value }
+      return { ...state, kitchenCold: action.value };
     case DISPATCH.bathHot:
-      return { ...state, bathHot: action.value }
+      return { ...state, bathHot: action.value };
     case DISPATCH.bathCold:
-      return { ...state, bathCold: action.value }
+      return { ...state, bathCold: action.value };
     case DISPATCH.watering:
-      return { ...state, watering: action.value }
+      return { ...state, watering: action.value };
     case DISPATCH.sewage:
-      return { ...state, sewage: action.value }
+      return { ...state, sewage: action.value };
     case DISPATCH.notes:
-      return { ...state, notes: action.value }
+      return { ...state, notes: action.value };
     case DISPATCH.profile:
-      return { ...state, profile: action.value }
+      return { ...state, profile: action.value };
     default:
-      return state
+      return state;
   }
-}
+};
 
 const Dispatch = ({
   profiles,
@@ -55,9 +56,9 @@ const Dispatch = ({
   lastValue,
   navigation,
   route,
-  toPeriod
+  toPeriod,
 }) => {
-  const isNew = useRef(true)
+  const isNew = useRef(true);
   const [send, setSend] = useReducer(ReducerDispatch, {
     profile: getProfile(profiles, route),
     kitchenHot: '',
@@ -71,112 +72,217 @@ const Dispatch = ({
   const [modalVisible, setModalVisible] = useState(false)
 
   useEffect(() => {
-    PeriodUpdate(locale, toPeriod, 'HOME', navigation)
-  }, [])
+    PeriodUpdate(locale, toPeriod, "HOME", navigation);
+  }, []);
 
   const onChange = useCallback((inType, inValue, lastValue) => {
-    if (inValue < lastValue) {
-      setModalVisible(true)
-    }
+    // if (inValue < lastValue) {
+    //   setModalVisible(true);
+    // }
     switch (inType) {
       case DISPATCH.kitchenHot:
         setSend({
           type: DISPATCH.kitchenHot,
-          value: FixEnumeratorInput(inValue)
-        })
-        break
+          value: FixEnumeratorInput(inValue),
+        });
+        break;
       case DISPATCH.kitchenCold:
         setSend({
           type: DISPATCH.kitchenCold,
-          value: FixEnumeratorInput(inValue)
-        })
-        break
+          value: FixEnumeratorInput(inValue),
+        });
+        break;
       case DISPATCH.bathHot:
-        setSend({ type: DISPATCH.bathHot, value: FixEnumeratorInput(inValue) })
-        break
+        setSend({ type: DISPATCH.bathHot, value: FixEnumeratorInput(inValue) });
+        break;
       case DISPATCH.bathCold:
         setSend({
           type: DISPATCH.bathCold,
-          value: FixEnumeratorInput(inValue)
-        })
-        break
+          value: FixEnumeratorInput(inValue),
+        });
+        break;
       case DISPATCH.watering:
         setSend({
           type: DISPATCH.watering,
-          value: FixEnumeratorInput(inValue)
-        })
-        break
+          value: FixEnumeratorInput(inValue),
+        });
+        break;
       case DISPATCH.sewage:
-        setSend({ type: DISPATCH.sewage, value: FixEnumeratorInput(inValue) })
-        break
+        setSend({ type: DISPATCH.sewage, value: FixEnumeratorInput(inValue) });
+        break;
       case DISPATCH.notes:
-        setSend({ type: DISPATCH.notes, value: FixNotesInput(inValue) })
-        break
+        setSend({ type: DISPATCH.notes, value: FixNotesInput(inValue) });
+        break;
       case DISPATCH.profile:
-        setSend({ type: DISPATCH.profile, value: inValue })
-        break
+        setSend({ type: DISPATCH.profile, value: inValue });
+        break;
       default:
-        break
+        break;
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     const Init = (profiles, route) => {
-      setSend({ type: DISPATCH.kitchenHot, value: '' })
-      setSend({ type: DISPATCH.kitchenCold, value: '' })
-      setSend({ type: DISPATCH.bathHot, value: '' })
-      setSend({ type: DISPATCH.bathCold, value: '' })
-      setSend({ type: DISPATCH.watering, value: '' })
-      setSend({ type: DISPATCH.sewage, value: '' })
-      setSend({ type: DISPATCH.notes, value: '' })
-      setSend({ type: DISPATCH.profile, value: getProfile(profiles, route) })
-      isNew.current = false
-    }
+      setSend({ type: DISPATCH.kitchenHot, value: "" });
+      setSend({ type: DISPATCH.kitchenCold, value: "" });
+      setSend({ type: DISPATCH.bathHot, value: "" });
+      setSend({ type: DISPATCH.bathCold, value: "" });
+      setSend({ type: DISPATCH.watering, value: "" });
+      setSend({ type: DISPATCH.sewage, value: "" });
+      setSend({ type: DISPATCH.notes, value: "" });
+      setSend({ type: DISPATCH.profile, value: getProfile(profiles, route) });
+      isNew.current = false;
+    };
     if (isNew) {
-      Init(profiles, route)
+      Init(profiles, route);
     }
-  }, [profiles, route, setSend])
+  }, [profiles, route, setSend]);
 
   var buildPeriodMessage = (period, locale) => {
-    let descr = locale.info_period_update_descr.replace('#begin#', period.begin)
-    descr = descr.replace('#end#', period.end)
-    return `${descr}`
-  }
+    let descr = locale.info_period_update_descr.replace(
+      "#begin#",
+      period.begin
+    );
+    descr = descr.replace("#end#", period.end);
+    return `${descr}`;
+  };
 
   const modalHeader = (
     <View style={styles.Warning.modalHeader}>
       <Text style={styles.Warning.title}>{modalVisible}</Text>
     </View>
-  )
+  );
 
   const modalBody = (
     <View style={styles.Warning.modalBody}>
       <Text style={styles.Warning.bodyText}>{locale.info_warning_pokaz}</Text>
     </View>
-  )
+  );
 
   const modalFooter = (
     <View style={styles.Warning.modalFooter}>
-      <View style={{ flexDirection: 'row-reverse', margin: 10 }}>
+      <View style={{ flexDirection: "row-reverse", margin: 10 }}>
         <TouchableOpacity
-          style={{ ...styles.Warning.actions, backgroundColor: '#0080ff' }}
+          style={{ ...styles.Warning.actions, backgroundColor: "#0080ff" }}
           onPress={() => {
-            setModalVisible(!modalVisible)
+            setModalVisible(!modalVisible);
           }}
         >
           <Text style={styles.Warning.actionText}>{locale.action_ok}</Text>
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 
   const modalContainer = (
+    // Alert.alert(
+    //   locale.info_warning,
+    //   locale.info_warning_pokaz[
+    //     {
+    //       text: locale.action_ok,
+    //       onPress: () => setModalVisible(!modalVisible),
+    //     }
+    //   ],
+    //   { cancelable: false }
+    // )
     <View style={styles.Warning.modalContainer}>
       {modalHeader}
       {modalBody}
       {modalFooter}
     </View>
-  )
+  );
+
+  const goToPreview = useCallback(() => {
+    if (send.kitchenHot < lastValue[route.params.ProfileID].kitchenHot) {
+      // setModalVisible(true);
+      Alert.alert(
+        locale.info_warning,
+        locale.info_warning_pokaz,
+        [{ text: "OK", onPress: () => null }],
+        { cancelable: false }
+      );
+    }
+    if (send.kitchenCold < lastValue[route.params.ProfileID].kitchenCold) {
+      Alert.alert(
+        locale.info_warning,
+        locale.info_warning_pokaz,
+        [{ text: "OK", onPress: () => null }],
+        { cancelable: false }
+      );
+    }
+    if (send.bathHot < lastValue[route.params.ProfileID].bathHot) {
+      Alert.alert(
+        locale.info_warning,
+        locale.info_warning_pokaz,
+        [{ text: "OK", onPress: () => null }],
+        { cancelable: false }
+      );
+    }
+    if (send.bathCold < lastValue[route.params.ProfileID].bathCold) {
+      Alert.alert(
+        locale.info_warning,
+        locale.info_warning_pokaz,
+        [{ text: "OK", onPress: () => null }],
+        { cancelable: false }
+      );
+    }
+    if (send.watering < lastValue[route.params.ProfileID].watering) {
+      Alert.alert(
+        locale.info_warning,
+        locale.info_warning_pokaz,
+        [{ text: "OK", onPress: () => null }],
+        { cancelable: false }
+      );
+    }
+    if (send.sewage < lastValue[route.params.ProfileID].sewage) {
+      Alert.alert(
+        locale.info_warning,
+        locale.info_warning_pokaz,
+        [{ text: "OK", onPress: () => null }],
+        { cancelable: false }
+      );
+    }
+
+    const validate = Validation(send, locale);
+    if (validate.state) {
+      NetInfo.fetch().then((state) => {
+        if (state.isConnected) {
+          if (Success4Dispatch(period)) {
+            navigation.navigate("PreviewDispatchFeedback", {
+              send: send,
+              period: period,
+            });
+          } else {
+            Alert.alert(
+              locale.info_warning,
+              `${locale.info_dispatch_unperiod_notification}`,
+              [
+                {
+                  text: locale.action_ok,
+                  onPress: () =>
+                    navigation.navigate("PreviewDispatchFeedback", {
+                      send: send,
+                      period: period,
+                    }),
+                },
+                { text: locale.action_cancel, onPress: () => null },
+              ],
+              { cancelable: false }
+            );
+          }
+        } else {
+          <NoNetwork />;
+        }
+      });
+    } else {
+      Alert.alert(
+        locale.valid_main_caption,
+        `${validate.details}`,
+        [{ text: "OK", onPress: () => null }],
+        { cancelable: false }
+      );
+    }
+  }, [send]);
 
   return (
     <SafeAreaView style={styles.Container}>
@@ -481,7 +587,7 @@ const Dispatch = ({
                   numberOfLines={4}
                   inputContainerStyle={styles.Dispatch.EnumeratorInputNotesSize}
                   inputStyle={styles.Dispatch.EnumeratorInputNotes}
-                  placeholder='Залиште примiтки'
+                  placeholder="Залиште примiтки"
                   placeholderTextColor={styles.PlaceholderTextColor}
                 />
               </View>
@@ -499,27 +605,20 @@ const Dispatch = ({
           <LinearGradient
             colors={[
               styles.GradientColorFirst.color,
-              styles.GradientColorSecond.color
+              styles.GradientColorSecond.color,
             ]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.Dispatch.SendBtn}
           >
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('PreviewDispatchFeedback', {
-                  send: send,
-                  period: period
-                })
-              }
-            >
+            <TouchableOpacity onPress={() => goToPreview()}>
               <Text style={styles.Dispatch.SendBtnText}>Вiдправити</Text>
             </TouchableOpacity>
           </LinearGradient>
         </View>
       </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default connect(StateToProps(), DispatchToProps())(Dispatch)
+export default connect(StateToProps(), DispatchToProps())(Dispatch);
