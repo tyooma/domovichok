@@ -15,9 +15,8 @@ import {
   Image,
   TextInput,
   View,
-  TouchableOpacity,
 } from "react-native";
-
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { Icon } from "react-native-elements";
 import { connect } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -30,7 +29,6 @@ import {
   runProfileSave,
   runProfileDelete,
   runHistorySearch,
-  // importProfileFromFile
 } from "./ProfileActions";
 import {
   FixAddressInput,
@@ -78,6 +76,7 @@ const Profile = ({
   navigation,
   route,
 }) => {
+  //console.log("PROFILE.js ---> profiles -->", profiles, "route ==>", route);
   const [profile, setProfile] = useReducer(
     ReducerProfile,
     getProfile(profiles, route)
@@ -86,9 +85,6 @@ const Profile = ({
   const [changeProfile, setChangeProfile] = useState(true);
   const [lookHistory, setLookHistory] = useState(true);
   const [checkPolicy, setCheckPolicy] = useState(false);
-
-  console.log('history================================>', history)
-  console.log('toHistory------------------------------>>>', toHistory)
 
   const onChange = useCallback(
     (inType, inValue) => {
@@ -453,7 +449,7 @@ const Profile = ({
                     {locale.profile_policy1}
                   </Text>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate('Policy')}
+                    onPress={() => navigation.navigate("Policy")}
                   >
                     <Text style={styles.Checkbox.PolicyTouch}>
                       {locale.profile_policy2}

@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
 import { importProfileFromFile } from "./Profile/ProfileActions";
 
-import { StateToProps, DispatchToProps } from "../store/MapToProps";
-import { PeriodUpdate } from "./Dispatch/DispatchSend";
+import { StateToProps, DispatchToProps } from '../store/MapToProps'
+import { PeriodUpdate } from './Dispatch/DispatchSend'
+import { ScrollView } from 'react-native-gesture-handler'
 
 export default Home = connect(
   StateToProps(),
@@ -207,18 +208,16 @@ const ProfileList = ({ profiles, styles, locale, navigation }) => {
         />
       );
     } else {
-      content = (
-        <>
-          <View style={styles.Empty.Content}>
+      content = (        
+          <ScrollView style={styles.Empty.Content} contentContainerStyle={styles.Empty.homeView}>
             <Text style={styles.Empty.Label}>
               {locale.home_profiles_empty_1}
             </Text>
             <Text style={styles.Empty.SubLabel}>
               {locale.home_profiles_empty_2}
             </Text>
-          </View>
-        </>
-      );
+          </ScrollView>              
+      )
     }
   } else {
     content = (

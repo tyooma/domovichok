@@ -147,8 +147,7 @@ export const Validation = (dispatch, locale) => {
     return value.replace(',','.');
   }
 
-  const checkVal = (inValue) => {
-    console.log("inValue ===<",inValue)
+  const checkVal = (inValue) => {    
     let result = false;
     const fixed = fixVal(inValue);
     try {
