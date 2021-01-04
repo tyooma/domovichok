@@ -17,7 +17,7 @@ export default {
   },
   // MAIN
   Container: { flex: 1, backgroundColor: '#212121' },
-  ContainerHeader: { marginTop: 55, flex: 1 },
+  ContainerHeader: { flex: 1 },
   //--------------------------------------------------------------------------------------------------
   ActionSpinner: { size: 'large', color: '#007BFF', style: { padding: 20 } },
   ActionSpinnerStyle: { padding: 20 },
@@ -40,19 +40,24 @@ export default {
   },
 
   Empty: {
-    Content: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+    Content: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
     Label: {
       marginBottom: 6,
+
       fontWeight: 'normal',
       fontSize: 14,
-      color: '#fff',
-      textAlign: 'center'
+      textAlign: 'center',
+      color: '#fff'
     },
     SubLabel: {
       fontWeight: 'normal',
       fontSize: 10,
-      color: '#ccc',
-      textAlign: 'center'
+      textAlign: 'center',
+      color: '#ccc'
     },
     SectionRow: { flexDirection: 'row', alignItems: 'center' },
     Link: {
@@ -75,8 +80,9 @@ export default {
     },
 
     Profiles: {
-      marginTop: 50,
       paddingTop: 30,
+      marginTop: 50,
+
       flex: 1,
       justifyContent: 'space-between'
     },
@@ -206,6 +212,7 @@ export default {
     InputItem: { marginBottom: 13 },
     InputCaption: {
       marginBottom: 10,
+
       fontSize: 13,
       fontWeight: 'normal',
       color: '#fff'
@@ -346,12 +353,16 @@ export default {
     },
 
     EnumeratorContainer: {
+      marginBottom: 10
+    },
+
+    EnumeratorItemWrap: {
       marginBottom: 10,
 
       flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between'
+      alignItems: 'center'
     },
+
     EnumeratorItem: {
       width: '20%',
 
@@ -359,6 +370,7 @@ export default {
       fontWeight: 'normal',
       color: '#fff'
     },
+
     EnumeratorInput: {
       paddingVertical: 0,
       paddingHorizontal: 10,
@@ -373,10 +385,13 @@ export default {
       borderWidth: 1,
       borderRadius: 6
     },
-    EnumeratorLastValue: {
-      padding: 0,
-      margin: 0,
 
+    EnumeratorLastValueLabel: {
+      fontSize: 11,
+      color: '#fff'
+    },
+
+    EnumeratorLastValue: {
       fontSize: 11,
       color: '#725CAE'
     },
@@ -502,85 +517,100 @@ export default {
 
   History: {
     Content: {
-      flex: 9,
-      justifyContent: 'space-between',
-      padding: 0,
-      margin: 0
+      paddingHorizontal: 15,
+
+      justifyContent: 'space-between'
     },
-    //------------------------------------------------------------------------------------------------
-    ContentHead: { padding: 0, margin: 10 },
-    ContentItem: { marginBottom: 5 },
+
+    ContentHead: { paddingTop: 30, paddingHorizontal: 10, marginTop: 50 },
+
+    ContentItem: { marginBottom: 20 },
+
     ContentItemCaption: {
+      paddingBottom: 8,
+      marginBottom: 12,
+
       fontSize: 16,
       fontWeight: 'bold',
-      color: 'gray',
-      paddingRight: 10
+      color: '#fff',
+
+      borderColor: '#725CAE',
+      borderBottomWidth: 1
     },
+
     ContentItemLabel: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      color: '#007BFF',
-      marginHorizontal: 10
+      fontSize: 13,
+      fontWeight: 'normal',
+      color: '#fff'
     },
-    //------------------------------------------------------------------------------------------------
+
     ContentRecords: { flex: 1, paddingHorizontal: 10 },
-    //------------------------------------------------------------------------------------------------
+
+    RecordList: {
+      marginBottom: 40
+    },
+
     Record: {
-      borderColor: 'gray',
+      marginBottom: 15,
+
       borderWidth: 1,
-      marginBottom: 10,
-      borderTopLeftRadius: 5,
-      borderTopRightRadius: 5,
-      borderBottomLeftRadius: 5,
-      borderBottomRightRadius: 5
+      borderColor: '#725CAE',
+      borderTopRightRadius: 10,
+      borderTopLeftRadius: 10,
+      borderBottomRightRadius: 10,
+      borderBottomLeftRadius: 10
     },
+
+    RecordGradient: {
+      marginBottom: 13,
+
+      borderTopRightRadius: 10,
+      borderTopLeftRadius: 10
+    },
+
     RecordHead: {
-      flexDirection: 'row',
-      backgroundColor: '#000000',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      borderColor: 'gray',
-      borderBottomWidth: 1,
-      borderRightWidth: 1,
-      paddingHorizontal: 5,
-      paddingVertical: 3,
-      borderTopLeftRadius: 5,
-      borderTopRightRadius: 5
-    },
-    RecordHeadCaption: { fontSize: 16, fontWeight: 'bold', color: '#007BFF' },
+      paddingVertical: 10,
+      paddingHorizontal: 15,
 
-    RecordSection: { marginVertical: 5, marginHorizontal: 5 },
-    RecordSectionCaption: { fontSize: 16, fontWeight: 'bold', color: 'gray' },
-
-    RecordSectionItems: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingLeft: 5
+
+      borderTopRightRadius: 10,
+      borderTopLeftRadius: 10
     },
+
+    RecordHeadCaption: { fontSize: 14, fontWeight: 'normal', color: '#fff' },
+
+    RecordSection: { paddingHorizontal: 15, marginBottom: 15 },
+
+    RecordSectionCaption: {
+      marginBottom: 6,
+
+      fontSize: 14,
+      fontWeight: 'bold',
+      color: '#fff'
+    },
+
+    RecordSectionItems: {},
+
     RecordItemContainer: {
       flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      paddingHorizontal: 5,
-      width: '50%'
+      alignItems: 'center'
     },
+
     RecordItemHead: {
-      fontSize: 14,
-      fontWeight: 'bold',
-      color: 'gray',
-      textAlign: 'left'
+      fontSize: 13,
+      fontWeight: 'normal',
+      color: '#fff'
     },
+
     RecordItemBody: {
-      fontSize: 14,
-      fontWeight: 'bold',
-      color: '#007BFF',
-      textAlign: 'right'
+      fontSize: 13,
+      fontWeight: 'normal',
+      color: '#fff'
     },
-    RecordItemBodyNotes: { fontSize: 14, fontWeight: 'bold', color: '#007BFF' },
-    //------------------------------------------------------------------------------------------------
-    DeleteIcon: { color: '#FF4D4D', fontSize: 35 },
-    CalendarIcon: { color: '#04C4AD', fontSize: 35 },
-    SortIcon: { color: '#04C42F', fontSize: 35 }
+
+    RecordItemBodyNotes: { fontSize: 13, fontWeight: 'normal', color: '#fff' }
   },
 
   Menu: {

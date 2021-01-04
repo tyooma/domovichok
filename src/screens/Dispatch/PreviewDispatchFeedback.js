@@ -8,10 +8,12 @@ import {
   View,
   Modal,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  Alert
 } from 'react-native'
 import { Divider, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient'
 import { StateToProps, DispatchToProps } from '../../store/MapToProps'
 import { ActionBack, Spinner } from '../components/Actions'
 import { Validation } from './DispatchActions'
@@ -90,21 +92,30 @@ const PreviewDispatchFeedback = ({
                   {route.params.send.profile.id}
                 </Text>
               </View>
-              <Divider style={styles.Divider} />
 
               <FlatList
                 data={[route.params.send]}
                 keyExtractor={(item) => item.profile.id}
                 renderItem={({ item }) => (
                   <View style={styles.History.Record} key={item.profile.id}>
-                    <View style={styles.History.RecordHead}>
-                      <Text style={styles.History.RecordHeadCaption}>
-                        {locale.history_record_caption}
-                      </Text>
-                      <Text style={styles.History.RecordHeadCaption}>
-                        {moment().format('DD.MM.YYYY')}
-                      </Text>
-                    </View>
+                    <LinearGradient
+                      colors={[
+                        styles.GradientColorFirst.color,
+                        styles.GradientColorSecond.color
+                      ]}
+                      start={{ x: 0, y: 0 }}
+                      end={{ x: 1, y: 0 }}
+                      style={styles.History.RecordGradient}
+                    >
+                      <View style={styles.History.RecordHead}>
+                        <Text style={styles.History.RecordHeadCaption}>
+                          {locale.history_record_caption}&nbsp;
+                        </Text>
+                        <Text style={styles.History.RecordHeadCaption}>
+                          {moment().format('DD.MM.YYYY')}
+                        </Text>
+                      </View>
+                    </LinearGradient>
                     {(item.kitchenHot !== '' || item.kitchenCold !== '') && (
                       <View style={styles.History.RecordSection}>
                         <Text style={styles.History.RecordSectionCaption}>
@@ -114,7 +125,7 @@ const PreviewDispatchFeedback = ({
                           {item.kitchenHot !== '' && (
                             <View style={styles.History.RecordItemContainer}>
                               <Text style={styles.History.RecordItemHead}>
-                                {locale.profile_kitchen_hot}
+                                {locale.profile_kitchen_hot}:&nbsp;
                               </Text>
                               <Text style={styles.History.RecordItemBody}>
                                 {item.kitchenHot}
@@ -124,7 +135,7 @@ const PreviewDispatchFeedback = ({
                           {item.kitchenCold !== '' && (
                             <View style={styles.History.RecordItemContainer}>
                               <Text style={styles.History.RecordItemHead}>
-                                {locale.profile_kitchen_cold}
+                                {locale.profile_kitchen_cold}:&nbsp;
                               </Text>
                               <Text style={styles.History.RecordItemBody}>
                                 {item.kitchenCold}
@@ -144,7 +155,7 @@ const PreviewDispatchFeedback = ({
                           {item.bathHot !== '' && (
                             <View style={styles.History.RecordItemContainer}>
                               <Text style={styles.History.RecordItemHead}>
-                                {locale.profile_bath_hot}
+                                {locale.profile_bath_hot}:&nbsp;
                               </Text>
                               <Text style={styles.History.RecordItemBody}>
                                 {item.bathHot}
@@ -154,7 +165,7 @@ const PreviewDispatchFeedback = ({
                           {item.bathCold !== '' && (
                             <View style={styles.History.RecordItemContainer}>
                               <Text style={styles.History.RecordItemHead}>
-                                {locale.profile_bath_cold}
+                                {locale.profile_bath_cold}:&nbsp;
                               </Text>
                               <Text style={styles.History.RecordItemBody}>
                                 {item.bathCold}
@@ -173,7 +184,7 @@ const PreviewDispatchFeedback = ({
                           {item.watering !== '' && (
                             <View style={styles.History.RecordItemContainer}>
                               <Text style={styles.History.RecordItemHead}>
-                                {locale.profile_other_watering}
+                                {locale.profile_other_watering}:&nbsp;
                               </Text>
                               <Text style={styles.History.RecordItemBody}>
                                 {item.watering}
@@ -183,7 +194,7 @@ const PreviewDispatchFeedback = ({
                           {item.sewage !== '' && (
                             <View style={styles.History.RecordItemContainer}>
                               <Text style={styles.History.RecordItemHead}>
-                                {locale.profile_other_sewage}
+                                {locale.profile_other_sewage}:&nbsp;
                               </Text>
                               <Text style={styles.History.RecordItemBody}>
                                 {item.sewage}
@@ -205,18 +216,24 @@ const PreviewDispatchFeedback = ({
                     )}
                   </View>
                 )}
+                style={styles.History.RecordList}
               />
             </View>
-          </View>
-          <Divider style={styles.Divider} />
-          <View style={styles.Dispatch.Toolbar}>
-            <TouchableOpacity onPress={() => SendOnline()}>
-              <Icon
-                name='envelope'
-                iconStyle={styles.Dispatch.SendIcon}
-                type='font-awesome-5'
-              />
-            </TouchableOpacity>
+            <View style={styles.Dispatch.Toolbar}>
+              <LinearGradient
+                colors={[
+                  styles.GradientColorFirst.color,
+                  styles.GradientColorSecond.color
+                ]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.Dispatch.SendBtn}
+              >
+                <TouchableOpacity onPress={() => SendOnline()}>
+                  <Text style={styles.Dispatch.SendBtnText}>Вiдправити</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+            </View>
           </View>
         </>
       )}
@@ -230,12 +247,7 @@ const PreviewDispatchFeedback = ({
           </View>
         </View>
       )}
-      <Modal
-        visible={modal}
-        onRequestClose={() => console.log('Modal => Close')}
-        animationType='fade'
-        transparent={false}
-      >
+      <Modal visible={modal} animationType='fade' transparent={false}>
         <DispatchFeedback
           dispatch={route.params.send}
           navigation={navigation}
