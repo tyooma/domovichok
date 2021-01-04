@@ -1,6 +1,6 @@
-import React, { useRef, useCallback, useState } from "react";
+import React, { useRef, useCallback, useState } from 'react'
 
-import moment from 'moment';
+import moment from 'moment'
 
 import {
   SafeAreaView,
@@ -18,15 +18,13 @@ import { StateToProps, DispatchToProps } from '../../store/MapToProps'
 import { ActionBack, Spinner } from '../components/Actions'
 import { Validation } from './DispatchActions'
 
-import DispatchFeedback from "./DispatchFeedback";
+import DispatchFeedback from './DispatchFeedback'
 
-import NoNetwork from "../NoNetwork";
+import NoNetwork from '../NoNetwork'
 
-import NetInfo from "@react-native-community/netinfo";
+import NetInfo from '@react-native-community/netinfo'
 
-import {   
-    Success4Dispatch,
-  } from "../../libs/Tools";
+import { Success4Dispatch } from '../../libs/Tools'
 
 const PreviewDispatchFeedback = ({
   send,
@@ -34,35 +32,35 @@ const PreviewDispatchFeedback = ({
   styles,
   navigation,
   route,
-  period,
+  period
 }) => {
-  console.log("route ==>", route, "period  ==>", period);
-  const needLoad = useRef(route.params.NeedLoad);
-  const [modal, setModal] = useState(false);
+  console.log('route ==>', route, 'period  ==>', period)
+  const needLoad = useRef(route.params.NeedLoad)
+  const [modal, setModal] = useState(false)
 
   const SendOnline = useCallback(() => {
     // const validate = Validation(route.params.send, locale);
     // if (validate.state) {
-      NetInfo.fetch().then((state) => {
-        if (state.isConnected) {
-          setModal(true);
-          // if (Success4Dispatch(period)) {
-          //   setModal(true);
-          // } else {
-          //   Alert.alert(
-          //     locale.info_warning,
-          //     `${locale.info_dispatch_unperiod_notification}`,
-          //     [
-          //       { text: locale.action_ok, onPress: () => setModal(true) },
-          //       { text: locale.action_cancel, onPress: () => null },
-          //     ],
-          //     { cancelable: false }
-          //   );
-          // }
-        } else {
-          <NoNetwork />;
-        }
-      });
+    NetInfo.fetch().then((state) => {
+      if (state.isConnected) {
+        setModal(true)
+        // if (Success4Dispatch(period)) {
+        //   setModal(true);
+        // } else {
+        //   Alert.alert(
+        //     locale.info_warning,
+        //     `${locale.info_dispatch_unperiod_notification}`,
+        //     [
+        //       { text: locale.action_ok, onPress: () => setModal(true) },
+        //       { text: locale.action_cancel, onPress: () => null },
+        //     ],
+        //     { cancelable: false }
+        //   );
+        // }
+      } else {
+        ;<NoNetwork />
+      }
+    })
     // } else {
     //   Alert.alert(
     //     locale.valid_main_caption,
@@ -71,20 +69,10 @@ const PreviewDispatchFeedback = ({
     //     { cancelable: false }
     //   );
     // }
-  }, [route.params.send, setModal]);
+  }, [route.params.send, setModal])
 
   return (
     <SafeAreaView style={styles.Container}>
-      <View style={styles.Header}>
-        <View style={styles.HeaderLeft}>
-          <View style={styles.HeaderIcon}>
-            <ActionBack navigation={navigation} />
-          </View>
-          <Text style={styles.HeaderCaption}>{locale.history_caption}</Text>
-        </View>
-        <View style={styles.HeaderRight}></View>
-      </View>
-      <Divider style={styles.Divider} />
       {needLoad && (
         <>
           <View style={styles.History.Content}>
@@ -158,10 +146,8 @@ const PreviewDispatchFeedback = ({
                         </View>
                       </View>
                     )}
-                    
 
-                    {(item.bathHot !== '' ||
-                      item.bathCold !== '') && (
+                    {(item.bathHot !== '' || item.bathCold !== '') && (
                       <View style={styles.History.RecordSection}>
                         <Text style={styles.History.RecordSectionCaption}>
                           {locale.profile_bath}
@@ -190,8 +176,7 @@ const PreviewDispatchFeedback = ({
                         </View>
                       </View>
                     )}
-                    {(item.watering !== '' ||
-                      item.sewage !== '') && (
+                    {(item.watering !== '' || item.sewage !== '') && (
                       <View style={styles.History.RecordSection}>
                         <Text style={styles.History.RecordSectionCaption}>
                           {locale.profile_other}
@@ -271,10 +256,10 @@ const PreviewDispatchFeedback = ({
         />
       </Modal>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 export default connect(
   StateToProps(),
   DispatchToProps()
-)(PreviewDispatchFeedback);
+)(PreviewDispatchFeedback)
