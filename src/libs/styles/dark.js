@@ -1,109 +1,121 @@
-import { Dimensions } from 'react-native'
+import { Dimensions } from "react-native";
 
-const screen = Dimensions.get('window')
+const screen = Dimensions.get("window");
 
-export const sWidth = screen.width
-export const sHeight = screen.height
+export const sWidth = screen.width;
+export const sHeight = screen.height;
 
 export default {
   //DRAWER
 
   //MAIN COLOR
   GradientColorFirst: {
-    color: '#555555'
+    color: "#555555",
   },
   GradientColorSecond: {
-    color: '#725CAE'
+    color: "#725CAE",
   },
   // MAIN
-  Container: { flex: 1, backgroundColor: '#212121' },
+  Container: { flex: 1, backgroundColor: "#212121" },
   ContainerHeader: { marginTop: 55, flex: 1 },
   //--------------------------------------------------------------------------------------------------
-  ActionSpinner: { size: 'large', color: '#007BFF', style: { padding: 20 } },
+  ActionSpinner: { size: "large", color: "#007BFF", style: { padding: 20 } },
   ActionSpinnerStyle: { padding: 20 },
   //--------------------------------------------------------------------------------------------------
-  InputRequired: { color: '#FF7171' },
-  InputSelection: '#FFFFFF',
-  PlaceholderTextColor: '#725cae66',
+  InputRequired: { color: "#FF7171" },
+  InputSelection: "#FFFFFF",
+  PlaceholderTextColor: "#725cae66",
   //--------------------------------------------------------------------------------------------------
-  SwitchTrackColor: { true: '#6e6685e1', false: '#7C7C7C' },
-  SwitchThumbColor: { true: '#725CAE', false: '#A7A7A7' },
-  SwitchIOSBackgroundColor: '#7C7C7C',
+  SwitchTrackColor: { true: "#6e6685e1", false: "#7C7C7C" },
+  SwitchThumbColor: { true: "#725CAE", false: "#A7A7A7" },
+  SwitchIOSBackgroundColor: "#7C7C7C",
   //--------------------------------------------------------------------------------------------------
-  ColorNone: { color: '#00000000' },
-  DisplayNone: { display: 'none' },
+  ColorNone: { color: "#00000000" },
+  DisplayNone: { display: "none" },
   //--------------------------------------------------------------------------------------------------
 
   Error: {
-    Caption: { fontSize: 18, fontWeight: 'bold', color: 'red' },
-    Text: { fontSize: 18, color: 'red', paddingHorizontal: 10 }
+    Caption: { fontSize: 18, fontWeight: "bold", color: "red" },
+    Text: { fontSize: 18, color: "red", paddingHorizontal: 10 },
   },
 
   Empty: {
-    Content: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+    Content: {
+      position: "absolute",
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      paddingTop: sHeight / 3,
+    },
+    homeView: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    //Content: { flex: 1, alignItems: "center", justifyContent: "center" },
     Label: {
       marginBottom: 6,
-      fontWeight: 'normal',
+      fontWeight: "normal",
       fontSize: 14,
-      color: '#fff',
-      textAlign: 'center'
+      color: "#fff",
+      textAlign: "center",
     },
     SubLabel: {
-      fontWeight: 'normal',
+      fontWeight: "normal",
       fontSize: 10,
-      color: '#ccc',
-      textAlign: 'center'
+      color: "#ccc",
+      textAlign: "center",
     },
-    SectionRow: { flexDirection: 'row', alignItems: 'center' },
+    SectionRow: { flexDirection: "row", alignItems: "center" },
     Link: {
       fontSize: 18,
-      fontWeight: 'bold',
-      color: '#007BFF',
+      fontWeight: "bold",
+      color: "#007BFF",
       paddingBottom: 2,
       borderBottomWidth: 1,
-      borderColor: '#007BFF'
+      borderColor: "#007BFF",
     },
-    WarningSection: { alignItems: 'center', margin: 5 },
-    WarningCaption: { fontSize: 18, fontWeight: 'bold', color: 'yellow' }
+    WarningSection: { alignItems: "center", margin: 5 },
+    WarningCaption: { fontSize: 18, fontWeight: "bold", color: "yellow" },
   },
 
   Home: {
     Content: {
       paddingHorizontal: 15,
       flex: 1,
-      justifyContent: 'space-between'
+      justifyContent: "space-between",
     },
 
     Profiles: {
       marginTop: 50,
       paddingTop: 30,
       flex: 1,
-      justifyContent: 'space-between'
+      justifyContent: "space-between",
     },
 
     Profile: {
       marginBottom: 15,
 
-      flexDirection: 'row',
-      justifyContent: 'space-between',
+      flexDirection: "row",
+      justifyContent: "space-between",
 
       borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: '#725CAE',
-      borderRadius: 6
+      borderStyle: "solid",
+      borderColor: "#725CAE",
+      borderRadius: 6,
     },
 
     ProfileInfo: {
       paddingTop: 14,
-      paddingLeft: 17
+      paddingLeft: 17,
     },
 
     ProfileCaption: {
       marginBottom: 8,
 
       fontSize: 14,
-      fontWeight: 'normal',
-      color: '#fff'
+      fontWeight: "normal",
+      color: "#fff",
     },
 
     ProfileIcons: {
@@ -111,33 +123,33 @@ export default {
       paddingRight: 11,
       paddingBottom: 11,
 
-      flexDirection: 'column',
-      justifyContent: 'center'
+      flexDirection: "column",
+      justifyContent: "center",
     },
 
     ProfileIcon: {
       marginBottom: 10,
 
       fontSize: 26,
-      fontWeight: 'normal',
-      color: '#725CAE'
+      fontWeight: "normal",
+      color: "#725CAE",
     },
 
     ProfileDispatchSection: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '17%',
+      alignItems: "center",
+      justifyContent: "center",
+      width: "17%",
       height: 40,
-      backgroundColor: 'green',
-      borderRadius: 10
+      backgroundColor: "green",
+      borderRadius: 10,
     },
 
     ProfileCreateContainer: {
       paddingRight: 15,
       paddingBottom: 40,
 
-      alignItems: 'flex-end',
-      justifyContent: 'space-between'
+      alignItems: "flex-end",
+      justifyContent: "space-between",
     },
 
     ProfileCreateSection: {
@@ -147,20 +159,20 @@ export default {
       width: 60,
       height: 60,
 
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: "center",
+      justifyContent: "center",
 
-      borderRadius: 20
+      borderRadius: 20,
     },
 
-    ProfileCreateIcon: { fontSize: 30, color: '#fff' },
+    ProfileCreateIcon: { fontSize: 30, color: "#fff" },
 
     ProfileSubBtn: {
       marginBottom: 8,
 
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-end'
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "flex-end",
     },
 
     ProfileCreateSubSection: {
@@ -169,22 +181,22 @@ export default {
       width: 50,
       height: 50,
 
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: "center",
+      justifyContent: "center",
 
-      borderRadius: 20
+      borderRadius: 20,
     },
 
     ProfileSubBtnText: {
       marginRight: 10,
 
-      color: '#fff'
+      color: "#fff",
     },
 
     ProfileCreateSubIcon: {
       fontSize: 20,
-      color: '#fff'
-    }
+      color: "#fff",
+    },
   },
 
   Profile: {
@@ -192,13 +204,13 @@ export default {
       marginTop: 50,
 
       flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'space-between'
+      flexDirection: "column",
+      justifyContent: "space-between",
     },
 
     ScrollView: {
       paddingTop: 30,
-      paddingHorizontal: 15
+      paddingHorizontal: 15,
     },
 
     InputContainer: { paddingHorizontal: 7 },
@@ -207,8 +219,8 @@ export default {
     InputCaption: {
       marginBottom: 10,
       fontSize: 13,
-      fontWeight: 'normal',
-      color: '#fff'
+      fontWeight: "normal",
+      color: "#fff",
     },
 
     InputDefault: {
@@ -216,76 +228,76 @@ export default {
       paddingHorizontal: 7,
 
       fontSize: 12,
-      fontWeight: 'normal',
-      color: '#fff',
+      fontWeight: "normal",
+      color: "#fff",
 
-      borderColor: '#725CAE',
+      borderColor: "#725CAE",
       borderWidth: 1,
-      borderRadius: 6
+      borderRadius: 6,
     },
     InputNotModif: {
       padding: 0,
       margin: 0,
 
       fontSize: 16,
-      fontWeight: 'bold',
-      color: '#725CAE'
+      fontWeight: "bold",
+      color: "#725CAE",
     },
 
     EnumeratorContainer: {
       marginBottom: 10,
 
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between'
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
     },
     EnumeratorCaption: {
       paddingBottom: 10,
       marginBottom: 10,
 
       fontSize: 14,
-      fontWeight: 'bold',
-      color: '#fff',
+      fontWeight: "bold",
+      color: "#fff",
 
-      borderColor: '#725cae66',
-      borderBottomWidth: 1
+      borderColor: "#725cae66",
+      borderBottomWidth: 1,
     },
     EnumeratorItem: {
       fontSize: 13,
-      fontWeight: 'normal',
-      color: '#fff',
-      marginTop: 0
+      fontWeight: "normal",
+      color: "#fff",
+      marginTop: 0,
     },
 
     Toolbar: {
       marginBottom: 50,
 
-      flexDirection: 'column'
+      flexDirection: "column",
     },
 
     Btns: {
-      alignItems: 'center',
-      justifyContent: 'center'
+      alignItems: "center",
+      justifyContent: "center",
     },
 
     BtnContainer: {
-      marginBottom: 15
+      marginBottom: 15,
     },
 
     Btn: {
       paddingVertical: 10,
       paddingHorizontal: 30,
 
-      width: '40%',
+      width: "40%",
 
-      borderRadius: 10
+      borderRadius: 10,
     },
 
     BtnText: {
       fontSize: 16,
-      fontWeight: 'normal',
-      color: '#fff'
-    }
+      fontWeight: "normal",
+      color: "#fff",
+    },
   },
 
   Dispatch: {
@@ -295,7 +307,7 @@ export default {
       paddingHorizontal: 15,
       marginTop: 50,
 
-      flex: 1
+      flex: 1,
     },
     Content: { paddingHorizontal: 10, paddingTop: 5 },
 
@@ -305,16 +317,16 @@ export default {
       marginBottom: 15,
 
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: "center",
+      justifyContent: "center",
 
-      backgroundColor: '#725CAE',
+      backgroundColor: "#725CAE",
 
-      borderRadius: 6
+      borderRadius: 6,
     },
     HeaderRememberCaption: {
       fontSize: 14,
-      color: '#fff'
+      color: "#fff",
     },
     Profile: { marginBottom: 0 },
     ProfileItem: { marginBottom: 20 },
@@ -323,13 +335,13 @@ export default {
       marginBottom: 12,
 
       fontSize: 16,
-      fontWeight: 'bold',
-      color: '#fff',
+      fontWeight: "bold",
+      color: "#fff",
 
-      borderColor: '#725CAE',
-      borderBottomWidth: 1
+      borderColor: "#725CAE",
+      borderBottomWidth: 1,
     },
-    ProfileItemLabel: { fontSize: 13, fontWeight: 'normal', color: '#fff' },
+    ProfileItemLabel: { fontSize: 13, fontWeight: "normal", color: "#fff" },
 
     Enumerators: {},
     EnumeratorSection: { marginBottom: 10 },
@@ -338,47 +350,47 @@ export default {
       marginBottom: 12,
 
       fontSize: 16,
-      fontWeight: 'bold',
-      color: '#fff',
+      fontWeight: "bold",
+      color: "#fff",
 
-      borderColor: '#725CAE',
-      borderBottomWidth: 1
+      borderColor: "#725CAE",
+      borderBottomWidth: 1,
     },
 
     EnumeratorContainer: {
       marginBottom: 10,
 
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between'
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
     },
     EnumeratorItem: {
-      width: '20%',
+      width: "20%",
 
       fontSize: 13,
-      fontWeight: 'normal',
-      color: '#fff'
+      fontWeight: "normal",
+      color: "#fff",
     },
     EnumeratorInput: {
       paddingVertical: 0,
       paddingHorizontal: 10,
 
-      width: '80%',
+      width: "80%",
 
       fontSize: 13,
-      fontWeight: 'normal',
-      color: '#725CAE',
+      fontWeight: "normal",
+      color: "#725CAE",
 
-      borderColor: '#725CAE',
+      borderColor: "#725CAE",
       borderWidth: 1,
-      borderRadius: 6
+      borderRadius: 6,
     },
     EnumeratorLastValue: {
       padding: 0,
       margin: 0,
 
       fontSize: 11,
-      color: '#725CAE'
+      color: "#725CAE",
     },
 
     InputEnumerator: 7,
@@ -394,221 +406,221 @@ export default {
       height: 120,
 
       fontSize: 13,
-      fontWeight: 'normal',
-      textAlignVertical: 'top',
-      color: '#fff',
+      fontWeight: "normal",
+      textAlignVertical: "top",
+      color: "#fff",
 
-      borderColor: '#725CAE',
+      borderColor: "#725CAE",
       borderWidth: 1,
-      borderRadius: 10
+      borderRadius: 10,
     },
 
     Toolbar: {
       padding: 5,
       marginBottom: 50,
 
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center'
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
     },
 
     SendBtn: {
       paddingVertical: 10,
       paddingHorizontal: 30,
 
-      width: '40%',
+      width: "40%",
 
-      borderRadius: 10
+      borderRadius: 10,
     },
 
     SendBtnText: {
       fontSize: 16,
-      fontWeight: 'normal',
-      color: '#fff'
-    }
+      fontWeight: "normal",
+      color: "#fff",
+    },
   },
 
   Feedback: {
     ViewArea: {
       flex: 1,
-      backgroundColor: '#212121',
-      alignItems: 'center',
-      justifyContent: 'center'
+      backgroundColor: "#212121",
+      alignItems: "center",
+      justifyContent: "center",
     },
     Container: {
-      width: '80%',
-      height: '60%',
-      backgroundColor: '#212121',
-      borderColor: '#007BFF',
+      width: "80%",
+      height: "60%",
+      backgroundColor: "#212121",
+      borderColor: "#007BFF",
       borderWidth: 2,
       padding: 0,
       margin: 0,
       borderTopLeftRadius: 5,
       borderTopRightRadius: 5,
       borderBottomLeftRadius: 5,
-      borderBottomRightRadius: 5
+      borderBottomRightRadius: 5,
     },
     Head: {
-      flexDirection: 'row',
-      backgroundColor: '#000000',
-      alignItems: 'center',
-      borderColor: '#007BFF',
+      flexDirection: "row",
+      backgroundColor: "#000000",
+      alignItems: "center",
+      borderColor: "#007BFF",
       borderBottomWidth: 2,
       borderRightWidth: 1,
       paddingHorizontal: 10,
       paddingVertical: 5,
       borderTopLeftRadius: 5,
-      borderTopRightRadius: 5
+      borderTopRightRadius: 5,
     },
-    HeadCaption: { fontSize: 18, fontWeight: 'bold', color: '#007BFF' },
+    HeadCaption: { fontSize: 18, fontWeight: "bold", color: "#007BFF" },
 
-    Spinner: { justifyContent: 'flex-start' },
-    SpinnerCaption: { alignItems: 'center' },
-    SpinnerLabel: { fontSize: 18, fontWeight: 'bold', color: '#007BFF' },
+    Spinner: { justifyContent: "flex-start" },
+    SpinnerCaption: { alignItems: "center" },
+    SpinnerLabel: { fontSize: 18, fontWeight: "bold", color: "#007BFF" },
 
-    Content: { flex: 1, justifyContent: 'space-between', margin: 10 },
+    Content: { flex: 1, justifyContent: "space-between", margin: 10 },
     ContentMessages: {},
     MessagesText: {
       fontSize: 18,
-      fontWeight: 'bold',
-      color: '#FFFFFF',
+      fontWeight: "bold",
+      color: "#FFFFFF",
       paddingHorizontal: 10,
       paddingVertical: 5,
-      marginBottom: 10
+      marginBottom: 10,
     },
     MessagesTextError: {
       fontSize: 18,
-      fontWeight: 'bold',
-      color: 'red',
+      fontWeight: "bold",
+      color: "red",
       paddingHorizontal: 10,
       paddingVertical: 5,
-      marginBottom: 10
+      marginBottom: 10,
     },
 
     Toolbar: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center'
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
     },
     ToolbarButton: {
-      backgroundColor: '#007BFF',
+      backgroundColor: "#007BFF",
       paddingHorizontal: 10,
       paddingVertical: 5,
       fontSize: 18,
-      fontWeight: 'bold',
-      color: '#FFFFFF'
-    }
+      fontWeight: "bold",
+      color: "#FFFFFF",
+    },
   },
 
   History: {
     Content: {
       flex: 9,
-      justifyContent: 'space-between',
+      justifyContent: "space-between",
       padding: 0,
-      margin: 0
+      margin: 0,
     },
     //------------------------------------------------------------------------------------------------
     ContentHead: { padding: 0, margin: 10 },
     ContentItem: { marginBottom: 5 },
     ContentItemCaption: {
       fontSize: 16,
-      fontWeight: 'bold',
-      color: 'gray',
-      paddingRight: 10
+      fontWeight: "bold",
+      color: "gray",
+      paddingRight: 10,
     },
     ContentItemLabel: {
       fontSize: 18,
-      fontWeight: 'bold',
-      color: '#007BFF',
-      marginHorizontal: 10
+      fontWeight: "bold",
+      color: "#007BFF",
+      marginHorizontal: 10,
     },
     //------------------------------------------------------------------------------------------------
     ContentRecords: { flex: 1, paddingHorizontal: 10 },
     //------------------------------------------------------------------------------------------------
     Record: {
-      borderColor: 'gray',
+      borderColor: "gray",
       borderWidth: 1,
       marginBottom: 10,
       borderTopLeftRadius: 5,
       borderTopRightRadius: 5,
       borderBottomLeftRadius: 5,
-      borderBottomRightRadius: 5
+      borderBottomRightRadius: 5,
     },
     RecordHead: {
-      flexDirection: 'row',
-      backgroundColor: '#000000',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      borderColor: 'gray',
+      flexDirection: "row",
+      backgroundColor: "#000000",
+      alignItems: "center",
+      justifyContent: "space-between",
+      borderColor: "gray",
       borderBottomWidth: 1,
       borderRightWidth: 1,
       paddingHorizontal: 5,
       paddingVertical: 3,
       borderTopLeftRadius: 5,
-      borderTopRightRadius: 5
+      borderTopRightRadius: 5,
     },
-    RecordHeadCaption: { fontSize: 16, fontWeight: 'bold', color: '#007BFF' },
+    RecordHeadCaption: { fontSize: 16, fontWeight: "bold", color: "#007BFF" },
 
     RecordSection: { marginVertical: 5, marginHorizontal: 5 },
-    RecordSectionCaption: { fontSize: 16, fontWeight: 'bold', color: 'gray' },
+    RecordSectionCaption: { fontSize: 16, fontWeight: "bold", color: "gray" },
 
     RecordSectionItems: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      paddingLeft: 5
+      flexDirection: "row",
+      alignItems: "center",
+      paddingLeft: 5,
     },
     RecordItemContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
       paddingHorizontal: 5,
-      width: '50%'
+      width: "50%",
     },
     RecordItemHead: {
       fontSize: 14,
-      fontWeight: 'bold',
-      color: 'gray',
-      textAlign: 'left'
+      fontWeight: "bold",
+      color: "gray",
+      textAlign: "left",
     },
     RecordItemBody: {
       fontSize: 14,
-      fontWeight: 'bold',
-      color: '#007BFF',
-      textAlign: 'right'
+      fontWeight: "bold",
+      color: "#007BFF",
+      textAlign: "right",
     },
-    RecordItemBodyNotes: { fontSize: 14, fontWeight: 'bold', color: '#007BFF' },
+    RecordItemBodyNotes: { fontSize: 14, fontWeight: "bold", color: "#007BFF" },
     //------------------------------------------------------------------------------------------------
-    DeleteIcon: { color: '#FF4D4D', fontSize: 35 },
-    CalendarIcon: { color: '#04C4AD', fontSize: 35 },
-    SortIcon: { color: '#04C42F', fontSize: 35 }
+    DeleteIcon: { color: "#FF4D4D", fontSize: 35 },
+    CalendarIcon: { color: "#04C4AD", fontSize: 35 },
+    SortIcon: { color: "#04C42F", fontSize: 35 },
   },
 
   Menu: {
     Container: {
       flex: 1,
-      backgroundColor: '#212121',
-      justifyContent: 'space-between'
+      backgroundColor: "#212121",
+      justifyContent: "space-between",
     },
-    Content: { height: '95%' },
-    LogoContainer: { alignItems: 'center' },
+    Content: { height: "95%" },
+    LogoContainer: { alignItems: "center" },
     LogoContent: { width: 135, height: 95 },
-    TopDivider: { backgroundColor: '#007BFF', height: 1, marginVertical: 5 },
+    TopDivider: { backgroundColor: "#007BFF", height: 1, marginVertical: 5 },
     ItemContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
+      flexDirection: "row",
+      alignItems: "center",
       marginHorizontal: 20,
-      marginVertical: 10
+      marginVertical: 10,
     },
     ItemCaption: {
       fontSize: 18,
-      fontWeight: 'bold',
-      color: '#007BFF',
-      marginLeft: 20
+      fontWeight: "bold",
+      color: "#007BFF",
+      marginLeft: 20,
     },
-    InstructionIcon: { color: '#007BFF', fontSize: 25 },
-    PrivatePolicyIcon: { color: '#007BFF', fontSize: 25 },
-    SettingsIcon: { color: '#007BFF', fontSize: 25 },
-    AboutIcon: { color: '#007BFF', fontSize: 25 }
+    InstructionIcon: { color: "#007BFF", fontSize: 25 },
+    PrivatePolicyIcon: { color: "#007BFF", fontSize: 25 },
+    SettingsIcon: { color: "#007BFF", fontSize: 25 },
+    AboutIcon: { color: "#007BFF", fontSize: 25 },
   },
 
   Settings: {
@@ -616,108 +628,108 @@ export default {
     Section: { paddingVertical: 0, marginBottom: 20 },
     SectionCaption: {
       fontSize: 17,
-      fontWeight: 'bold',
-      color: 'gray',
-      borderColor: 'gray',
+      fontWeight: "bold",
+      color: "gray",
+      borderColor: "gray",
       borderBottomWidth: 1,
       paddingBottom: 2,
-      marginBottom: 2
+      marginBottom: 2,
     },
 
-    LocaleSection: { justifyContent: 'space-between', marginTop: 5 },
+    LocaleSection: { justifyContent: "space-between", marginTop: 5 },
     LocaleItem: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      color: 'gray',
-      borderColor: 'gray',
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      color: "gray",
+      borderColor: "gray",
       borderWidth: 1,
       padding: 5,
-      marginVertical: 3
+      marginVertical: 3,
     },
-    LocaleDefault: { backgroundColor: '#2A2A2A' },
-    LocaleSelected: { backgroundColor: '#555555' },
+    LocaleDefault: { backgroundColor: "#2A2A2A" },
+    LocaleSelected: { backgroundColor: "#555555" },
     LocaleCaption: { fontSize: 18, marginTop: 0 },
-    LocaleCaptionDefault: { color: 'white' },
-    LocaleCaptionSelected: { color: '#007BFF', fontWeight: 'bold' },
+    LocaleCaptionDefault: { color: "white" },
+    LocaleCaptionSelected: { color: "#007BFF", fontWeight: "bold" },
     LocaleImage: { width: 45, height: 45 },
 
     ThemeItems: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between'
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
     },
-    ThemeItem: { width: '48%' },
+    ThemeItem: { width: "48%" },
     ThemeItemContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      color: 'gray',
-      borderColor: 'gray',
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      color: "gray",
+      borderColor: "gray",
       borderWidth: 1,
       padding: 10,
-      marginVertical: 10
+      marginVertical: 10,
     },
-    ThemeDefault: { backgroundColor: '#2A2A2A' },
-    ThemeSelected: { backgroundColor: '#555555' },
-    ThemeCaption: { fontSize: 18, color: 'white', margin: 0 },
-    ThemeDarkIcon: { ColorTrue: '#007BFF', ColorFalse: 'gray', Size: 40 },
-    ThemeLightIcon: { ColorTrue: '#007BFF', ColorFalse: 'gray', Size: 40 },
+    ThemeDefault: { backgroundColor: "#2A2A2A" },
+    ThemeSelected: { backgroundColor: "#555555" },
+    ThemeCaption: { fontSize: 18, color: "white", margin: 0 },
+    ThemeDarkIcon: { ColorTrue: "#007BFF", ColorFalse: "gray", Size: 40 },
+    ThemeLightIcon: { ColorTrue: "#007BFF", ColorFalse: "gray", Size: 40 },
 
     SwitchItem: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between'
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
     },
-    SwitchItemCaption: { fontSize: 18, color: 'gray', marginTop: 0 }
+    SwitchItemCaption: { fontSize: 18, color: "gray", marginTop: 0 },
   },
 
   Policy: {
     Container: { flex: 1 },
     ParagraphHead: {
       fontSize: 18,
-      color: '#007BFF',
+      color: "#007BFF",
       marginTop: 20,
       marginBottom: 10,
-      fontStyle: 'italic'
+      fontStyle: "italic",
     },
-    ParagraphText: { color: '#007BFF', marginBottom: 10, textAlign: 'justify' },
+    ParagraphText: { color: "#007BFF", marginBottom: 10, textAlign: "justify" },
     Warning: {
       paddingLeft: 10,
       fontSize: 22,
-      fontWeight: 'bold',
-      color: '#C0392B'
-    }
+      fontWeight: "bold",
+      color: "#C0392B",
+    },
   },
 
   Help: {
     Container: { flex: 9, marginHorizontal: 7 },
-    PeriodUpdate: { color: 'green', fontSize: 24 },
+    PeriodUpdate: { color: "green", fontSize: 24 },
     //----------------------------------------------------------------------------------------
-    slideContainer: { alignItems: 'center' },
+    slideContainer: { alignItems: "center" },
     slideTitle: {
       fontSize: 20,
-      color: '#007BFF',
-      fontWeight: 'bold',
-      marginVertical: 10
+      color: "#007BFF",
+      fontWeight: "bold",
+      marginVertical: 10,
     },
     //----------------------------------------------------------------------------------------
-    imageContainer: { alignItems: 'center' },
+    imageContainer: { alignItems: "center" },
     imageContent: {
       width: 300,
       height: 480,
-      resizeMode: 'contain'
+      resizeMode: "contain",
     },
     //----------------------------------------------------------------------------------------
-    explanationTitle: { fontSize: 16, color: '#007BFF', marginTop: 10 },
-    regularText: { color: '#007BFF', marginTop: 10, textAlign: 'justify' },
+    explanationTitle: { fontSize: 16, color: "#007BFF", marginTop: 10 },
+    regularText: { color: "#007BFF", marginTop: 10, textAlign: "justify" },
     lastRegularText: {
-      color: '#007BFF',
+      color: "#007BFF",
       marginTop: 10,
       marginBottom: 20,
-      textAlign: 'justify'
+      textAlign: "justify",
     },
-    button: { marginBottom: 7 }
+    button: { marginBottom: 7 },
   },
 
   About: {
@@ -725,146 +737,146 @@ export default {
       paddingVertical: 30,
       paddingHorizontal: 15,
       marginTop: 50,
-      flex: 1
+      flex: 1,
     },
     ContainerCaption: {
       marginBottom: 30,
 
-      alignItems: 'center'
+      alignItems: "center",
     },
-    CaptionText: { color: '#fff', fontSize: 25, fontWeight: 'bold' },
+    CaptionText: { color: "#fff", fontSize: 25, fontWeight: "bold" },
     ContainerDetails: { flex: 1 },
-    Disclaimer: { color: '#fff', marginBottom: 15 },
-    Telephone: { color: '#fff' },
+    Disclaimer: { color: "#fff", marginBottom: 15 },
+    Telephone: { color: "#fff" },
     Telephone_2: {
-      color: '#725CAE',
+      color: "#725CAE",
       marginBottom: 15,
-      textDecorationLine: 'underline'
+      textDecorationLine: "underline",
     },
-    Link: { color: '#fff' },
+    Link: { color: "#fff" },
     Link_2: {
-      color: '#725CAE',
+      color: "#725CAE",
       marginBottom: 15,
-      textDecorationLine: 'underline'
+      textDecorationLine: "underline",
     },
-    Version: { color: '#725CAE', alignSelf: 'flex-end', fontSize: 14 }
+    Version: { color: "#725CAE", alignSelf: "flex-end", fontSize: 14 },
   },
   NoNetwork: {
     ContainerCenter: {
       padding: 7,
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#212529'
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#212529",
     },
     Image: { marginBottom: 50 },
-    ContainerCaption: { alignItems: 'center', marginVertical: 30 },
+    ContainerCaption: { alignItems: "center", marginVertical: 30 },
     CaptionText: {
-      color: '#ffffff',
-      alignItems: 'center',
-      textAlign: 'center',
+      color: "#ffffff",
+      alignItems: "center",
+      textAlign: "center",
       fontSize: 28,
-      fontWeight: 'bold'
+      fontWeight: "bold",
     },
     retryText: {
       marginTop: 10,
       fontSize: 20,
-      color: '#725CAE',
-      fontWeight: 'bold'
-    }
+      color: "#725CAE",
+      fontWeight: "bold",
+    },
   },
   Checkbox: {
     marginTop: 10,
     marginBottom: 40,
 
-    flexDirection: 'row',
+    flexDirection: "row",
 
     CheckboxStyle: {
       height: 20,
       width: 20,
 
-      justifyContent: 'center',
-      alignItems: 'center',
+      justifyContent: "center",
+      alignItems: "center",
 
       borderRadius: 5,
       borderWidth: 0.3,
-      borderColor: '#725CAE'
+      borderColor: "#725CAE",
     },
 
     CheckboxImage: {
       height: 10,
       width: 14,
-      resizeMode: 'contain'
+      resizeMode: "contain",
     },
 
     Policy: {
       marginLeft: 10,
 
-      flexDirection: 'row',
-      flexWrap: 'wrap'
+      flexDirection: "row",
+      flexWrap: "wrap",
     },
 
     PolicyText: {
-      color: '#fff'
+      color: "#fff",
     },
 
     PolicyTouch: {
-      color: '#725CAE'
-    }
+      color: "#725CAE",
+    },
   },
   // ----------- Modal Warninig-----------
   Warning: {
     container: {
       flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center'
+      backgroundColor: "#fff",
+      alignItems: "center",
+      justifyContent: "center",
     },
     modal: {
-      backgroundColor: '#00000099',
+      backgroundColor: "#00000099",
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center'
+      alignItems: "center",
+      justifyContent: "center",
     },
     modalContainer: {
-      backgroundColor: '#fff',
-      borderRadius: 5
+      backgroundColor: "#fff",
+      borderRadius: 5,
     },
     modalHeader: {
-      alignItems: 'center',
-      justifyContent: 'center'
+      alignItems: "center",
+      justifyContent: "center",
     },
     title: {
-      fontWeight: 'bold',
+      fontWeight: "bold",
       fontSize: 20,
       padding: 15,
-      color: '#000'
+      color: "#000",
     },
     divider: {
-      width: '100%',
+      width: "100%",
       height: 1,
-      backgroundColor: 'lightgray'
+      backgroundColor: "lightgray",
     },
     modalBody: {
-      backgroundColor: '#fff',
+      backgroundColor: "#fff",
       paddingVertical: 20,
       paddingHorizontal: 10,
-      alignItems: 'center',
-      justifyContent: 'center'
+      alignItems: "center",
+      justifyContent: "center",
     },
     bodyText: {
-      fontSize: 20
+      fontSize: 20,
     },
     modalFooter: {},
     actions: {
       borderRadius: 5,
       marginHorizontal: 10,
       paddingVertical: 10,
-      paddingHorizontal: 20
+      paddingHorizontal: 20,
     },
     actionText: {
-      color: '#fff'
-    }
-  }
+      color: "#fff",
+    },
+  },
   // -----------END Header Modal WArninig-----------
-}
+};
