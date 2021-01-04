@@ -169,15 +169,16 @@ const ProfileList = ({ profiles, styles, locale, navigation }) => {
         />
       )
     } else {
-      content = (        
-          <ScrollView style={styles.Empty.Content} contentContainerStyle={styles.Empty.homeView}>
-            <Text style={styles.Empty.Label}>
-              {locale.home_profiles_empty_1}
-            </Text>
-            <Text style={styles.Empty.SubLabel}>
-              {locale.home_profiles_empty_2}
-            </Text>
-          </ScrollView>              
+      content = (
+        <ScrollView
+          style={styles.Empty.Content}
+          contentContainerStyle={styles.Empty.homeView}
+        >
+          <Text style={styles.Empty.Label}>{locale.home_profiles_empty_1}</Text>
+          <Text style={styles.Empty.SubLabel}>
+            {locale.home_profiles_empty_2}
+          </Text>
+        </ScrollView>
       )
     }
   } else {
