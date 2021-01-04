@@ -87,6 +87,9 @@ const Profile = ({
   const [lookHistory, setLookHistory] = useState(true);
   const [checkPolicy, setCheckPolicy] = useState(false);
 
+  console.log('history================================>', history)
+  console.log('toHistory------------------------------>>>', toHistory)
+
   const onChange = useCallback(
     (inType, inValue) => {
       switch (inType) {
@@ -429,12 +432,9 @@ const Profile = ({
                 />
               </View>
             </View>
-            <View style={styles.Checkbox}>
-              {!route.params.ProfileID && (
-                <TouchableOpacity
-                  style={styles.Checkbox.CheckboxContainer}
-                  onPress={() => setCheckPolicy(!checkPolicy)}
-                >
+            {!route.params.ProfileID && (
+              <View style={styles.Checkbox}>
+                <TouchableOpacity onPress={() => setCheckPolicy(!checkPolicy)}>
                   <View style={styles.Checkbox.CheckboxStyle}>
                     {checkPolicy ? (
                       <Image
@@ -446,22 +446,25 @@ const Profile = ({
                       <View style={styles.Checkbox.CheckboxStyle} />
                     )}
                   </View>
-                  <View style={styles.Checkbox.PolicyTextContainer}>
-                    <Text style={styles.Checkbox.PolicyText}>
-                      {locale.profile_policy1}
-                      <TouchableOpacity
-                        onPress={() => navigation.navigate("Policy")}
-                      >
-                        <Text style={styles.Checkbox.PolicyTouch}>
-                          {locale.profile_policy2}
-                        </Text>
-                      </TouchableOpacity>
-                      {locale.profile_policy3}
-                    </Text>
-                  </View>
                 </TouchableOpacity>
-              )}
-            </View>
+
+                <View style={styles.Checkbox.Policy}>
+                  <Text style={styles.Checkbox.PolicyText}>
+                    {locale.profile_policy1}
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('Policy')}
+                  >
+                    <Text style={styles.Checkbox.PolicyTouch}>
+                      {locale.profile_policy2}
+                    </Text>
+                  </TouchableOpacity>
+                  <Text style={styles.Checkbox.PolicyText}>
+                    {locale.profile_policy3}
+                  </Text>
+                </View>
+              </View>
+            )}
           </View>
           <View style={styles.Profile.Toolbar}>
             <View style={styles.Profile.Btns}>

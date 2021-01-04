@@ -108,7 +108,7 @@ const HomeStack = connect(
       name="PreviewDispatchFeedback"
       component={PreviewDispatchFeedback}
       options={{
-        title: "Підтвердження показань",
+        title: 'Підтвердження'
       }}
     />
   </Stack.Navigator>

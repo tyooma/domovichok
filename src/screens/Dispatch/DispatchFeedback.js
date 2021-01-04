@@ -1,9 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { ScrollView, Text, View, Image } from "react-native";
-import { connect } from "react-redux";
-import { StateToProps, DispatchToProps } from "../../store/MapToProps";
-import { Spinner } from "../components/Actions";
-import { runFeedback } from "./DispatchActions";
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { Text, View } from 'react-native'
+import { connect } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient'
+import { Icon } from 'react-native-elements'
+import { StateToProps, DispatchToProps } from '../../store/MapToProps'
+import { Spinner } from '../components/Actions'
+import { runFeedback } from './DispatchActions'
 
 const DispatchFeedback = ({
   dispatch,
@@ -15,11 +17,10 @@ const DispatchFeedback = ({
   lastValue,
   toLastValue,
   toPeriod,
-  navigation,
-  theme,
+  navigation
 }) => {
-  console.log("dispatch ==>", dispatch, "setModal", setModal);  
-  const needLoad = useRef(true);
+  console.log('dispatch ==>', dispatch, 'setModal', setModal)
+  const needLoad = useRef(true)
   const [content, setContent] = useState(
     <View style={styles.NoNetwork.ContainerCenter}>
       <Spinner />
@@ -27,14 +28,13 @@ const DispatchFeedback = ({
         {locale.dispatch_modal_spinner}
       </Text>
     </View>
-  );
+  )
 
   const onExit = useCallback(() => {
-    setModal(false);
-    navigation.navigate("Home");
-  }, []);
+    setModal(false)
+    navigation.navigate('Home')
+  }, [])
 
-  // Update Content
   useEffect(() => {
     const getFeedback = async () => {
       const feedback = await runFeedback(
@@ -45,44 +45,38 @@ const DispatchFeedback = ({
         lastValue,
         toLastValue,
         toPeriod
-      );
+      )
       setContent(
         <View style={styles.NoNetwork.ContainerCenter}>
-          {theme === "DARK" ? (
-            <Image
-              style={styles.NoNetwork.Image}
-              source={require("../../libs/assets/images/thanks.png")}
+          <LinearGradient
+            colors={[
+              styles.GradientColorFirst.color,
+              styles.GradientColorSecond.color
+            ]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.Home.ProfileCreateSubSection}
+          >
+            <Icon
+              name='check-circle'
+              iconStyle={styles.Home.ProfileCreateSubIcon}
+              type='font-awesome-5'
             />
-          ) : (
-            <Image
-              style={styles.NoNetwork.Image}
-              source={require("../../libs/assets/images/thanks-black.png")}
-            />
-          )}
+          </LinearGradient>
           <Text style={styles.NoNetwork.CaptionText}>{locale.err_thans}</Text>
           <Text onPress={() => onExit()} style={styles.NoNetwork.retryText}>
             {locale.dispatch_modal_home}
           </Text>
         </View>
-      );
-      needLoad.current = false;
-    };
-    if (needLoad) {
-      getFeedback();
+      )
+      needLoad.current = false
     }
-  }, []);
+    if (needLoad) {
+      getFeedback()
+    }
+  }, [])
 
-  return (
-    // <View style={styles.Feedback.ViewArea}>
-    //   <View style={styles.Feedback.Container}>
-    //     <View style={styles.Feedback.Head}>
-    //       <Text style={styles.Feedback.HeadCaption}>{locale.project_name}</Text>
-    //     </View>
-    //     { content }
-    //   </View>
-    // </View>
-    <View style={styles.ContainerHeader}>{content}</View>
-  );
-};
+  return <View style={styles.ContainerHeader}>{content}</View>
+}
 
-export default connect(StateToProps(), DispatchToProps())(DispatchFeedback);
+export default connect(StateToProps(), DispatchToProps())(DispatchFeedback)

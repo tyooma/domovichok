@@ -16,14 +16,14 @@ export const runProfileSave = (
   checkPolicy
 ) => {
   const checkProfile = (profile, profiles, ProfileID) => {
-    console.log(
-      "ProfileID ==>",
-      ProfileID,
-      "profiles==>",
-      profiles,
-      "profile==>",
-      profile
-    );
+    // console.log(
+    //   "ProfileID ==>",
+    //   ProfileID,
+    //   "profiles==>",
+    //   profiles,
+    //   "profile==>",
+    //   profile
+    // );
     let result = true;
     if (!ProfileID) {
       // Add new Profile

@@ -47,43 +47,71 @@ export default Home = connect(
           <View style={styles.Home.ProfileCreateContainer}>
             {dropDown ? (
               <View>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   onPress={() => {
                     setDrowDown(!dropDown);
                     navigation.navigate("Profile", { ProfileID: undefined }); //undefined default
                   }}
                 >
                   <Text>Створити</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {                  
-
-                    // importProfileFromFile(
-                    //   profiles.id,
-                    //   profiles,
-                    //   locale,
-                    //   toProfiles,
-                    //   lastValue,
-                    //   toLastValue,
-                    //   navigation,
-                    //   toHistory
-                    // );
-
-                    importProfileFromFile(
-                      ProfileID,
-                      locale,
-                      profiles,
-                      toProfiles,
-                      lastValue,
-                      toLastValue,
-                      navigation,
-                      toHistory,
-                      true
-                      )
-                  }}
+                </TouchableOpacity> */}
+                 <TouchableOpacity
+                onPress={() => {
+                  setDrowDown(!dropDown)
+                  navigation.navigate('Profile', { ProfileID: undefined })
+                }}
+                style={styles.Home.ProfileSubBtn}
+              >
+                <Text style={styles.Home.ProfileSubBtnText}>Створити</Text>
+                <LinearGradient
+                  colors={[
+                    styles.GradientColorFirst.color,
+                    styles.GradientColorSecond.color
+                  ]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.Home.ProfileCreateSubSection}
                 >
-                  <Text>Імпортувати</Text>
-                </TouchableOpacity>
+                  <Icon
+                    name='user-plus'
+                    iconStyle={styles.Home.ProfileCreateSubIcon}
+                    type='font-awesome-5'
+                  ></Icon>
+                </LinearGradient>
+              </TouchableOpacity>
+                
+                <TouchableOpacity style={styles.Home.ProfileSubBtn} onPress={() => {
+                  console.log('history================================>', history)
+                  console.log('toHistory------------------------------>>>', toHistory)
+                  importProfileFromFile(
+                    ProfileID,
+                    locale,
+                    profiles,
+                    toProfiles,
+                    lastValue,
+                    toLastValue,
+                    navigation,
+                    toHistory,
+                    true
+                    )
+                }}>
+                <Text style={styles.Home.ProfileSubBtnText}>Імпортувати</Text>
+                <LinearGradient
+                  colors={[
+                    styles.GradientColorFirst.color,
+                    styles.GradientColorSecond.color
+                  ]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.Home.ProfileCreateSubSection}
+                >
+                  <Icon
+                    name='upload'
+                    iconStyle={styles.Home.ProfileCreateSubIcon}
+                    type='font-awesome-5'
+                  ></Icon>
+                </LinearGradient>
+              </TouchableOpacity>
               </View>
             ) : null}
 
