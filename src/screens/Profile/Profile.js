@@ -1,9 +1,9 @@
 import React, {
   useCallback,
+  useState,
   useEffect,
   useReducer,
   useRef,
-  useState,
 } from "react";
 import {
   Alert,
@@ -12,23 +12,25 @@ import {
   ScrollView,
   Switch,
   Text,
+  Image,
   TextInput,
   View,
+  TouchableOpacity,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Icon, Divider } from "react-native-elements";
+
+import { Icon } from "react-native-elements";
 import { connect } from "react-redux";
-
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import LinearGradient from "react-native-linear-gradient";
 import { StateToProps, DispatchToProps } from "../../store/MapToProps";
-
+import { ActionBack } from "./../components/Actions";
 import { PROFILE } from "../../libs/Consts";
 import { getProfile } from "../../libs/Tools";
 import {
   runProfileSave,
   runProfileDelete,
   runHistorySearch,
-  importMeterReadingFromFile,
-  importProfileFromFile,
+  // importProfileFromFile
 } from "./ProfileActions";
 import {
   FixAddressInput,
@@ -38,7 +40,6 @@ import {
 } from "../../libs/Tools";
 
 const ReducerProfile = (state, action) => {
-  // console.log('ReducerProfile => ['+action.type+']: <'+action.value+'> => STATE:', state);
   switch (action.type) {
     case PROFILE.id:
       return { ...state, id: action.value };
@@ -82,41 +83,54 @@ const Profile = ({
     getProfile(profiles, route)
   );
   const isNew = useRef(true);
-  const [prevHistory, setPrevHistory] = useState(history);
+  const [changeProfile, setChangeProfile] = useState(true);
+  const [lookHistory, setLookHistory] = useState(true);
+  const [checkPolicy, setCheckPolicy] = useState(false);
+
   const onChange = useCallback(
     (inType, inValue) => {
       switch (inType) {
         case PROFILE.id:
+          setChangeProfile(false);
           setProfile({ type: PROFILE.id, value: FixDigitInput(inValue) });
           break;
         case PROFILE.fio:
+          setChangeProfile(false);
           setProfile({ type: PROFILE.fio, value: FixNameInput(inValue) });
           break;
         case PROFILE.address:
+          setChangeProfile(false);
           setProfile({
             type: PROFILE.address,
             value: FixAddressInput(inValue),
           });
           break;
         case PROFILE.phone:
+          setChangeProfile(false);
           setProfile({ type: PROFILE.phone, value: FixPhoneInput(inValue) });
           break;
         case PROFILE.kitchenHot:
+          setChangeProfile(false);
           setProfile({ type: PROFILE.kitchenHot, value: inValue });
           break;
         case PROFILE.kitchenCold:
+          setChangeProfile(false);
           setProfile({ type: PROFILE.kitchenCold, value: inValue });
           break;
         case PROFILE.bathHot:
+          setChangeProfile(false);
           setProfile({ type: PROFILE.bathHot, value: inValue });
           break;
         case PROFILE.bathCold:
+          setChangeProfile(false);
           setProfile({ type: PROFILE.bathCold, value: inValue });
           break;
         case PROFILE.watering:
+          setChangeProfile(false);
           setProfile({ type: PROFILE.watering, value: inValue });
           break;
         case PROFILE.sewage:
+          setChangeProfile(false);
           setProfile({ type: PROFILE.sewage, value: inValue });
           break;
         default:
@@ -170,37 +184,26 @@ const Profile = ({
     }
   }, [profiles, route, setProfile]);
 
-  // console.log('Profile => lastValue:', lastValue);
-
   return (
     <SafeAreaView style={styles.Container}>
-      {/* <View style={styles.Header}>
-        <View style={styles.HeaderLeft}>
-          <View style={styles.HeaderIcon}><ActionBack navigation={navigation} screen={!route.params.ProfileID?'CreateProfile':''}/></View>
-          <Text style={styles.HeaderCaption}>
-            {!route.params.ProfileID ? locale.profile_new_caption : locale.profile_edit_caption}
-          </Text>
-        </View>
-        <View style={styles.HeaderRight}></View>
-      </View>
-      <Divider style={styles.Divider}/> */}
-      <View style={{ marginTop: 50 }}>
-        <ScrollView>
+      <View style={styles.Profile.Content}>
+        <ScrollView style={styles.Profile.ScrollView}>
           <View style={styles.Profile.InputContainer}>
             <View style={styles.Profile.InputSection}>
               <View style={styles.Profile.InputItem}>
                 {/* <TouchableOpacity
-                  onPress={() =>
-                    importProfileFromFile(
-                      route.params.ProfileID,
-                      locale,
-                      profiles,
-                      toProfiles,
-                      lastValue,
-                      toLastValue,
-                      navigation,
-                      toHistory
-                    )
+                  onPress={
+                    () => console.log(" route", route, "toHistory", toHistory)
+                    // importProfileFromFile(
+                    //   route.params.ProfileID,
+                    //   locale,
+                    //   profiles,
+                    //   toProfiles,
+                    //   lastValue,
+                    //   toLastValue,
+                    //   navigation,
+                    //   toHistory
+                    // )
                   }
                 >
                   <Text
@@ -215,8 +218,8 @@ const Profile = ({
                   >
                     Импортувати профиль
                   </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                </TouchableOpacity> */}
+                {/* <TouchableOpacity
                   onPress={() => {
                     importMeterReadingFromFile(route, setPrevHistory);
                   }}
@@ -256,19 +259,6 @@ const Profile = ({
                     <Text style={styles.InputRequired}>*</Text>
                   )}
                 </Text>
-                {/*********************************************************************************/}
-                {/* <TextInput
-                  editable={!route.params.ProfileID}
-                  onChangeText={text => onChange(PROFILE.id, text)}
-                  selectionColor={styles.InputSelection}
-                  placeholder={locale.profile_id_placeholder}
-                  placeholderTextColor={styles.PlaceholderTextColor}
-                  maxLength={10}
-                  keyboardType="number-pad"
-                  value={profile.id}
-                  style={{color: '#007BFF'}}
-                  // style={route.params.ProfileID?styles.Profile.InputDefault:styles.Profile.InputNotModif}
-                /> */}
                 {!route.params.ProfileID && (
                   <TextInput
                     editable={true}
@@ -295,7 +285,6 @@ const Profile = ({
                     style={styles.Profile.InputNotModif}
                   />
                 )}
-                {/*********************************************************************************/}
               </View>
               <View style={styles.Profile.InputItem}>
                 <Text style={styles.Profile.InputCaption}>
@@ -440,87 +429,109 @@ const Profile = ({
                 />
               </View>
             </View>
+            <View style={styles.Checkbox}>
+              {!route.params.ProfileID && (
+                <TouchableOpacity
+                  style={styles.Checkbox.CheckboxContainer}
+                  onPress={() => setCheckPolicy(!checkPolicy)}
+                >
+                  <View style={styles.Checkbox.CheckboxStyle}>
+                    {checkPolicy ? (
+                      <Image
+                        source={require("../../libs/assets/images/checkbox.png")}
+                        style={styles.Checkbox.CheckboxImage}
+                        key={"tickCheckbox"}
+                      />
+                    ) : (
+                      <View style={styles.Checkbox.CheckboxStyle} />
+                    )}
+                  </View>
+                  <View style={styles.Checkbox.PolicyTextContainer}>
+                    <Text style={styles.Checkbox.PolicyText}>
+                      {locale.profile_policy1}
+                      <TouchableOpacity
+                        onPress={() => navigation.navigate("Policy")}
+                      >
+                        <Text style={styles.Checkbox.PolicyTouch}>
+                          {locale.profile_policy2}
+                        </Text>
+                      </TouchableOpacity>
+                      {locale.profile_policy3}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
-        </ScrollView>
-        <View style={styles.Toolbar.Container}>
-          <Divider style={styles.Divider} />
-          <View style={styles.Toolbar.Icons}>
-            <View style={styles.Toolbar.Icon}>
-              <TouchableOpacity
-                onPress={() =>
-                  route.params.ProfileID
-                    ? runProfileDelete(
-                        profile.id,
+          <View style={styles.Profile.Toolbar}>
+            <View style={styles.Profile.Btns}>
+              <View style={styles.Profile.BtnContainer}>
+                <LinearGradient
+                  disabled={changeProfile}
+                  colors={[
+                    styles.GradientColorFirst.color,
+                    styles.GradientColorSecond.color,
+                  ]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.Profile.Btn}
+                >
+                  <TouchableOpacity
+                    onPress={() =>
+                      runProfileSave(
+                        profile,
+                        route.params.ProfileID,
+                        locale,
                         profiles,
                         toProfiles,
-                        locale,
-                        history,
-                        toHistory,
                         lastValue,
                         toLastValue,
-                        navigation
+                        navigation,
+                        checkPolicy
                       )
-                    : null
+                    }
+                  >
+                    <Text style={styles.Profile.BtnText}>Зберегти</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
+              </View>
+              <View
+                style={
+                  route.params.ProfileID
+                    ? styles.Profile.BtnContainer
+                    : { display: "none" }
                 }
               >
-                <Icon
-                  name="trash-alt"
-                  iconStyle={
-                    route.params.ProfileID
-                      ? styles.Profile.DeleteIcon
-                      : styles.ColorNone
-                  }
-                  type="font-awesome-5"
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.Toolbar.Icon}>
-              <TouchableOpacity
-                onPress={() =>
-                  runProfileSave(
-                    profile,
-                    route.params.ProfileID,
-                    locale,
-                    profiles,
-                    toProfiles,
-                    lastValue,
-                    toLastValue,
-                    navigation
-                  )
-                }
-              >
-                <Icon
-                  name="save"
-                  iconStyle={styles.Profile.SaveIcon}
-                  type="font-awesome-5"
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.Toolbar.Icon}>
-              <TouchableOpacity
-                onPress={() =>
-                  runHistorySearch(history, profile)
-                    ? navigation.navigate("History", {
-                        ProfileID: profile.id,
-                        ProfileName: profile.address,
-                        NeedLoad: true,
-                      })
-                    : null
-                }
-              >
-                <Icon
-                  name="history"
-                  iconStyle={
-                    runHistorySearch(history, profile)
-                      ? styles.Profile.HistoryIcon
-                      : styles.ColorNone
-                  }
-                  type="font-awesome-5"
-                />
-              </TouchableOpacity>
+                <LinearGradient
+                  colors={["#f33", "#f33"]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.Profile.Btn}
+                >
+                  <TouchableOpacity
+                    onPress={() =>
+                      route.params.ProfileID
+                        ? runProfileDelete(
+                            profile.id,
+                            profiles,
+                            toProfiles,
+                            locale,
+                            history,
+                            toHistory,
+                            lastValue,
+                            toLastValue,
+                            navigation
+                          )
+                        : null
+                    }
+                  >
+                    <Text style={styles.Profile.BtnText}>Видалити</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
+              </View>
             </View>
           </View>
-        </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

@@ -1,72 +1,126 @@
-import React, { useEffect } from 'react'
-import { Alert, FlatList, SafeAreaView, Text, View } from 'react-native'
-import { Icon, Divider } from 'react-native-elements'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { connect } from 'react-redux'
-import { StateToProps, DispatchToProps } from '../store/MapToProps'
-import { ActionMenu } from './components/Actions'
-import { PeriodUpdate } from './Dispatch/DispatchSend'
+import React, { useEffect, useState } from "react";
+import { FlatList, Text, View, TouchableOpacity } from "react-native";
+import { Icon } from "react-native-elements";
+import { connect } from "react-redux";
+import LinearGradient from "react-native-linear-gradient";
+import { importProfileFromFile } from "./Profile/ProfileActions";
+
+import { StateToProps, DispatchToProps } from "../store/MapToProps";
+import { PeriodUpdate } from "./Dispatch/DispatchSend";
 
 export default Home = connect(
   StateToProps(),
   DispatchToProps()
-)(({ navigation, styles, locale, toPeriod, profiles, profilesDetails }) => {
-  useEffect(() => {
-    PeriodUpdate(locale, toPeriod, 'HOME', navigation)
-  }, [])
+)(
+  ({
+    navigation,
+    styles,
+    locale,
+    toPeriod,
+    profiles,
+    profilesDetails,
+    toProfiles,
+    history,
+    toHistory,
+    lastValue,
+    toLastValue,
+    ProfileID,
+  }) => {
+    const [dropDown, setDrowDown] = useState(false);
 
-  return (
-    <SafeAreaView style={styles.Container}>
-      <View style={styles.Header}>
-        <View style={styles.HeaderLeft}>
-          <View style={styles.HeaderIcon}>
-            <ActionMenu navigation={navigation} />
-          </View>
-          <Text style={styles.HeaderCaption}>{locale.project_name}</Text>
-        </View>
-        <View style={styles.HeaderRight}></View>
-      </View>
-      <Divider style={styles.Divider} />
-      <View style={styles.Home.Content}>
-        <View style={styles.Home.Profiles}>
-          <ProfileList
-            profiles={profiles}
-            isDetails={profilesDetails}
-            styles={styles}
-            locale={locale}
-            navigation={navigation}
-          />
-        </View>
-        <View style={styles.Home.ProfileCreateContainer}>
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('Profile', { ProfileID: undefined })
-            }
-            style={styles.Home.ProfileCreateSection}
-          >
-            <Icon
-              name='user-plus'
-              iconStyle={styles.Home.ProfileCreateIcon}
-              type='font-awesome-5'
+    useEffect(() => {
+      PeriodUpdate(locale, toPeriod, "HOME", navigation);
+    }, []);
+
+    return (
+      <View style={styles.Container}>
+        <View style={styles.Home.Content}>
+          <View style={styles.Home.Profiles}>
+            <ProfileList
+              profiles={profiles}
+              isDetails={profilesDetails}
+              styles={styles}
+              locale={locale}
+              navigation={navigation}
             />
-          </TouchableOpacity>
+          </View>
+          <View style={styles.Home.ProfileCreateContainer}>
+            {dropDown ? (
+              <View>
+                <TouchableOpacity
+                  onPress={() => {
+                    setDrowDown(!dropDown);
+                    navigation.navigate("Profile", { ProfileID: undefined }); //undefined default
+                  }}
+                >
+                  <Text>Створити</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {                  
 
+                    // importProfileFromFile(
+                    //   profiles.id,
+                    //   profiles,
+                    //   locale,
+                    //   toProfiles,
+                    //   lastValue,
+                    //   toLastValue,
+                    //   navigation,
+                    //   toHistory
+                    // );
+
+                    importProfileFromFile(
+                      ProfileID,
+                      locale,
+                      profiles,
+                      toProfiles,
+                      lastValue,
+                      toLastValue,
+                      navigation,
+                      toHistory,
+                      true
+                      )
+                  }}
+                >
+                  <Text>Імпортувати</Text>
+                </TouchableOpacity>
+              </View>
+            ) : null}
+
+            <TouchableOpacity onPress={() => setDrowDown(!dropDown)}>
+              <LinearGradient
+                colors={[
+                  styles.GradientColorFirst.color,
+                  styles.GradientColorSecond.color,
+                ]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.Home.ProfileCreateSection}
+              >
+                <Icon
+                  name="plus"
+                  iconStyle={styles.Home.ProfileCreateIcon}
+                  type="font-awesome-5"
+                ></Icon>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </SafeAreaView>
-  )
-})
+    );
+  }
+);
 
-const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
-  let validate = false
-  let errors = false
-  let content = undefined
+const ProfileList = ({ profiles, styles, locale, navigation }) => {
+  let validate = false;
+  let errors = false;
+  let content = undefined;
   if (profiles && styles && locale && navigation) {
     if (profiles.length > 0) {
-      validate = true
+      validate = true;
     }
   } else {
-    errors = true
+    errors = true;
   }
 
   if (!errors) {
@@ -76,87 +130,67 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
           data={profiles}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <View style={styles.Home.Profile}>
-              <View style={styles.Home.ProfileSection}>
+            <TouchableOpacity
+              style={styles.Home.Profile}
+              onPress={() =>
+                navigation.navigate("Dispatch", {
+                  ProfileID: item.id,
+                  IsNewDispatch: true,
+                })
+              }
+            >
+              <View style={styles.Home.ProfileInfo}>
+                <Text style={styles.Home.ProfileCaption}>{item.address}</Text>
+                <Text style={styles.Home.ProfileCaption}>
+                  О/Р:&nbsp;{item.id}
+                </Text>
+              </View>
+
+              <View style={styles.Home.ProfileIcons}>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('Profile', { ProfileID: item.id })
+                    navigation.navigate("Profile", { ProfileID: item.id })
                   }
                 >
-                  <Text style={styles.Home.ProfileCaption}>{item.address}</Text>
-                  {isDetails && (
-                    <View style={styles.Home.ProfileDetails}>
-                      <Text style={styles.Home.ProfileDetailsText}>
-                        {locale.profile_id}&nbsp;&nbsp;{item.id}
-                      </Text>
-                    </View>
-                  )}
+                  <Icon
+                    name="edit"
+                    iconStyle={styles.Home.ProfileIcon}
+                    type="font-awesome-5"
+                  ></Icon>
                 </TouchableOpacity>
-              </View>
-              <View style={styles.Home.ProfileDispatchSection}>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('Dispatch', {
+                    navigation.navigate("History", {
                       ProfileID: item.id,
-                      IsNewDispatch: true
+                      ProfileName: item.address,
+                      NeedLoad: true,
                     })
                   }
                 >
                   <Icon
-                    name='sign-out-alt'
-                    iconStyle={styles.Home.ProfileDispatchIcon}
-                    type='font-awesome-5'
-                  />
+                    name="inbox"
+                    iconStyle={styles.Home.ProfileIcon}
+                    type="font-awesome-5"
+                  ></Icon>
                 </TouchableOpacity>
               </View>
-            </View>
+            </TouchableOpacity>
           )}
         />
-      )
+      );
     } else {
       content = (
         <>
-          <View style={styles.Empty.Filler}></View>
           <View style={styles.Empty.Content}>
-            <View style={styles.Empty.Section}>
-              <Text style={styles.Empty.Label}>
-                {locale.home_profiles_empty_1}
-              </Text>
-            </View>
-            {/* <View style={styles.Empty.Section}>
-              <Text style={styles.Empty.Label}>
-                {locale.home_profiles_empty_2}
-              </Text>
-              <View style={styles.Empty.SectionRow}>
-                <Text style={styles.Empty.Label}>
-                  {locale.home_profiles_empty_3}&nbsp;&nbsp;
-                </Text>
-                <Icon
-                  name='user-plus'
-                  iconStyle={styles.Empty.Icon}
-                  type='font-awesome-5'
-                />
-                <Text style={styles.Empty.Label}>
-                  &nbsp;&nbsp;{locale.home_profiles_empty_4}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.Empty.Section}>
-              <Text numberOfLines={5} style={styles.Empty.Label}>
-                {locale.home_profiles_empty_5}
-              </Text>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Instruction')}
-              >
-                <Text style={styles.Empty.Link}>
-                  {locale.home_profiles_empty_6}
-                </Text>
-              </TouchableOpacity>
-            </View> */}
+            <Text style={styles.Empty.Label}>
+              {locale.home_profiles_empty_1}
+            </Text>
+            <Text style={styles.Empty.SubLabel}>
+              {locale.home_profiles_empty_2}
+            </Text>
           </View>
-          <View style={styles.Empty.Filler}></View>
         </>
-      )
+      );
     }
   } else {
     content = (
@@ -172,8 +206,7 @@ const ProfileList = ({ profiles, isDetails, styles, locale, navigation }) => {
         </View>
         <View style={styles.Empty.Filler}></View>
       </>
-    )
+    );
   }
-
-  return content
-}
+  return content;
+};

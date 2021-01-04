@@ -12,13 +12,23 @@ export const runProfileSave = (
   toProfiles,
   lastValue,
   toLastValue,
-  navigation
+  navigation,
+  checkPolicy
 ) => {
   const checkProfile = (profile, profiles, ProfileID) => {
+    console.log(
+      "ProfileID ==>",
+      ProfileID,
+      "profiles==>",
+      profiles,
+      "profile==>",
+      profile
+    );
     let result = true;
     if (!ProfileID) {
       // Add new Profile
       profiles.forEach((item) => {
+        console.log('item==============>', item)
         if (item.id === profile.id || item.address === profile.address) {
           result = false;
         }
@@ -27,6 +37,7 @@ export const runProfileSave = (
       // Update current Profile
       let newProfiles = [];
       profiles.forEach((item) => {
+        
         if (item.id !== profile.id) {
           newProfiles.push(item);
         }
@@ -40,7 +51,8 @@ export const runProfileSave = (
     return result;
   };
 
-  const validation = (profile, profiles, ProfileID, locale) => {
+  const validation = (profile, profiles, ProfileID, locale, checkPolicy = true) => {
+    console.log("checkPolicy checkPolicy----->", checkPolicy);
     let result = true;
     let details = "";
     if (!checkProfile(profile, profiles, ProfileID)) {
@@ -69,6 +81,11 @@ export const runProfileSave = (
       result = false;
       details += locale.valid_profile_enumerators_unchecked;
     }
+    if (checkPolicy) {
+    } else {
+      if (ProfileID == undefined) result = false;
+      details += `${locale.valid_profile_policy_read}\n`;
+    }
     return { state: result, details: details };
   };
 
@@ -80,9 +97,16 @@ export const runProfileSave = (
     toProfiles,
     lastValue,
     toLastValue,
-    navigation
+    navigation,
+    checkPolicy
   ) => {
-    const validate = validation(profile, profiles, ProfileID, locale);
+    const validate = validation(
+      profile,
+      profiles,
+      ProfileID,
+      locale,
+      checkPolicy
+    );
     if (validate.state) {
       let newProfiles = [];
       if (!ProfileID) {
@@ -151,7 +175,8 @@ export const runProfileSave = (
       toProfiles,
       lastValue,
       toLastValue,
-      navigation
+      navigation,
+      checkPolicy
     );
   }
 };
@@ -257,14 +282,17 @@ export const runHistorySearch = (history, profile) => {
   return result;
 };
 
-export const importProfileFromFile = async (ProfileID,
+export const importProfileFromFile = async (
+  ProfileID,
   locale,
   profiles,
   toProfiles,
   lastValue,
   toLastValue,
   navigation,
-  toHistory) => {
+  toHistory,
+  // checkPolicy = true
+) => {
   try {
     const res = await DocumentPicker.pick({
       type: [DocumentPicker.types.plainText],
@@ -323,13 +351,16 @@ export const importProfileFromFile = async (ProfileID,
         toProfiles,
         lastValue,
         toLastValue,
-        navigation
+        navigation,
+        // checkPolicy
       );
-      toHistory(historyFromFile);
+      console.log("toHistory", toHistory);
+      console.log("historyFromFile", historyFromFile);
+      // toHistory(historyFromFile);
     });
   } catch (err) {
     if (DocumentPicker.isCancel(err)) {
-      console.log(err);
+      console.log("err in PRofileActions", err);
     } else {
       throw err;
     }
