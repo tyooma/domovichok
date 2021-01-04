@@ -3,6 +3,7 @@ import { SafeAreaView, Text, View } from 'react-native'
 import { Divider, Icon } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient'
 import { StateToProps, DispatchToProps } from '../../store/MapToProps'
 import { ActionBack, Spinner } from '../components/Actions'
 import { HistoryDelete } from './HistoryActions'
@@ -30,16 +31,6 @@ const History = ({
 
   return (
     <SafeAreaView style={styles.Container}>
-      <View style={styles.Header}>
-        <View style={styles.HeaderLeft}>
-          <View style={styles.HeaderIcon}>
-            <ActionBack navigation={navigation} />
-          </View>
-          <Text style={styles.HeaderCaption}>{locale.history_caption}</Text>
-        </View>
-        <View style={styles.HeaderRight}></View>
-      </View>
-      <Divider style={styles.Divider} />
       {needLoad && (
         <>
           <View style={styles.History.Content}>
@@ -60,7 +51,6 @@ const History = ({
                   {route.params.ProfileID}
                 </Text>
               </View>
-              <Divider style={styles.Divider} />
             </View>
             <View style={styles.History.ContentRecords}>
               <HistoryList
@@ -70,50 +60,42 @@ const History = ({
               />
             </View>
           </View>
-          <View style={styles.Toolbar.Container}>
-            <Divider style={styles.Divider} />
-            <View style={styles.Toolbar.Icons}>
-              <View style={styles.Toolbar.Icon}>
-                <TouchableOpacity
-                  onPress={() =>
-                    HistoryDelete(
-                      route.params.ProfileID,
-                      history,
-                      toHistory,
-                      lastValue,
-                      toLastValue,
-                      locale,
-                      navigation
-                    )
-                  }
-                >
-                  <Icon
-                    name='trash-alt'
-                    iconStyle={styles.History.DeleteIcon}
-                    type='font-awesome-5'
-                  />
-                </TouchableOpacity>
-              </View>
-              <View style={styles.Toolbar.Icon}>
-                <TouchableOpacity onPress={() => null}>
-                  <Icon
-                    name='calendar-alt'
-                    iconStyle={[styles.History.CalendarIcon, styles.ColorNone]}
-                    type='font-awesome-5'
-                  />
-                </TouchableOpacity>
-              </View>
-              <View style={styles.Toolbar.Icon}>
-                <TouchableOpacity onPress={() => setSort(!sort)}>
-                  <Icon
-                    name='sort'
-                    iconStyle={styles.History.SortIcon}
-                    type='font-awesome-5'
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
+          <View style={styles.Dispatch.Toolbar}>
+            <LinearGradient
+              colors={[
+                styles.GradientColorFirst.color,
+                styles.GradientColorSecond.color
+              ]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.Dispatch.SendBtn}
+            >
+              <TouchableOpacity
+                onPress={() =>
+                  HistoryDelete(
+                    route.params.ProfileID,
+                    history,
+                    toHistory,
+                    lastValue,
+                    toLastValue,
+                    locale,
+                    navigation
+                  )
+                }
+              >
+                <Text style={styles.Dispatch.SendBtnText}>Очистити</Text>
+              </TouchableOpacity>
+            </LinearGradient>
           </View>
+          {/* <View style={styles.Toolbar.Icon}>
+              <TouchableOpacity onPress={() => setSort(!sort)}>
+                <Icon
+                  name='sort'
+                  iconStyle={styles.History.SortIcon}
+                  type='font-awesome-5'
+                />
+              </TouchableOpacity>
+            </View> */}
         </>
       )}
       {!needLoad && (
