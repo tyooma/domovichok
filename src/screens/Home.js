@@ -183,7 +183,6 @@ const ProfileList = ({ profiles, styles, locale, navigation }) => {
   } else {
     content = (
       <>
-        <View style={styles.Empty.Filler}></View>
         <View style={styles.Empty.Content}>
           <View style={styles.Empty.Section}>
             <Text style={styles.Error.Caption}>{locale.err_main_caption}</Text>
@@ -192,7 +191,6 @@ const ProfileList = ({ profiles, styles, locale, navigation }) => {
             <Text style={styles.Error.Text}>{locale.err_home_build_list}</Text>
           </View>
         </View>
-        <View style={styles.Empty.Filler}></View>
       </>
     )
   }
