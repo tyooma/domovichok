@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import {
   Modal,
+  Alert,
   SafeAreaView,
   ScrollView,
   Text,
@@ -14,14 +15,14 @@ import {
   View,
   TouchableOpacity
 } from 'react-native'
-
+import NetInfo from "@react-native-community/netinfo";
 import { Input } from 'react-native-elements'
 import { connect } from 'react-redux'
 import LinearGradient from 'react-native-linear-gradient'
 import { StateToProps, DispatchToProps } from '../../store/MapToProps'
 import { DISPATCH } from '../../libs/Consts'
-import { getProfile, FixEnumeratorInput, FixNotesInput } from '../../libs/Tools'
-
+import { getProfile, FixEnumeratorInput, Success4Dispatch,FixNotesInput } from '../../libs/Tools'
+import { Validation } from "./DispatchActions";
 import { PeriodUpdate } from './DispatchSend'
 
 const ReducerDispatch = (state, action) => {
