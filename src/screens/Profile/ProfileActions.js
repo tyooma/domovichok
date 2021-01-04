@@ -291,7 +291,6 @@ export const importProfileFromFile = async (
   toLastValue,
   navigation,
   toHistory,
-  // checkPolicy = true
 ) => {
   try {
     const res = await DocumentPicker.pick({
@@ -336,9 +335,9 @@ export const importProfileFromFile = async (
           counters.push(obj);
         });
       });
-      counters.filter(function (date, i, array) {
-        return array.indexOf(date) === i;
-      });
+      // counters.filter(function (date, i, array) {
+      //   return array.indexOf(date) === i;
+      // });
       const historyFromFile = {
         [personalNumber]: counters,
       };
@@ -350,13 +349,12 @@ export const importProfileFromFile = async (
         profiles,
         toProfiles,
         lastValue,
-        toLastValue,
+        toLastValue,//toLastValue
         navigation,
-        // checkPolicy
       );
       console.log("toHistory", toHistory);
       console.log("historyFromFile", historyFromFile);
-      // toHistory(historyFromFile);
+      toHistory(historyFromFile);
     });
   } catch (err) {
     if (DocumentPicker.isCancel(err)) {

@@ -92,7 +92,7 @@ export default Home = connect(
                     toLastValue,
                     navigation,
                     toHistory,
-                    true
+                    // true
                     )
                 }}>
                 <Text style={styles.Home.ProfileSubBtnText}>Імпортувати</Text>
