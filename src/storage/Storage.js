@@ -3,7 +3,7 @@ import { STORAGE } from './Actions'
 
 export const SaveToStorage = (action, value) => {
   try {
-    let parse = null;// JSON.stringify(profiles), default from Larin let parse = undefined;
+    let parse = undefined;// JSON.stringify(profiles), default from Larin let parse = undefined;
     switch (action) {
       case STORAGE.lang:
         parse = value
@@ -14,6 +14,8 @@ export const SaveToStorage = (action, value) => {
       case STORAGE.fbtoken:
         parse = value
         break
+      case STORAGE.history:
+        parse = value
       default:
         parse = JSON.stringify(value)
     }

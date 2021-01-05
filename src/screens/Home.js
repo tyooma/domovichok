@@ -26,7 +26,7 @@ export default Home = connect(
     lastValue,
     toLastValue,
     ProfileID,
-    // route
+    route
   }) => {
     const [dropDown, setDrowDown] = useState(false);
     
@@ -78,13 +78,8 @@ export default Home = connect(
               </TouchableOpacity>
                 
                 <TouchableOpacity style={styles.Home.ProfileSubBtn} onPress={() => {
-                  console.log('profiles----------------------------->>>', profiles)
+                  console.log('profiles----------------------------->>>', profiles)  
 
-                  // if(profiles.length) {
-                  //   importMeterReadingFromFile(profiles, setPrevHistory);
-                  // }
-                  
-                  
                   importProfileFromFile(
                     ProfileID,
                     locale,
@@ -95,9 +90,10 @@ export default Home = connect(
                     navigation,
                     toHistory,
                     // true
-                    )
-                    
-                }}>
+                    history
+                  )                                                       
+                  }
+                }>
                 <Text style={styles.Home.ProfileSubBtnText}>Імпортувати</Text>
                 <LinearGradient
                   colors={[

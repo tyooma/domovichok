@@ -44,13 +44,16 @@ export const runProfileSave = (
   }
 
   const validation = (profile, profiles, ProfileID, locale, checkPolicy = true) => {
-    console.log('checkPolicy checkPolicy----->', checkPolicy)
+    
     let result = true
     let details = ''
     if (!checkProfile(profile, profiles, ProfileID)) {
       result = false
       details += `${locale.valid_profile_unique}\n`
     }
+    // if (checkProfile(profile, profiles, ProfileID)) {
+    //   result = true
+    // }
     if (profile.id && profile.id.length === 10) {
     } else {
       result = false
@@ -283,6 +286,7 @@ export const importProfileFromFile = async (
   toLastValue,
   navigation,
   toHistory,
+  history
 ) => {
   try {
     const res = await DocumentPicker.pick({
@@ -329,23 +333,36 @@ export const importProfileFromFile = async (
           counters.push(obj);
         });
       });
-      const historyFromFile = {
-        [personalNumber]: counters,
-      };
+      
+      // const historyFromFile = {
+      //   [personalNumber]: counters,
+      // };
+      history.push(...counters)
+      // const historyFromFile = {
+      //   [personalNumber]: history,
+      // };
 
-      runProfileSave(
-        storeFromFile,
-        ProfileID,
-        locale,
-        profiles,
-        toProfiles,
-        lastValue,
-        toLastValue,//default value toLastValue
-        navigation,
-      );
-      // toLastValue(historyFromFile)
-      console.log('toHistory===============================>>>', toHistory(counters));
-      toHistory(historyFromFile);
+        runProfileSave(
+          storeFromFile,
+          ProfileID,
+          locale,
+          profiles,
+          toProfiles,
+          lastValue,
+          toLastValue,//default value toLastValue
+          navigation,
+          // history
+        );
+        // toHistory(historyFromFile);
+        
+        // history.push(...counters)
+        console.log('historial===============>', history)
+        toHistory({
+          [personalNumber]: history,
+        })
+        console.log('toHistory0000000000000000000000000000000000000000000000000000>', history)
+        
+        // runHistorySearch(history,personalNumber)
     });
   } catch (err) {
     if (DocumentPicker.isCancel(err)) {
@@ -356,14 +373,14 @@ export const importProfileFromFile = async (
   }
 };
 
-export const importMeterReadingFromFile = async (profiles, usingHook) => {
+export const importMeterReadingFromFile = async (usingHook, id) => {
   try {
     const res = await DocumentPicker.pick({
       type: [DocumentPicker.types.plainText],
     });
     RNFS.readFile(res.uri).then((res) => {
       const toStore = JSON.parse(JSON.parse(res));
-      const personalNumber = toStore.personalNumber.slice(0, 10);
+      // const personalNumber = toStore.personalNumber.slice(0, 10);
 
       const counters = [];
       toStore.years.map((item) => {
@@ -381,24 +398,19 @@ export const importMeterReadingFromFile = async (profiles, usingHook) => {
           obj.watering = "";
           obj.datetime = moment(
             item.countersValuesDate.kitchenHotCounter
-          ).format("DD.MM.YYYY, h:mm:ss");
+          ).format("DD.MM.YYYY h:mm:ss");
           counters.push(obj);
         });
       });
 
-      profiles.forEach((profile,index,arr) => {
-        if(profile.id.indexOf(arr)) {
-          usingHook((prevState) => ({
-            // prevState: prevState[route.params.ProfileID].push(...counters),
-            prevState: prevState[profile.id].push(...counters),
-          }));
-        }
-      })
+      console.log('counters---------------------------------------------<>>>>', counters)
+      console.log('historia----------------------------===========================>>>', history)
+      // history.push(...counters)
 
-      // usingHook((prevState) => ({
-      //   // prevState: prevState[route.params.ProfileID].push(...counters),
-      //   prevState: prevState[ProfileID].push(...counters),
-      // }));
+      usingHook((prevState) => ({
+        // prevState: prevState[route.params.ProfileID].push(...counters),
+        prevState: prevState[id].push(...counters),
+      }));
     });
   } catch (err) {
     if (DocumentPicker.isCancel(err)) {
