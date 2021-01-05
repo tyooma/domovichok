@@ -11,7 +11,7 @@ export const HistoryDelete = (profileID, history, toHistory, lastValue, toLastVa
       Object.assign(newLastValue, lastValue);
       newLastValue[profileID] = [];
       toLastValue(newLastValue);
-      navigation.navigate('Home');
+      //navigation.navigate('Home');
     } catch (err) {
       console.log('HistoryDelete => Try-Catch:', err);
       Alert.alert(

@@ -5,16 +5,16 @@ import { StateToProps } from "../../store/MapToProps";
 import { HISTORYEMPTY } from "../../libs/Consts";
 import { HistorySort } from "./HistoryActions";
 
-export const HistoryList = connect(StateToProps())(   
-  ({ ProfileID, history, sort, filter, styles, locale }) => {    
-    if (history[ProfileID]) {     
-      const dataList = history[ProfileID];      
+export const HistoryList = connect(StateToProps())(
+  ({ ProfileID, history, sort, filter, styles, locale }) => {         
+    if (history[ProfileID] && history[ProfileID].length != 0) {      
+      const dataList = history[ProfileID];
       return (
         <FlatList
           data={HistorySort(dataList, sort, locale)}
-          keyExtractor={(item) => (item.timestamp).toString()}
+          keyExtractor={(item) => item.timestamp.toString()}
           renderItem={({ item }) => (
-            <View style={styles.History.Record} key={(item.timestamp).toString()}>
+            <View style={styles.History.Record} key={item.timestamp.toString()}>
               <View style={styles.History.RecordHead}>
                 <Text style={styles.History.RecordHeadCaption}>
                   {locale.history_record_caption}
