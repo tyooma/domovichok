@@ -54,12 +54,12 @@ const DrawerContent = ({
             <View>
               {theme === THEME.dark ? (
                 <Image
-                  source={{ uri: 'https://i.ibb.co/MkD20W5/night-1.png' }}
+                  source={require('../libs/assets/images/logo-dark.png')}
                   style={styles.Drawer.Logo}
                 />
               ) : (
                 <Image
-                  source={{ uri: 'https://i.ibb.co/61NtmQp/2.png' }}
+                  source={require('../libs/assets/images/logo-light.png')}
                   style={styles.Drawer.Logo}
                 />
               )}

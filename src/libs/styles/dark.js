@@ -109,7 +109,7 @@ export default {
       borderColor: '#007BFF'
     },
     WarningSection: { alignItems: 'center', margin: 5 },
-    WarningCaption: { fontSize: 18, fontWeight: 'bold', color: 'yellow' }
+    WarningCaption: { fontSize: 18, fontWeight: 'normal', color: '#fff' }
   },
 
   Home: {
