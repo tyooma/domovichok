@@ -28,12 +28,6 @@ const History = ({ locale, styles, history, route }) => {
         <>
           <View style={styles.History.Content}>
             <View style={styles.History.ContentHead}>
-              {/* {history && history.length != 0 ? 
-
-:
-null
-} */}
-
               <View style={styles.History.ContentItem}>
                 <Text style={styles.History.ContentItemCaption}>
                   {locale.dispatch_profile_name}
@@ -52,52 +46,52 @@ null
               </View>
             </View>
             {/* ----------------------------------------------------------------- */}
+            {history && history.length != 0 ? (
+              <View style={styles.sortBlockStyle}>
+                <TouchableOpacity
+                  onPress={() => {
+                    Alert.alert(
+                      locale.info_warning,
+                      "Тимчасово не працюэ",
+                      [{ text: "ОК", onPress: () => null }],
+                      { cancelable: false }
+                    );
+                  }}
+                >
+                  <View style={styles.History.InputDefault}>
+                    <Text style={styles.Dispatch.HeaderRememberCaption}>
+                      {"  "}
+                      {locale.filter}
+                      {"  "}
+                      <Icon
+                        name="filter"
+                        size={25}
+                        color={styles.MainColor.color}
+                      />
+                    </Text>
+                  </View>
+                </TouchableOpacity>
 
-            <View style={styles.sortBlockStyle}>
-              <TouchableOpacity
-                onPress={() => {
-                  Alert.alert(
-                    locale.info_warning,
-                    "Тимчасово не працюэ",
-                    [{ text: "ОК", onPress: () => null }],
-                    { cancelable: false }
-                  );
-                }}
-              >
-                <View style={styles.History.InputDefault}>
-                  <Text style={styles.Dispatch.HeaderRememberCaption}>
-                    {"  "}
-                    {locale.filter}
-                    {"  "}
-                    <Icon
-                      name="filter"
-                      size={25}
-                      color={styles.MainColor.color}
-                    />
-                  </Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => {
-                  setSort(!sort);
-                }}
-              >
-                <View style={styles.History.InputDefault}>
-                  <Text style={styles.Dispatch.HeaderRememberCaption}>
-                    {"  "}
-                    {locale.sort}
-                    {"  "}
-                    <Icon
-                      name={sort ? "sort-amount-up" : "sort-amount-down"}
-                      size={25}
-                      color={styles.MainColor.color}
-                    />
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-
+                <TouchableOpacity
+                  onPress={() => {
+                    setSort(!sort);
+                  }}
+                >
+                  <View style={styles.History.InputDefault}>
+                    <Text style={styles.Dispatch.HeaderRememberCaption}>
+                      {"  "}
+                      {locale.sort}
+                      {"  "}
+                      <Icon
+                        name={sort ? "sort-amount-up" : "sort-amount-down"}
+                        size={25}
+                        color={styles.MainColor.color}
+                      />
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            ) : null}
             {/* ----------------------------------------------------------------- */}
             {/* <View style={styles.History.ContentRecords}> */}
             <HistoryList
