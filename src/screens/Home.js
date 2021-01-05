@@ -3,7 +3,7 @@ import { FlatList, Text, View, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import { connect } from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
-import { importProfileFromFile } from "./Profile/ProfileActions";
+import { importProfileFromFile,importMeterReadingFromFile } from "./Profile/ProfileActions";
 
 import { StateToProps, DispatchToProps } from '../store/MapToProps'
 import { PeriodUpdate } from './Dispatch/DispatchSend'
@@ -26,8 +26,11 @@ export default Home = connect(
     lastValue,
     toLastValue,
     ProfileID,
+    // route
   }) => {
     const [dropDown, setDrowDown] = useState(false);
+    
+    const [prevHistory, setPrevHistory] = useState(history);
 
     useEffect(() => {
       PeriodUpdate(locale, toPeriod, "HOME", navigation);
@@ -48,14 +51,7 @@ export default Home = connect(
           <View style={styles.Home.ProfileCreateContainer}>
             {dropDown ? (
               <View>
-                {/* <TouchableOpacity
-                  onPress={() => {
-                    setDrowDown(!dropDown);
-                    navigation.navigate("Profile", { ProfileID: undefined }); //undefined default
-                  }}
-                >
-                  <Text>Створити</Text>
-                </TouchableOpacity> */}
+                
                  <TouchableOpacity
                 onPress={() => {
                   setDrowDown(!dropDown)
@@ -82,8 +78,13 @@ export default Home = connect(
               </TouchableOpacity>
                 
                 <TouchableOpacity style={styles.Home.ProfileSubBtn} onPress={() => {
-                  console.log('history================================>', history)
-                  console.log('toHistory------------------------------>>>', toHistory)
+                  console.log('profiles----------------------------->>>', profiles)
+
+                  // if(profiles.length) {
+                  //   importMeterReadingFromFile(profiles, setPrevHistory);
+                  // }
+                  
+                  
                   importProfileFromFile(
                     ProfileID,
                     locale,
@@ -95,6 +96,7 @@ export default Home = connect(
                     toHistory,
                     // true
                     )
+                    
                 }}>
                 <Text style={styles.Home.ProfileSubBtnText}>Імпортувати</Text>
                 <LinearGradient
@@ -208,15 +210,16 @@ const ProfileList = ({ profiles, styles, locale, navigation }) => {
         />
       );
     } else {
-      content = (        
-          <ScrollView style={styles.Empty.Content} contentContainerStyle={styles.Empty.homeView}>
-            <Text style={styles.Empty.Label}>
-              {locale.home_profiles_empty_1}
-            </Text>
-            <Text style={styles.Empty.SubLabel}>
-              {locale.home_profiles_empty_2}
-            </Text>
-          </ScrollView>              
+      content = (
+        <ScrollView
+          style={styles.Empty.Content}
+          contentContainerStyle={styles.Empty.homeView}
+        >
+          <Text style={styles.Empty.Label}>{locale.home_profiles_empty_1}</Text>
+          <Text style={styles.Empty.SubLabel}>
+            {locale.home_profiles_empty_2}
+          </Text>
+        </ScrollView>
       )
     }
   } else {

@@ -3,7 +3,7 @@ import { STORAGE } from './Actions'
 
 export const SaveToStorage = (action, value) => {
   try {
-    let parse = null;// JSON.stringify(profiles)
+    let parse = null;// JSON.stringify(profiles), default from Larin let parse = undefined;
     switch (action) {
       case STORAGE.lang:
         parse = value
