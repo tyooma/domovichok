@@ -1,29 +1,39 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { SafeAreaView, Text, View } from 'react-native'
-import { Divider, Icon } from 'react-native-elements'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { connect } from 'react-redux'
-import LinearGradient from 'react-native-linear-gradient'
-import { StateToProps, DispatchToProps } from '../../store/MapToProps'
-import { ActionBack, Spinner } from '../components/Actions'
-import { HistoryDelete } from './HistoryActions'
-import { HistoryList } from './HistoryList'
+import React, { useEffect, useRef, useState } from "react";
+import {
+  SafeAreaView,
+  Text,
+  View,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import { connect } from "react-redux";
+import { StateToProps, DispatchToProps } from "../../store/MapToProps";
+import { Spinner } from "../components/Actions";
+import { HistoryList } from "./HistoryList";
 
 const History = ({ locale, styles, history, route }) => {
-  const needLoad = useRef(route.params.NeedLoad)
-  const [sort, setSort] = useState(true)
-  const [filter, setFilter] = useState(undefined)
+  const needLoad = useRef(route.params.NeedLoad);
+  const [sort, setSort] = useState(true);
+  const [filter, setFilter] = useState(undefined);
   useEffect(() => {
-    setSort(true)
-    setFilter(undefined)
-  }, [route])
+    setSort(true);
+    setFilter(undefined);
+  }, [route]);
 
+  console.log("history", history, "route", route, "sort", sort);
   return (
     <SafeAreaView style={styles.Container}>
       {needLoad && (
         <>
           <View style={styles.History.Content}>
             <View style={styles.History.ContentHead}>
+              {/* {history && history.length != 0 ? 
+
+:
+null
+} */}
+
               <View style={styles.History.ContentItem}>
                 <Text style={styles.History.ContentItemCaption}>
                   {locale.dispatch_profile_name}
@@ -41,6 +51,54 @@ const History = ({ locale, styles, history, route }) => {
                 </Text>
               </View>
             </View>
+            {/* ----------------------------------------------------------------- */}
+
+            <View style={styles.sortBlockStyle}>
+              <TouchableOpacity
+                onPress={() => {
+                  Alert.alert(
+                    locale.info_warning,
+                    "Тимчасово не працюэ",
+                    [{ text: "ОК", onPress: () => null }],
+                    { cancelable: false }
+                  );
+                }}
+              >
+                <View style={styles.History.InputDefault}>
+                  <Text style={styles.Dispatch.HeaderRememberCaption}>
+                    {"  "}
+                    {locale.filter}
+                    {"  "}
+                    <Icon
+                      name="filter"
+                      size={25}
+                      color={styles.MainColor.color}
+                    />
+                  </Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => {
+                  setSort(!sort);
+                }}
+              >
+                <View style={styles.History.InputDefault}>
+                  <Text style={styles.Dispatch.HeaderRememberCaption}>
+                    {"  "}
+                    {locale.sort}
+                    {"  "}
+                    <Icon
+                      name={sort ? "sort-amount-up" : "sort-amount-down"}
+                      size={25}
+                      color={styles.MainColor.color}
+                    />
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            {/* ----------------------------------------------------------------- */}
             {/* <View style={styles.History.ContentRecords}> */}
             <HistoryList
               ProfileID={route.params.ProfileID}
@@ -62,7 +120,7 @@ const History = ({ locale, styles, history, route }) => {
         </View>
       )}
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default connect(StateToProps(), DispatchToProps())(History)
+export default connect(StateToProps(), DispatchToProps())(History);

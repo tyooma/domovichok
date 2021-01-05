@@ -558,6 +558,20 @@ export default {
       justifyContent: 'space-between'
     },
 
+
+    InputDefault: {
+      paddingVertical: 2,
+      paddingHorizontal: 7,
+
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: '#212121',
+
+      borderColor: '#00AEEF',
+      borderWidth: 1,
+      borderRadius: 6
+    },
+
     ContentHead: { paddingTop: 30, paddingHorizontal: 10, marginTop: 50 },
 
     ContentItem: { marginBottom: 20 },
@@ -896,7 +910,7 @@ export default {
     },
 
     Policy: {
-      marginLeft: 10,
+      marginHorizontal: 10,
 
       flexDirection: 'row',
       flexWrap: 'wrap'
@@ -973,5 +987,11 @@ export default {
     actionText: {
       color: '#212121'
     }
-  }
+  },
+  sortBlockStyle:{  
+    padding: 15,  
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
 }

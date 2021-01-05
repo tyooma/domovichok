@@ -558,6 +558,21 @@ export default {
       justifyContent: 'space-between'
     },
 
+    InputDefault: {      
+      paddingVertical: 2,
+      paddingHorizontal: 7,
+
+      fontSize: 16,
+      fontWeight: 'normal',
+      fontWeight: 'bold',
+      color: '#fff',
+
+      borderColor: '#725CAE',
+      borderWidth: 1,
+      borderRadius: 6
+    },
+   
+
     ContentHead: { paddingTop: 30, paddingHorizontal: 10, marginTop: 50 },
 
     ContentItem: { marginBottom: 20 },
@@ -892,14 +907,13 @@ export default {
     },
 
     Policy: {
-      marginLeft: 10,
-
+      marginHorizontal: 10,
       flexDirection: 'row',
       flexWrap: 'wrap'
     },
 
     PolicyText: {
-      color: '#fff'
+      color: '#fff',
     },
 
     PolicyTouch: {
@@ -959,5 +973,12 @@ export default {
     actionText: {
       color: '#fff'
     }
-  }
+  },
+  sortBlockStyle:{
+    padding: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  
 }
