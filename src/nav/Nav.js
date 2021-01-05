@@ -25,8 +25,8 @@ import { StateToProps, DispatchToProps } from '../store/MapToProps'
 import { runProfileDelete } from '../screens/Profile/ProfileActions'
 import DrawerContent from './DrawerContent'
 
-const Stack = createStackNavigator()
-const Drawer = createDrawerNavigator()
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const MainStack = connect(
   StateToProps(),
@@ -39,35 +39,36 @@ const MainStack = connect(
     profiles,
     toProfiles,
     toHistory,
-    toLastValue
+    toLastValue,
+    history,
   }) => (
     <Stack.Navigator
       screenOptions={{
         headerTransparent: true,
-        headerTitleAlign: 'center',
+        headerTitleAlign: "center",
         headerTitleStyle: {
-          fontFamily: 'Montserrat-SemiBold',
-          fontSize: 22
+          fontFamily: "Montserrat-SemiBold",
+          fontSize: 22,
         },
-        headerTintColor: '#fff',
+        headerTintColor: "#fff",
         headerBackground: () => (
           <LinearGradient
             colors={[
               styles.GradientColorFirst.color,
-              styles.GradientColorSecond.color
+              styles.GradientColorSecond.color,
             ]}
             style={StyleSheet.absoluteFill}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
           />
-        )
+        ),
       }}
     >
       <Stack.Screen
-        name='Home'
+        name="Home"
         component={Home}
         options={{
-          title: 'Домовичок',
+          title: "Домовичок",
           headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HeaderIcon}>
               <Item
@@ -80,39 +81,39 @@ const MainStack = connect(
           headerLeft: () => (
             <HeaderButtons HeaderButtonComponent={HeaderIcon}>
               <Item
-                title='Drawer'
-                iconName='ios-menu'
+                title="Drawer"
+                iconName="ios-menu"
                 onPress={() => navigation.toggleDrawer()}
               />
             </HeaderButtons>
-          )
+          ),
         }}
       />
       <Stack.Screen
-        name='Instruction'
+        name="Instruction"
         component={Instruction}
         options={{
-          title: 'Iнструкцiя'
+          title: "Iнструкцiя",
         }}
       />
       <Stack.Screen
-        name='Dispatch'
+        name="Dispatch"
         component={Dispatch}
         options={{
-          title: 'Передача показників'
+          title: "Передача показників",
         }}
       />
       <Stack.Screen
-        name='Profile'
+        name="Profile"
         component={Profile}
         options={({ navigation, route }) => ({
-          title: 'Профіль',
+          title: "Профіль",
           headerRight: () =>
             route.params.ProfileID !== undefined ? (
               <HeaderButtons HeaderButtonComponent={HeaderIcon}>
                 <Item
-                  title='Trash'
-                  iconName='ios-trash'
+                  title="Trash"
+                  iconName="ios-trash"
                   onPress={() => {
                     route.params.ProfileID
                       ? runProfileDelete(
@@ -122,29 +123,52 @@ const MainStack = connect(
                           locale,
                           [],
                           toHistory,
-                          'undefined',
+                          "undefined",
                           toLastValue,
                           navigation
                         )
-                      : null
+                      : null;
                   }}
                 />
               </HeaderButtons>
-            ) : null
+            ) : null,
         })}
       />
       <Stack.Screen
-        name='History'
+        name="History"
         component={History}
-        options={{
-          title: 'Історія'
-        }}
+        options={({ navigation, route }) => ({
+          title: "Історія",
+          headerRight: () =>
+            route.params.ProfileID !== undefined ? (
+              <HeaderButtons HeaderButtonComponent={HeaderIcon}>
+                <Item
+                  title="Trash"
+                  iconName="ios-trash"
+                  onPress={() => {
+                    history.length
+                      ? null
+                      : HistoryDelete(
+                          route.params.ProfileID,
+                          history,
+                          toHistory,
+                          "undefined",
+                          toLastValue,
+                          locale,
+                          navigation
+                        );
+                  }}
+                />
+              </HeaderButtons>
+            ) : null,
+        })}
       />
+
       <Stack.Screen
-        name='PreviewDispatchFeedback'
+        name="PreviewDispatchFeedback"
         component={PreviewDispatchFeedback}
         options={{
-          title: 'Підтвердження показань'
+          title: "Підтвердження показань",
         }}
       />
       <Stack.Screen
@@ -197,16 +221,16 @@ const MainStack = connect(
       />
     </Stack.Navigator>
   )
-)
+);
 
 const MainDrawer = ({ navigation, route }) => (
   <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
     <Drawer.Screen name='MainStack' component={MainStack} />
   </Drawer.Navigator>
-)
+);
 
 export const Nav = () => (
   <NavigationContainer>
     <MainDrawer />
   </NavigationContainer>
-)
+);

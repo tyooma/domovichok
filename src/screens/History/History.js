@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { SafeAreaView, Text, View } from 'react-native'
-import { Divider, Icon } from 'react-native-elements'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { connect } from 'react-redux'
-import LinearGradient from 'react-native-linear-gradient'
-import { StateToProps, DispatchToProps } from '../../store/MapToProps'
-import { ActionBack, Spinner } from '../components/Actions'
-import { HistoryDelete } from './HistoryActions'
-import { HistoryList } from './HistoryList'
+import React, { useEffect, useRef, useState } from "react";
+import { SafeAreaView, Text, View } from "react-native";
+import { Divider, Icon } from "react-native-elements";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { connect } from "react-redux";
+import LinearGradient from "react-native-linear-gradient";
+import { StateToProps, DispatchToProps } from "../../store/MapToProps";
+import { ActionBack, Spinner } from "../components/Actions";
+import { HistoryDelete } from "./HistoryActions";
+import { HistoryList } from "./HistoryList";
 
 const History = ({
   locale,
@@ -17,17 +17,17 @@ const History = ({
   lastValue,
   toLastValue,
   navigation,
-  route
+  route,
 }) => {
-  const needLoad = useRef(route.params.NeedLoad)
-  const [sort, setSort] = useState(true)
-  const [filter, setFilter] = useState(undefined)
-  console.log('route.params in HISTORY ==>', route.params)
+  const needLoad = useRef(route.params.NeedLoad);
+  const [sort, setSort] = useState(true);
+  const [filter, setFilter] = useState(undefined);
+  console.log("route.params in HISTORY ==>", history);
 
   useEffect(() => {
-    setSort(true)
-    setFilter(undefined)
-  }, [route])
+    setSort(true);
+    setFilter(undefined);
+  }, [route]);
 
   return (
     <SafeAreaView style={styles.Container}>
@@ -52,15 +52,17 @@ const History = ({
                 </Text>
               </View>
             </View>
-            <View style={styles.History.ContentRecords}>
-              <HistoryList
-                ProfileID={route.params.ProfileID}
-                sort={sort}
-                filter={filter}
-              />
-            </View>
+            {/* <View style={styles.History.ContentRecords}> */}
+            <HistoryList
+              ProfileID={route.params.ProfileID}
+              sort={sort}
+              filter={filter}
+            />
+            {/* </View> */}
           </View>
-          <View style={styles.Dispatch.Toolbar}>
+
+
+          {/* <View style={styles.Dispatch.Toolbar}>
             <LinearGradient
               colors={[
                 styles.GradientColorFirst.color,
@@ -86,7 +88,7 @@ const History = ({
                 <Text style={styles.Dispatch.SendBtnText}>Очистити</Text>
               </TouchableOpacity>
             </LinearGradient>
-          </View>
+          </View> */}
           {/* <View style={styles.Toolbar.Icon}>
               <TouchableOpacity onPress={() => setSort(!sort)}>
                 <Icon
@@ -109,7 +111,7 @@ const History = ({
         </View>
       )}
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default connect(StateToProps(), DispatchToProps())(History)
+export default connect(StateToProps(), DispatchToProps())(History);
