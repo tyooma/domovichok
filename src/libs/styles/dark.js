@@ -7,32 +7,65 @@ export const sHeight = screen.height
 
 export default {
   //DRAWER
+  Drawer: {
+    flex: 1,
+    backgroundColor: '#212121',
 
-  //MAIN COLOR
+    Head: {
+      padding: 15,
+
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    },
+
+    Logo: {
+      width: 110,
+      height: 82
+    },
+
+    List: {
+      padding: 8
+    }
+  },
+
+  //MAIN COLORS
   GradientColorFirst: {
     color: '#555555'
   },
+
   GradientColorSecond: {
     color: '#725CAE'
   },
+
+  MainColor: {
+    color: '#fff'
+  },
+
   // MAIN
   Container: { flex: 1, backgroundColor: '#212121' },
+
   ContainerHeader: { flex: 1 },
-  //--------------------------------------------------------------------------------------------------
+
   ActionSpinner: { size: 'large', color: '#725CAE', style: { padding: 20 } },
+
   ActionSpinnerStyle: { padding: 20 },
-  //--------------------------------------------------------------------------------------------------
+
   InputRequired: { color: '#FF7171' },
+
   InputSelection: '#FFFFFF',
+
   PlaceholderTextColor: '#725cae66',
-  //--------------------------------------------------------------------------------------------------
+
   SwitchTrackColor: { true: '#6e6685e1', false: '#7C7C7C' },
+
   SwitchThumbColor: { true: '#725CAE', false: '#A7A7A7' },
+
   SwitchIOSBackgroundColor: '#7C7C7C',
-  //--------------------------------------------------------------------------------------------------
+
   ColorNone: { color: '#00000000' },
+
   DisplayNone: { display: 'none' },
-  //--------------------------------------------------------------------------------------------------
 
   Error: {
     Caption: { fontSize: 18, fontWeight: 'bold', color: 'red' },
@@ -41,16 +74,16 @@ export default {
 
   Empty: {
     Content: {
-      position: "absolute",
+      position: 'absolute',
       top: 0,
       bottom: 0,
       left: 0,
       right: 0,
-      paddingTop: sHeight / 3,
+      paddingTop: sHeight / 3
     },
     homeView: {
-      alignItems: "center",
-      justifyContent: "center",
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     Label: {
       marginBottom: 6,
@@ -728,32 +761,40 @@ export default {
   },
 
   Help: {
-    Container: { flex: 9, marginHorizontal: 7 },
+    Container: { flex: 1, paddingTop: 5, marginTop: 50, marginHorizontal: 7 },
+
     PeriodUpdate: { color: 'green', fontSize: 24 },
-    //----------------------------------------------------------------------------------------
+
     slideContainer: { alignItems: 'center' },
+
     slideTitle: {
+      marginVertical: 10,
+
       fontSize: 20,
-      color: '#007BFF',
-      fontWeight: 'bold',
-      marginVertical: 10
+      fontWeight: 'normal',
+      color: '#fff'
     },
-    //----------------------------------------------------------------------------------------
+
     imageContainer: { alignItems: 'center' },
+
     imageContent: {
       width: 300,
       height: 480,
       resizeMode: 'contain'
     },
-    //----------------------------------------------------------------------------------------
-    explanationTitle: { fontSize: 16, color: '#007BFF', marginTop: 10 },
-    regularText: { color: '#007BFF', marginTop: 10, textAlign: 'justify' },
+
+    explanationTitle: { fontSize: 16, color: '#fff', marginTop: 10 },
+
+    regularText: { color: '#fff', marginTop: 10, textAlign: 'justify' },
+
     lastRegularText: {
-      color: '#007BFF',
       marginTop: 10,
       marginBottom: 20,
-      textAlign: 'justify'
+
+      textAlign: 'justify',
+      color: '#fff'
     },
+
     button: { marginBottom: 7 }
   },
 
@@ -769,7 +810,7 @@ export default {
 
       alignItems: 'center'
     },
-    CaptionText: { fontSize: 18, fontWeight: 'regular', color: '#fff' },
+    CaptionText: { fontSize: 18, fontWeight: 'normal', color: '#fff' },
     ContainerDetails: { flex: 1 },
     Disclaimer: { color: '#fff', marginBottom: 15 },
     Telephone: { color: '#fff' },
@@ -786,6 +827,7 @@ export default {
     },
     Version: { color: '#725CAE', alignSelf: 'flex-end', fontSize: 14 }
   },
+
   NoNetwork: {
     ContainerCenter: {
       padding: 7,
@@ -828,6 +870,7 @@ export default {
       color: '#725CAE'
     }
   },
+
   Checkbox: {
     marginTop: 10,
     marginBottom: 40,
@@ -867,7 +910,7 @@ export default {
       color: '#725CAE'
     }
   },
-  // ----------- Modal Warninig-----------
+
   Warning: {
     container: {
       flex: 1,
@@ -921,5 +964,4 @@ export default {
       color: '#fff'
     }
   }
-  // -----------END Header Modal WArninig-----------
 }

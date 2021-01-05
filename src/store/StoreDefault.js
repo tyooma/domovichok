@@ -11,8 +11,8 @@ const dbTokens = 'PushSubscribers'
 export const DefaultInit = {
   lang: LANG.ua,
   locale: getLocale(LANG.ua),
-  theme: THEME.dark,
-  styles: getStyles(THEME.dark),
+  theme: THEME.light,
+  styles: getStyles(THEME.light),
   profiles: [],
   profilesDetails: true,
   history: [],
