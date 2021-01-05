@@ -12,7 +12,12 @@ import { StateToProps, DispatchToProps } from "../../store/MapToProps";
 import { Spinner } from "../components/Actions";
 import { HistoryList } from "./HistoryList";
 
-const History = ({ locale, styles, history, route }) => {
+const History = ({ 
+  locale,
+  styles,
+  history, 
+  route,
+}) => {
   const needLoad = useRef(route.params.NeedLoad);
   const [sort, setSort] = useState(true);
   const [filter, setFilter] = useState(undefined);

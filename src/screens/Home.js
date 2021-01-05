@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { FlatList, Text, View, TouchableOpacity } from 'react-native'
-import { Icon } from 'react-native-elements'
-import { connect } from 'react-redux'
-import LinearGradient from 'react-native-linear-gradient'
+import React, { useEffect, useState } from "react";
+import { FlatList, Text, View, TouchableOpacity } from "react-native";
+import { Icon } from "react-native-elements";
+import { connect } from "react-redux";
+import LinearGradient from "react-native-linear-gradient";
+import { importProfileFromFile,importMeterReadingFromFile } from "./Profile/ProfileActions";
 
 import { StateToProps, DispatchToProps } from '../store/MapToProps'
 import { PeriodUpdate } from './Dispatch/DispatchSend'
@@ -11,29 +12,47 @@ import { ScrollView } from 'react-native-gesture-handler'
 export default Home = connect(
   StateToProps(),
   DispatchToProps()
-)(({ navigation, styles, locale, toPeriod, profiles, profilesDetails }) => {
-  const [dropDown, setDrowDown] = useState(false)
+)(
+  ({
+    navigation,
+    styles,
+    locale,
+    toPeriod,
+    profiles,
+    profilesDetails,
+    toProfiles,
+    history,
+    toHistory,
+    lastValue,
+    toLastValue,
+    ProfileID,
+    route
+  }) => {
+    const [dropDown, setDrowDown] = useState(false);
+    
+    const [prevHistory, setPrevHistory] = useState(history);
 
-  useEffect(() => {
-    PeriodUpdate(locale, toPeriod, 'HOME', navigation)
-  }, [])
+    useEffect(() => {
+      PeriodUpdate(locale, toPeriod, "HOME", navigation);
+    }, []);
 
-  return (
-    <View style={styles.Container}>
-      <View style={styles.Home.Content}>
-        <View style={styles.Home.Profiles}>
-          <ProfileList
-            profiles={profiles}
-            isDetails={profilesDetails}
-            styles={styles}
-            locale={locale}
-            navigation={navigation}
-          />
-        </View>
-        <View style={styles.Home.ProfileCreateContainer}>
-          {dropDown ? (
-            <View>
-              <TouchableOpacity
+    return (
+      <View style={styles.Container}>
+        <View style={styles.Home.Content}>
+          <View style={styles.Home.Profiles}>
+            <ProfileList
+              profiles={profiles}
+              isDetails={profilesDetails}
+              styles={styles}
+              locale={locale}
+              navigation={navigation}
+            />
+          </View>
+          <View style={styles.Home.ProfileCreateContainer}>
+            {dropDown ? (
+              <View>
+                
+                 <TouchableOpacity
                 onPress={() => {
                   setDrowDown(!dropDown)
                   navigation.navigate('Profile', { ProfileID: undefined })
@@ -57,7 +76,24 @@ export default Home = connect(
                   ></Icon>
                 </LinearGradient>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.Home.ProfileSubBtn}>
+                
+                <TouchableOpacity style={styles.Home.ProfileSubBtn} onPress={() => {
+                  console.log('profiles----------------------------->>>', profiles)  
+
+                  importProfileFromFile(
+                    ProfileID,
+                    locale,
+                    profiles,
+                    toProfiles,
+                    lastValue,
+                    toLastValue,
+                    navigation,
+                    toHistory,
+                    // true
+                    history
+                  )                                                       
+                  }
+                }>
                 <Text style={styles.Home.ProfileSubBtnText}>Імпортувати</Text>
                 <LinearGradient
                   colors={[
@@ -75,42 +111,43 @@ export default Home = connect(
                   ></Icon>
                 </LinearGradient>
               </TouchableOpacity>
-            </View>
-          ) : null}
+              </View>
+            ) : null}
 
-          <TouchableOpacity onPress={() => setDrowDown(!dropDown)}>
-            <LinearGradient
-              colors={[
-                styles.GradientColorFirst.color,
-                styles.GradientColorSecond.color
-              ]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              style={styles.Home.ProfileCreateSection}
-            >
-              <Icon
-                name='plus'
-                iconStyle={styles.Home.ProfileCreateIcon}
-                type='font-awesome-5'
-              ></Icon>
-            </LinearGradient>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={() => setDrowDown(!dropDown)}>
+              <LinearGradient
+                colors={[
+                  styles.GradientColorFirst.color,
+                  styles.GradientColorSecond.color,
+                ]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.Home.ProfileCreateSection}
+              >
+                <Icon
+                  name="plus"
+                  iconStyle={styles.Home.ProfileCreateIcon}
+                  type="font-awesome-5"
+                ></Icon>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
-  )
-})
+    );
+  }
+);
 
 const ProfileList = ({ profiles, styles, locale, navigation }) => {
-  let validate = false
-  let errors = false
-  let content = undefined
+  let validate = false;
+  let errors = false;
+  let content = undefined;
   if (profiles && styles && locale && navigation) {
     if (profiles.length > 0) {
-      validate = true
+      validate = true;
     }
   } else {
-    errors = true
+    errors = true;
   }
 
   if (!errors) {
@@ -123,9 +160,9 @@ const ProfileList = ({ profiles, styles, locale, navigation }) => {
             <TouchableOpacity
               style={styles.Home.Profile}
               onPress={() =>
-                navigation.navigate('Dispatch', {
+                navigation.navigate("Dispatch", {
                   ProfileID: item.id,
-                  IsNewDispatch: true
+                  IsNewDispatch: true,
                 })
               }
             >
@@ -139,35 +176,35 @@ const ProfileList = ({ profiles, styles, locale, navigation }) => {
               <View style={styles.Home.ProfileIcons}>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('Profile', { ProfileID: item.id })
+                    navigation.navigate("Profile", { ProfileID: item.id })
                   }
                 >
                   <Icon
-                    name='edit'
+                    name="edit"
                     iconStyle={styles.Home.ProfileIcon}
-                    type='font-awesome-5'
+                    type="font-awesome-5"
                   ></Icon>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('History', {
+                    navigation.navigate("History", {
                       ProfileID: item.id,
                       ProfileName: item.address,
-                      NeedLoad: true
+                      NeedLoad: true,
                     })
                   }
                 >
                   <Icon
-                    name='inbox'
+                    name="inbox"
                     iconStyle={styles.Home.ProfileIcon}
-                    type='font-awesome-5'
+                    type="font-awesome-5"
                   ></Icon>
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
           )}
         />
-      )
+      );
     } else {
       content = (
         <ScrollView
@@ -184,6 +221,7 @@ const ProfileList = ({ profiles, styles, locale, navigation }) => {
   } else {
     content = (
       <>
+        <View style={styles.Empty.Filler}></View>
         <View style={styles.Empty.Content}>
           <View style={styles.Empty.Section}>
             <Text style={styles.Error.Caption}>{locale.err_main_caption}</Text>
@@ -192,8 +230,9 @@ const ProfileList = ({ profiles, styles, locale, navigation }) => {
             <Text style={styles.Error.Text}>{locale.err_home_build_list}</Text>
           </View>
         </View>
+        <View style={styles.Empty.Filler}></View>
       </>
-    )
+    );
   }
-  return content
-}
+  return content;
+};
