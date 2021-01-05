@@ -323,8 +323,6 @@ export default {
       paddingVertical: 10,
       paddingHorizontal: 30,
 
-      width: '40%',
-
       borderRadius: 10
     },
 
@@ -470,8 +468,6 @@ export default {
     SendBtn: {
       paddingVertical: 10,
       paddingHorizontal: 30,
-
-      width: '40%',
 
       borderRadius: 10
     },

@@ -25,7 +25,7 @@ export default {
     },
 
     List: {
-      padding: 8
+      padding: 4
     }
   },
 

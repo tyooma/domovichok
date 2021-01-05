@@ -431,34 +431,36 @@ const Profile = ({
           <View style={styles.Profile.Toolbar}>
             <View style={styles.Profile.Btns}>
               <View style={styles.Profile.BtnContainer}>
-                <LinearGradient
-                  disabled={changeProfile}
-                  colors={[
-                    styles.GradientColorFirst.color,
-                    styles.GradientColorSecond.color
-                  ]}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
-                  style={styles.Profile.Btn}
+                <TouchableOpacity
+                  onPress={() =>
+                    runProfileSave(
+                      profile,
+                      route.params.ProfileID,
+                      locale,
+                      profiles,
+                      toProfiles,
+                      lastValue,
+                      toLastValue,
+                      navigation,
+                      checkPolicy
+                    )
+                  }
                 >
-                  <TouchableOpacity
-                    onPress={() =>
-                      runProfileSave(
-                        profile,
-                        route.params.ProfileID,
-                        locale,
-                        profiles,
-                        toProfiles,
-                        lastValue,
-                        toLastValue,
-                        navigation,
-                        checkPolicy
-                      )
-                    }
+                  <LinearGradient
+                    disabled={changeProfile}
+                    colors={[
+                      styles.GradientColorFirst.color,
+                      styles.GradientColorSecond.color
+                    ]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.Profile.Btn}
                   >
-                    <Text style={styles.Profile.BtnText}>Зберегти</Text>
-                  </TouchableOpacity>
-                </LinearGradient>
+                    <View>
+                      <Text style={styles.Profile.BtnText}>Зберегти</Text>
+                    </View>
+                  </LinearGradient>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
