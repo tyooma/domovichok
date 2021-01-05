@@ -14,7 +14,8 @@ import {
   Text,
   Image,
   TextInput,
-  View
+  View,
+  Linking
 } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Icon } from 'react-native-elements'
@@ -404,7 +405,11 @@ const Profile = ({
                     {locale.profile_policy1}
                   </Text>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate('Policy')}
+                    onPress={() =>
+                      Linking.openURL(
+                        'https://tau-quadra.com/privacy-policy-mob-app/'
+                      )
+                    }
                   >
                     <Text style={styles.Checkbox.PolicyTouch}>
                       {locale.profile_policy2}
@@ -446,40 +451,6 @@ const Profile = ({
                     }
                   >
                     <Text style={styles.Profile.BtnText}>Зберегти</Text>
-                  </TouchableOpacity>
-                </LinearGradient>
-              </View>
-              <View
-                style={
-                  route.params.ProfileID
-                    ? styles.Profile.BtnContainer
-                    : { display: 'none' }
-                }
-              >
-                <LinearGradient
-                  colors={['#f33', '#f33']}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
-                  style={styles.Profile.Btn}
-                >
-                  <TouchableOpacity
-                    onPress={() =>
-                      route.params.ProfileID
-                        ? runProfileDelete(
-                            profile.id,
-                            profiles,
-                            toProfiles,
-                            locale,
-                            history,
-                            toHistory,
-                            lastValue,
-                            toLastValue,
-                            navigation
-                          )
-                        : null
-                    }
-                  >
-                    <Text style={styles.Profile.BtnText}>Видалити</Text>
                   </TouchableOpacity>
                 </LinearGradient>
               </View>
