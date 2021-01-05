@@ -37,6 +37,7 @@ import {
   FixNameInput,
   FixPhoneInput
 } from '../../libs/Tools'
+import { THEME } from '../../libs/Consts'
 
 const ReducerProfile = (state, action) => {
   switch (action.type) {
@@ -68,6 +69,7 @@ const ReducerProfile = (state, action) => {
 const Profile = ({
   locale,
   styles,
+  theme,
   profiles,
   toProfiles,
   history,
@@ -390,7 +392,11 @@ const Profile = ({
                   <View style={styles.Checkbox.CheckboxStyle}>
                     {checkPolicy ? (
                       <Image
-                        source={require('../../libs/assets/images/checkbox.png')}
+                        source={
+                          theme === THEME.dark
+                            ? require('../../libs/assets/images/checkbox-dark.png')
+                            : require('../../libs/assets/images/checkbox-light.png')
+                        }
                         style={styles.Checkbox.CheckboxImage}
                         key={'tickCheckbox'}
                       />
