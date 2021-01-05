@@ -25,7 +25,7 @@ export default {
     },
 
     List: {
-      padding: 8
+      padding: 4
     }
   },
 
@@ -109,7 +109,7 @@ export default {
       borderColor: '#007BFF'
     },
     WarningSection: { alignItems: 'center', margin: 5 },
-    WarningCaption: { fontSize: 18, fontWeight: 'bold', color: 'yellow' }
+    WarningCaption: { fontSize: 18, fontWeight: 'normal', color: '#212121' }
   },
 
   Home: {
@@ -323,8 +323,6 @@ export default {
       paddingVertical: 10,
       paddingHorizontal: 30,
 
-      width: '40%',
-
       borderRadius: 10
     },
 
@@ -470,8 +468,6 @@ export default {
     SendBtn: {
       paddingVertical: 10,
       paddingHorizontal: 30,
-
-      width: '40%',
 
       borderRadius: 10
     },

@@ -1,28 +1,39 @@
-import React from "react";
-import { FlatList, ScrollView, Text, View } from "react-native";
-import { connect } from "react-redux";
-import { StateToProps } from "../../store/MapToProps";
-import { HISTORYEMPTY } from "../../libs/Consts";
-import { HistorySort } from "./HistoryActions";
+import React from 'react'
+import { FlatList, ScrollView, Text, View } from 'react-native'
+import { connect } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient'
+import { StateToProps } from '../../store/MapToProps'
+import { HISTORYEMPTY } from '../../libs/Consts'
+import { HistorySort } from './HistoryActions'
 
-export const HistoryList = connect(StateToProps())(   
-  ({ ProfileID, history, sort, filter, styles, locale }) => {    
-    if (history[ProfileID]) {     
-      const dataList = history[ProfileID];      
+export const HistoryList = connect(StateToProps())(
+  ({ ProfileID, history, sort, filter, styles, locale }) => {
+    if (history[ProfileID] && history[ProfileID].length != 0) {
+      const dataList = history[ProfileID]
       return (
         <FlatList
           data={HistorySort(dataList, sort, locale)}
-          keyExtractor={(item) => (item.timestamp).toString()}
+          keyExtractor={(item) => item.timestamp.toString()}
           renderItem={({ item }) => (
-            <View style={styles.History.Record} key={(item.timestamp).toString()}>
-              <View style={styles.History.RecordHead}>
-                <Text style={styles.History.RecordHeadCaption}>
-                  {locale.history_record_caption}
-                </Text>
-                <Text style={styles.History.RecordHeadCaption}>
-                  {item.datetime}
-                </Text>
-              </View>
+            <View style={styles.History.Record} key={item.timestamp.toString()}>
+              <LinearGradient
+                colors={[
+                  styles.GradientColorFirst.color,
+                  styles.GradientColorSecond.color
+                ]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.History.RecordGradient}
+              >
+                <View style={styles.History.RecordHead}>
+                  <Text style={styles.History.RecordHeadCaption}>
+                    {locale.history_record_caption}&nbsp;
+                  </Text>
+                  <Text style={styles.History.RecordHeadCaption}>
+                    {item.datetime}
+                  </Text>
+                </View>
+              </LinearGradient>
               {(item.kitchenHot !== HISTORYEMPTY ||
                 item.kitchenCold !== HISTORYEMPTY) && (
                 <View style={styles.History.RecordSection}>
@@ -36,7 +47,7 @@ export const HistoryList = connect(StateToProps())(
                           {locale.profile_kitchen_hot}
                         </Text>
                         <Text style={styles.History.RecordItemBody}>
-                          {item.kitchenHot}
+                          {item.kitchenHot}:&nbsp;
                         </Text>
                       </View>
                     )}
@@ -46,7 +57,7 @@ export const HistoryList = connect(StateToProps())(
                           {locale.profile_kitchen_cold}
                         </Text>
                         <Text style={styles.History.RecordItemBody}>
-                          {item.kitchenCold}
+                          {item.kitchenCold}:&nbsp;
                         </Text>
                       </View>
                     )}
@@ -63,7 +74,7 @@ export const HistoryList = connect(StateToProps())(
                     {item.bathHot !== HISTORYEMPTY && (
                       <View style={styles.History.RecordItemContainer}>
                         <Text style={styles.History.RecordItemHead}>
-                          {locale.profile_bath_hot}
+                          {locale.profile_bath_hot}:&nbsp;
                         </Text>
                         <Text style={styles.History.RecordItemBody}>
                           {item.bathHot}
@@ -73,7 +84,7 @@ export const HistoryList = connect(StateToProps())(
                     {item.bathCold !== HISTORYEMPTY && (
                       <View style={styles.History.RecordItemContainer}>
                         <Text style={styles.History.RecordItemHead}>
-                          {locale.profile_bath_cold}
+                          {locale.profile_bath_cold}:&nbsp;
                         </Text>
                         <Text style={styles.History.RecordItemBody}>
                           {item.bathCold}
@@ -93,7 +104,7 @@ export const HistoryList = connect(StateToProps())(
                     {item.watering !== HISTORYEMPTY && (
                       <View style={styles.History.RecordItemContainer}>
                         <Text style={styles.History.RecordItemHead}>
-                          {locale.profile_other_watering}
+                          {locale.profile_other_watering}:&nbsp;
                         </Text>
                         <Text style={styles.History.RecordItemBody}>
                           {item.watering}
@@ -103,7 +114,7 @@ export const HistoryList = connect(StateToProps())(
                     {item.sewage !== HISTORYEMPTY && (
                       <View style={styles.History.RecordItemContainer}>
                         <Text style={styles.History.RecordItemHead}>
-                          {locale.profile_other_sewage}
+                          {locale.profile_other_sewage}:&nbsp;
                         </Text>
                         <Text style={styles.History.RecordItemBody}>
                           {item.sewage}
@@ -126,7 +137,7 @@ export const HistoryList = connect(StateToProps())(
             </View>
           )}
         />
-      );
+      )
     } else {
       return (
         <View style={styles.Empty.WarningSection}>
@@ -134,7 +145,7 @@ export const HistoryList = connect(StateToProps())(
             {locale.history_records_empty}
           </Text>
         </View>
-      );
+      )
     }
   }
-);
+)
