@@ -3,18 +3,14 @@ import {
   SafeAreaView,
   Text,
   View,
+  Alert,
   TouchableOpacity,
-  Dimensions,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
-
 import { connect } from "react-redux";
 import { StateToProps, DispatchToProps } from "../../store/MapToProps";
-import { ActionBack, Spinner } from "../components/Actions";
-import { HistoryDelete } from "./HistoryActions";
+import { Spinner } from "../components/Actions";
 import { HistoryList } from "./HistoryList";
-
-var { sWidth } = Dimensions.get("window");
 
 const History = ({ locale, styles, history, route }) => {
   const needLoad = useRef(route.params.NeedLoad);
@@ -56,38 +52,52 @@ null
               </View>
             </View>
             {/* ----------------------------------------------------------------- */}
-            <View
-              style={{
-                flexDirection: "row",
-                alignSelf: "center",
-                width: sWidth,
-                paddingLeft: 0,
-              }}
-            >
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  alignSelf: "center",
-                  justifyContent: "center",
-                  textAlignVertical: "center",
+
+            <View style={styles.sortBlockStyle}>
+              <TouchableOpacity
+                onPress={() => {
+                  Alert.alert(
+                    locale.info_warning,
+                    "Тимчасово не працюэ",
+                    [{ text: "ОК", onPress: () => null }],
+                    { cancelable: false }
+                  );
                 }}
               >
-                {/* <Text style={styles.History.ContentItemCaption}>
-                  {locale.filter} */}
-                <Icon name="filter" size={25} color={styles.MainColor.color} />
-                {/* {locale.sort} */}
-                <Icon
-                  name={sort ? "arrow-up" : "arrow-down"}
-                  raised={true}
-                  style={{ paddingHorizontal: 15 }}
-                  size={25}
-                  onPress={() => {
-                    setSort(!sort);
-                  }}
-                />
-              </View>
+                <View style={styles.History.InputDefault}>
+                  <Text style={styles.Dispatch.HeaderRememberCaption}>
+                    {"  "}
+                    {locale.filter}
+                    {"  "}
+                    <Icon
+                      name="filter"
+                      size={25}
+                      color={styles.MainColor.color}
+                    />
+                  </Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => {
+                  setSort(!sort);
+                }}
+              >
+                <View style={styles.History.InputDefault}>
+                  <Text style={styles.Dispatch.HeaderRememberCaption}>
+                    {"  "}
+                    {locale.sort}
+                    {"  "}
+                    <Icon
+                      name={sort ? "sort-amount-up" : "sort-amount-down"}
+                      size={25}
+                      color={styles.MainColor.color}
+                    />
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </View>
+
             {/* ----------------------------------------------------------------- */}
             {/* <View style={styles.History.ContentRecords}> */}
             <HistoryList
