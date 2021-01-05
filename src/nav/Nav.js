@@ -146,9 +146,9 @@ const MainStack = connect(
                   title="Trash"
                   iconName="ios-trash"
                   onPress={() => {
-                    history.length
-                      ? null
-                      : HistoryDelete(
+                    history[route.params.ProfileID] &&
+                    history[route.params.ProfileID].length != 0
+                      ? HistoryDelete(
                           route.params.ProfileID,
                           history,
                           toHistory,
@@ -156,7 +156,8 @@ const MainStack = connect(
                           toLastValue,
                           locale,
                           navigation
-                        );
+                        )
+                      : null;
                   }}
                 />
               </HeaderButtons>
