@@ -43,12 +43,14 @@ const Instruction = ({ locale, styles, media, toPeriod, navigation }) => {
                 </View>
                 <Text style={styles.Help.regularText}>{locale.help_main_page_text_1}</Text>
                 <Text style={styles.Help.regularText}>{locale.help_main_page_text_2}</Text>
-                <Text style={styles.Help.lastRegularText}>{locale.help_main_page_text_3}</Text>
+                <Text style={styles.Help.regularText}>{locale.help_main_page_text_3}</Text>
+                <Text style={styles.Help.regularText}>{locale.help_main_page_text_4}</Text>
+                <Text style={styles.Help.lastRegularText}>{locale.help_main_page_text_5}</Text>
                 <View style={styles.Help.imageContainer}>
                   <Image style={styles.Help.imageContent} source={media.Help.HomeScreenFull} />
                 </View>
-                <Text style={styles.Help.regularText}>{locale.help_main_page_text_4}</Text>
-                <Text style={styles.Help.lastRegularText}>{locale.help_main_page_text_5}</Text>
+                <Text style={styles.Help.regularText}>{locale.help_main_page_text_6}</Text>
+                <Text style={styles.Help.lastRegularText}>{locale.help_main_page_text_7}</Text>
               </View>
             </CollapseBody>
           </Collapse>
@@ -65,6 +67,8 @@ const Instruction = ({ locale, styles, media, toPeriod, navigation }) => {
                   <Image style={styles.Help.imageContent} source={media.Help.Profile} />
                 </View>
                 <Text style={styles.Help.regularText}>{locale.help_profile_foreword}</Text>
+                <Text style={styles.Help.regularText}>{locale.help_profile_edit}</Text>
+                <Text style={styles.Help.regularText}>{locale.help_profile_delete}</Text>
                 <Text style={styles.Help.regularText}>{locale.help_profile_paragraph}</Text>
                 <Text style={styles.Help.regularText}>{locale.help_profile_paragraph_1_1}</Text>
                 <Text style={styles.Help.regularText}>{locale.help_profile_paragraph_1_2}</Text>
@@ -115,7 +119,7 @@ const Instruction = ({ locale, styles, media, toPeriod, navigation }) => {
             </CollapseBody>
           </Collapse>
           <Divider style={styles.Divider} />
-          <Collapse>
+          {/* <Collapse>
             <CollapseHeader>
               <View style={styles.Help.slideContainer}>
                 <Text style={styles.Help.slideTitle}>{locale.help_period}</Text>
@@ -127,7 +131,7 @@ const Instruction = ({ locale, styles, media, toPeriod, navigation }) => {
               </View>
             </CollapseBody>
           </Collapse>
-          <Divider style={styles.Divider} />
+          <Divider style={styles.Divider} /> */}
         </ScrollView>
       </View>
     </SafeAreaView>

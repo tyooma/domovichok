@@ -61,7 +61,8 @@ const Dispatch = ({
   lastValue,
   navigation,
   route,
-  toPeriod
+  toPeriod,
+  history
 }) => {
   const isNew = useRef(true)
   const [send, setSend] = useReducer(ReducerDispatch, {
@@ -604,19 +605,21 @@ const Dispatch = ({
         </Modal>
 
         <View style={styles.Dispatch.Toolbar}>
-          <LinearGradient
-            colors={[
-              styles.GradientColorFirst.color,
-              styles.GradientColorSecond.color
-            ]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={styles.Dispatch.SendBtn}
-          >
-            <TouchableOpacity onPress={() => goToPreview()}>
-              <Text style={styles.Dispatch.SendBtnText}>Вiдправити</Text>
-            </TouchableOpacity>
-          </LinearGradient>
+          <TouchableOpacity onPress={() => goToPreview()}>
+            <LinearGradient
+              colors={[
+                styles.GradientColorFirst.color,
+                styles.GradientColorSecond.color
+              ]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.Dispatch.SendBtn}
+            >
+              <View>
+                <Text style={styles.Dispatch.SendBtnText}>Вiдправити</Text>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>

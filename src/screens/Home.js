@@ -3,7 +3,7 @@ import { FlatList, Text, View, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import { connect } from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
-import { importProfileFromFile,importMeterReadingFromFile } from "./Profile/ProfileActions";
+import { importProfileFromFile } from "./Profile/ProfileActions";
 
 import { StateToProps, DispatchToProps } from '../store/MapToProps'
 import { PeriodUpdate } from './Dispatch/DispatchSend'

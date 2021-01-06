@@ -14,7 +14,8 @@ import {
   Text,
   Image,
   TextInput,
-  View
+  View,
+  Linking
 } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Icon } from 'react-native-elements'
@@ -28,7 +29,8 @@ import { getProfile } from '../../libs/Tools'
 import {
   runProfileSave,
   runProfileDelete,
-  runHistorySearch
+  runHistorySearch,
+  importMeterReadingFromFile
 } from './ProfileActions'
 import {
   FixAddressInput,
@@ -36,6 +38,7 @@ import {
   FixNameInput,
   FixPhoneInput
 } from '../../libs/Tools'
+import { THEME } from '../../libs/Consts'
 
 const ReducerProfile = (state, action) => {
   switch (action.type) {
@@ -67,6 +70,7 @@ const ReducerProfile = (state, action) => {
 const Profile = ({
   locale,
   styles,
+  theme,
   profiles,
   toProfiles,
   history,
@@ -218,9 +222,9 @@ const Profile = ({
                     Импортувати профиль
                   </Text>
                 </TouchableOpacity> */}
-                {/* <TouchableOpacity
+                <TouchableOpacity
                   onPress={() => {
-                    importMeterReadingFromFile(route, setPrevHistory);
+                    importMeterReadingFromFile(history);
                   }}
                 >
                   <Text
@@ -228,13 +232,13 @@ const Profile = ({
                       fontSize: 20,
                       textAlign: "center",
                       padding: 10,
-                      backgroundColor: "green",
+                      backgroundColor: "#FF7171",
                       color: "#fff",
                     }}
                   >
                     Импортувати покази
                   </Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
                 <Text style={styles.Profile.InputCaption}>
                   {locale.profile_name}&nbsp;
                   {!route.params.ProfileID && (
@@ -434,7 +438,11 @@ const Profile = ({
                   <View style={styles.Checkbox.CheckboxStyle}>
                     {checkPolicy ? (
                       <Image
-                        source={require('../../libs/assets/images/checkbox.png')}
+                        source={
+                          theme === THEME.dark
+                            ? require('../../libs/assets/images/checkbox-dark.png')
+                            : require('../../libs/assets/images/checkbox-light.png')
+                        }
                         style={styles.Checkbox.CheckboxImage}
                         key={'tickCheckbox'}
                       />
@@ -449,7 +457,11 @@ const Profile = ({
                     {locale.profile_policy1}
                   </Text>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate('Policy')}
+                    onPress={() =>
+                      Linking.openURL(
+                        'https://tau-quadra.com/privacy-policy-mob-app/'
+                      )
+                    }
                   >
                     <Text style={styles.Checkbox.PolicyTouch}>
                       {locale.profile_policy2}
@@ -465,68 +477,36 @@ const Profile = ({
           <View style={styles.Profile.Toolbar}>
             <View style={styles.Profile.Btns}>
               <View style={styles.Profile.BtnContainer}>
-                <LinearGradient
-                  disabled={changeProfile}
-                  colors={[
-                    styles.GradientColorFirst.color,
-                    styles.GradientColorSecond.color
-                  ]}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
-                  style={styles.Profile.Btn}
+                <TouchableOpacity
+                  onPress={() =>
+                    runProfileSave(
+                      profile,
+                      route.params.ProfileID,
+                      locale,
+                      profiles,
+                      toProfiles,
+                      lastValue,
+                      toLastValue,
+                      navigation,
+                      checkPolicy
+                    )
+                  }
                 >
-                  <TouchableOpacity
-                    onPress={() =>
-                      runProfileSave(
-                        profile,
-                        route.params.ProfileID,
-                        locale,
-                        profiles,
-                        toProfiles,
-                        lastValue,
-                        toLastValue,
-                        navigation,
-                        checkPolicy
-                      )
-                    }
+                  <LinearGradient
+                    disabled={changeProfile}
+                    colors={[
+                      styles.GradientColorFirst.color,
+                      styles.GradientColorSecond.color
+                    ]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.Profile.Btn}
                   >
-                    <Text style={styles.Profile.BtnText}>Зберегти</Text>
-                  </TouchableOpacity>
-                </LinearGradient>
-              </View>
-              <View
-                style={
-                  route.params.ProfileID
-                    ? styles.Profile.BtnContainer
-                    : { display: 'none' }
-                }
-              >
-                <LinearGradient
-                  colors={['#f33', '#f33']}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
-                  style={styles.Profile.Btn}
-                >
-                  <TouchableOpacity
-                    onPress={() =>
-                      route.params.ProfileID
-                        ? runProfileDelete(
-                            profile.id,
-                            profiles,
-                            toProfiles,
-                            locale,
-                            history,
-                            toHistory,
-                            lastValue,
-                            toLastValue,
-                            navigation
-                          )
-                        : null
-                    }
-                  >
-                    <Text style={styles.Profile.BtnText}>Видалити</Text>
-                  </TouchableOpacity>
-                </LinearGradient>
+                    <View>
+                      <Text style={styles.Profile.BtnText}>Зберегти</Text>
+                    </View>
+                  </LinearGradient>
+                </TouchableOpacity>
               </View>
             </View>
           </View>

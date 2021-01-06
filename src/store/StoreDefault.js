@@ -11,9 +11,9 @@ const dbTokens = 'PushSubscribers'
 export const DefaultInit = {
   lang: LANG.ua,
   locale: getLocale(LANG.ua),
-  theme: THEME.dark,
+  theme: THEME.light,
   styles: getStyles(THEME.light),
-  profiles: [],//default value from Larin= []   
+  profiles: [],
   profilesDetails: true,
   history: [],
   lastValue: {},

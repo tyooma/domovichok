@@ -221,19 +221,21 @@ const PreviewDispatchFeedback = ({
               />
             </View>
             <View style={styles.Dispatch.Toolbar}>
-              <LinearGradient
-                colors={[
-                  styles.GradientColorFirst.color,
-                  styles.GradientColorSecond.color
-                ]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                style={styles.Dispatch.SendBtn}
-              >
-                <TouchableOpacity onPress={() => SendOnline()}>
-                  <Text style={styles.Dispatch.SendBtnText}>Вiдправити</Text>
-                </TouchableOpacity>
-              </LinearGradient>
+              <TouchableOpacity onPress={() => SendOnline()}>
+                <LinearGradient
+                  colors={[
+                    styles.GradientColorFirst.color,
+                    styles.GradientColorSecond.color
+                  ]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.Dispatch.SendBtn}
+                >
+                  <View>
+                    <Text style={styles.Dispatch.SendBtnText}>Вiдправити</Text>
+                  </View>
+                </LinearGradient>
+              </TouchableOpacity>
             </View>
           </View>
         </>
