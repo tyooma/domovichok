@@ -309,6 +309,7 @@ export const importProfileFromFile = async (
       };
       console.log("storeFromFile ==>", storeFromFile )
       const counters = [];
+
       toStore.years.map((item) => {
         item.months.map((item) => {
           let obj = {};
@@ -331,35 +332,27 @@ export const importProfileFromFile = async (
         });
       });
       
-      // const historyFromFile = {
-      //   [personalNumber]: counters,
-      // };
-      history.push(...counters)
-      // const historyFromFile = {
-      //   [personalNumber]: history,
-      // };
+      const historyFromFile = {
+        [personalNumber]: counters,
+      };
 
-        runProfileSave(
-          storeFromFile,
-          ProfileID,
-          locale,
-          profiles,
-          toProfiles,
-          lastValue,
-          toLastValue,//default value toLastValue
-          navigation,
-          // history
-        );
-        // toHistory(historyFromFile);
-        
-        // history.push(...counters)
-        console.log('historial===============>', history)
-        toHistory({
-          [personalNumber]: history,
-        })
-        console.log('toHistory0000000000000000000000000000000000000000000000000000>', history)
-        
-        // runHistorySearch(history,personalNumber)
+
+      runProfileSave(
+        storeFromFile,
+        ProfileID,
+        locale,
+        profiles,
+        toProfiles,
+        lastValue,
+        toLastValue,//default value toLastValue
+        navigation,
+        // history
+      );
+
+      console.log('history------------------------------------------>>====>>', history[personalNumber]);
+
+      toHistory(historyFromFile)
+      console.log('history2----------------------------------------->>====>>', history);
     });
   } catch (err) {
     if (DocumentPicker.isCancel(err)) {
@@ -370,14 +363,14 @@ export const importProfileFromFile = async (
   }
 };
 
-export const importMeterReadingFromFile = async (usingHook, id) => {
+export const importMeterReadingFromFile = async (hist) => { //export const importMeterReadingFromFile = async (usingHook, route) is default function
   try {
     const res = await DocumentPicker.pick({
       type: [DocumentPicker.types.plainText],
     });
     RNFS.readFile(res.uri).then((res) => {
       const toStore = JSON.parse(JSON.parse(res));
-      // const personalNumber = toStore.personalNumber.slice(0, 10);
+      const personalNumber = toStore.personalNumber.slice(0, 10);
 
       const counters = [];
       toStore.years.map((item) => {
@@ -401,13 +394,16 @@ export const importMeterReadingFromFile = async (usingHook, id) => {
       });
 
       console.log('counters---------------------------------------------<>>>>', counters)
-      console.log('historia----------------------------===========================>>>', history)
+      // console.log('historia----------------------------===========================>>>', history)
       // history.push(...counters)
 
-      usingHook((prevState) => ({
-        // prevState: prevState[route.params.ProfileID].push(...counters),
-        prevState: prevState[id].push(...counters),
-      }));
+      // usingHook((prevState) => ({
+      //   prevState: prevState[route.params.ProfileID].push(...counters),
+      // }));
+      // console.log('history---------------------->>>>', history)
+      console.log('hisssst>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', hist)
+      hist[personalNumber].push(...counters)
+      console.log('history---------------------->>>>')
     });
   } catch (err) {
     if (DocumentPicker.isCancel(err)) {

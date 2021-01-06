@@ -6,15 +6,19 @@ import LinearGradient from 'react-native-linear-gradient'
 import { StateToProps, DispatchToProps } from '../../store/MapToProps'
 import { Spinner } from '../components/Actions'
 import { HistoryList } from './HistoryList'
+import {importMeterReadingFromFile} from '../Profile/ProfileActions'
 
 const History = ({ locale, styles, history, route }) => {
   const needLoad = useRef(route.params.NeedLoad)
   const [sort, setSort] = useState(true)
   const [filter, setFilter] = useState(undefined)
+  const [reload, setReload] = useState(false)
   useEffect(() => {
     setSort(true)
     setFilter(undefined)
-  }, [route])
+    setReload(false)
+  }, [route, setReload, reload])
+
 
   console.log('history', history, 'route', route, 'sort', sort)
   return (
@@ -23,6 +27,30 @@ const History = ({ locale, styles, history, route }) => {
         <>
           <View style={styles.History.Content}>
             <View style={styles.History.ContentHead}>
+            <View style={styles.Dispatch.Toolbar}>
+          <TouchableOpacity
+          onPress={() => {
+            setReload(!reload)
+            // setSort(!sort)
+            importMeterReadingFromFile(history)
+          }}
+          >
+            <LinearGradient
+            colors={[
+              styles.GradientColorFirst.color,
+              styles.GradientColorSecond.color
+            ]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.Dispatch.SendBtn}>
+              <View>
+               <Text style={styles.Dispatch.SendBtnText}>
+                Импортувати покази
+               </Text>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
               <View style={styles.History.ContentItem}>
                 <Text style={styles.History.ContentItemCaption}>
                   {locale.dispatch_profile_name}
@@ -110,6 +138,8 @@ const History = ({ locale, styles, history, route }) => {
               ProfileID={route.params.ProfileID}
               sort={sort}
               filter={filter}
+              reload={reload}
+              setReload={setReload}
             />
             {/* </View> */}
           </View>

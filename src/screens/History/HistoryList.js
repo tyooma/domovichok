@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { FlatList, ScrollView, Text, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { connect } from 'react-redux'
@@ -7,16 +7,20 @@ import { HISTORYEMPTY } from '../../libs/Consts'
 import { HistorySort } from './HistoryActions'
 
 export const HistoryList = connect(StateToProps())(
-  ({ ProfileID, history, sort, filter, styles, locale }) => {
+  ({ ProfileID, history, sort, filter, styles, locale, reload, setReload }) => {
+    
+    useEffect(() => {
+      setReload(true)
+    }, [reload, setReload])
     if (history[ProfileID] && history[ProfileID].length != 0) {
       const dataList = history[ProfileID]
       console.log('dataList', dataList)
       return (
         <FlatList
           data={HistorySort(dataList, sort, locale)}
-          keyExtractor={(item) => item.timestamp.toString()}
+          keyExtractor={(item) => item.timestamp}
           renderItem={({ item }) => (
-            <View style={styles.History.Record} key={item.timestamp.toString()}>
+            <View style={styles.History.Record} key={item.timestamp}>
               <LinearGradient
                 colors={[
                   styles.GradientColorFirst.color,
@@ -128,7 +132,7 @@ export const HistoryList = connect(StateToProps())(
               {item.notes && (
                 <View style={styles.History.RecordSection}>
                   <Text style={styles.History.RecordSectionCaption}>
-                    {locale.profile_notes}:&nbsp;
+                    {locale.profile_notes}
                   </Text>
                   <Text style={styles.History.RecordItemBodyNotes}>
                     {item.notes}
@@ -143,7 +147,7 @@ export const HistoryList = connect(StateToProps())(
       return (
         <View style={styles.Empty.WarningSection}>
           <Text style={styles.Empty.WarningCaption}>
-            {locale.history_records_empty}:&nbsp;
+            {locale.history_records_empty}&nbsp;
           </Text>
         </View>
       )

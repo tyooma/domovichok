@@ -61,7 +61,8 @@ const Dispatch = ({
   lastValue,
   navigation,
   route,
-  toPeriod
+  toPeriod,
+  history
 }) => {
   const isNew = useRef(true)
   const [send, setSend] = useReducer(ReducerDispatch, {
