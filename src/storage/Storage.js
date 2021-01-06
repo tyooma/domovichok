@@ -3,7 +3,7 @@ import { STORAGE } from './Actions'
 
 export const SaveToStorage = (action, value) => {
   try {
-    let parse = undefined
+    let parse = undefined;// JSON.stringify(profiles), default from Larin let parse = undefined;
     switch (action) {
       case STORAGE.lang:
         parse = value
@@ -14,10 +14,13 @@ export const SaveToStorage = (action, value) => {
       case STORAGE.fbtoken:
         parse = value
         break
+      case STORAGE.history:
+        parse = value
       default:
         parse = JSON.stringify(value)
     }
     AsyncStorage.setItem(action, parse)
+    console.log(`action:::${action},value---${value}`, value)
   } catch (err) {
     console.log(
       'SaveToStorage: ERROR => action: ' + action + ' value: ' + value + ' >',

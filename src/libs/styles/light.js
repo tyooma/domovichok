@@ -576,6 +576,11 @@ export default {
 
     ContentItem: { marginBottom: 20 },
 
+    HeaderRememberCaption: {
+      fontSize: 14,
+      color: '##212121'
+    },
+
     ContentItemCaption: {
       paddingBottom: 8,
       marginBottom: 12,

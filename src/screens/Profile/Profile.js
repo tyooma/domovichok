@@ -193,6 +193,51 @@ const Profile = ({
           <View style={styles.Profile.InputContainer}>
             <View style={styles.Profile.InputSection}>
               <View style={styles.Profile.InputItem}>
+                {/* <TouchableOpacity
+                  onPress={
+                    () => console.log(" route", route, "toHistory", toHistory)
+                    // importProfileFromFile(
+                    //   route.params.ProfileID,
+                    //   locale,
+                    //   profiles,
+                    //   toProfiles,
+                    //   lastValue,
+                    //   toLastValue,
+                    //   navigation,
+                    //   toHistory
+                    // )
+                  }
+                >
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      textAlign: "center",
+                      padding: 30,
+                      backgroundColor: "green",
+                      color: "#fff",
+                      marginBottom: 50,
+                    }}
+                  >
+                    Импортувати профиль
+                  </Text>
+                </TouchableOpacity> */}
+                {/* <TouchableOpacity
+                  onPress={() => {
+                    importMeterReadingFromFile(route, setPrevHistory);
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      textAlign: "center",
+                      padding: 10,
+                      backgroundColor: "green",
+                      color: "#fff",
+                    }}
+                  >
+                    Импортувати покази
+                  </Text>
+                </TouchableOpacity> */}
                 <Text style={styles.Profile.InputCaption}>
                   {locale.profile_name}&nbsp;
                   {!route.params.ProfileID && (

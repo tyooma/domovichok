@@ -4,7 +4,7 @@ import firestore from '@react-native-firebase/firestore'
 import { LANG, THEME } from '../libs/Consts'
 import { getLocale, getStyles, getMedia } from '../libs/Tools'
 import * as RCreator from './Creators'
-import { STORAGE } from '../storage/Actions'
+import { STORAGE } from '../storage/Actions' 
 
 const dbTokens = 'PushSubscribers'
 

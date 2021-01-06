@@ -1,0 +1,1 @@
+"{\"personalNumber\":\"1111111111111111\",\"years\":[{\"year\":2020,\"months\":[{\"month\":\"Грудень\",\"countersValues\":{\"kitchenHotCounter\":127,\"toiletHotCounter\":127},\"countersValuesDate\":{\"kitchenHotCounter\":\"12/21/2020 5:03:48 AM\",\"toiletHotCounter\":\"12/21/2020 5:03:48 AM\"}}]}]}"

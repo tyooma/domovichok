@@ -22,6 +22,7 @@ export default {
   // home_profiles_empty_3: "на іконку",
   // home_profiles_empty_4: "внизу екрану",
   // home_profiles_empty_5: "Для довідки натисніть на посилання:",
+
   // home_profiles_empty_6: "Інструкція",
 
   //FILTER

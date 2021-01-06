@@ -42,7 +42,7 @@ export const getStyles = (theme) => {
   let styles = null;
   switch (theme) {
     case THEME.light:
-      styles = require("./styles/light").default;
+      styles = require("./styles/light").default; 
       break;
     case THEME.dark:
       styles = require("./styles/dark").default;

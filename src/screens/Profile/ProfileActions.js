@@ -1,6 +1,8 @@
-import { Alert } from 'react-native'
-import { LASTVALUE } from '../../libs/Consts'
-
+import { Alert } from "react-native";
+import { LASTVALUE } from "../../libs/Consts";
+import DocumentPicker from "react-native-document-picker";
+import * as RNFS from "react-native-fs";
+import moment from "moment";
 export const runProfileSave = (
   profile,
   ProfileID,
@@ -16,7 +18,7 @@ export const runProfileSave = (
     let result = true
     if (!ProfileID) {
       // Add new Profile
-      profiles.forEach((item) => {
+      profiles.forEach((item) => {        
         if (item.id === profile.id || item.address === profile.address) {
           result = false
         }
@@ -38,8 +40,7 @@ export const runProfileSave = (
     return result
   }
 
-  const validation = (profile, profiles, ProfileID, locale, checkPolicy) => {
-    console.log('checkPolicy checkPolicy----->', checkPolicy)
+  const validation = (profile, profiles, ProfileID, locale, checkPolicy = true) => {
     let result = true
     let details = ''
     if (!checkProfile(profile, profiles, ProfileID)) {
@@ -268,3 +269,151 @@ export const runHistorySearch = (history, profile) => {
   }
   return result
 }
+export const importProfileFromFile = async (
+  ProfileID,
+  locale,
+  profiles,
+  toProfiles,
+  lastValue,
+  toLastValue,
+  navigation,
+  toHistory,
+  history
+) => {
+  try {
+    const res = await DocumentPicker.pick({
+      type: [DocumentPicker.types.plainText],
+    });
+    RNFS.readFile(res.uri).then((res) => {  
+      const toStore = JSON.parse(JSON.parse(res));    
+      const personalNumber = toStore.personalNumber.slice(0, 10);      
+      const storeFromFile = {
+        address: toStore.personalNumber,
+        bathCold: toStore.years[0].months[0].countersValues.toiletColdCounter
+          ? true
+          : false,
+        bathHot: toStore.years[0].months[0].countersValues.toiletHotCounter
+        ? true
+        : false,
+        fio: "",
+        id: toStore.personalNumber.slice(0, 10),
+        kitchenCold:  toStore.years[0].months[0].countersValues.kitchenColdCounter
+        ? true
+        : false,
+        kitchenHot: toStore.years[0].months[0].countersValues.kitchenHotCounter
+          ? true
+          : false,
+        phone: "",
+        sewage: false,
+        watering: false,
+      };
+      console.log("storeFromFile ==>", storeFromFile )
+      const counters = [];
+      toStore.years.map((item) => {
+        item.months.map((item) => {
+          let obj = {};
+          obj.bathHot = item.countersValues.toiletHotCounter
+            ? item.countersValues.toiletHotCounter.toString()
+            : "-";
+          obj.kitchenHot = item.countersValues.kitchenHotCounter
+            ? item.countersValues.kitchenHotCounter.toString()
+            : "-";
+          obj.bathCold = "-";
+          obj.kitchenCold = "-";
+          obj.sewage = "-";
+          obj.watering = "-";
+          obj.datetime = moment(
+            item.countersValuesDate.kitchenHotCounter
+          ).format("DD.MM.YYYY, h:mm:ss");
+          obj.notes = '-';
+          obj.timestamp = Date.parse(item.countersValuesDate.kitchenHotCounter);
+          counters.push(obj);
+        });
+      });
+      
+      // const historyFromFile = {
+      //   [personalNumber]: counters,
+      // };
+      history.push(...counters)
+      // const historyFromFile = {
+      //   [personalNumber]: history,
+      // };
+
+        runProfileSave(
+          storeFromFile,
+          ProfileID,
+          locale,
+          profiles,
+          toProfiles,
+          lastValue,
+          toLastValue,//default value toLastValue
+          navigation,
+          // history
+        );
+        // toHistory(historyFromFile);
+        
+        // history.push(...counters)
+        console.log('historial===============>', history)
+        toHistory({
+          [personalNumber]: history,
+        })
+        console.log('toHistory0000000000000000000000000000000000000000000000000000>', history)
+        
+        // runHistorySearch(history,personalNumber)
+    });
+  } catch (err) {
+    if (DocumentPicker.isCancel(err)) {
+      console.log("err in PRofileActions", err);
+    } else {
+      throw err;
+    }
+  }
+};
+
+export const importMeterReadingFromFile = async (usingHook, id) => {
+  try {
+    const res = await DocumentPicker.pick({
+      type: [DocumentPicker.types.plainText],
+    });
+    RNFS.readFile(res.uri).then((res) => {
+      const toStore = JSON.parse(JSON.parse(res));
+      // const personalNumber = toStore.personalNumber.slice(0, 10);
+
+      const counters = [];
+      toStore.years.map((item) => {
+        item.months.map((item) => {
+          let obj = {};
+          obj.bathHot = item.countersValues.toiletHotCounter
+            ? item.countersValues.toiletHotCounter.toString()
+            : "";
+          obj.kitchenHot = item.countersValues.kitchenHotCounter
+            ? item.countersValues.kitchenHotCounter.toString()
+            : "";
+          obj.bathCold = "";
+          obj.kitchenCold = "";
+          obj.sewage = "";
+          obj.watering = "";
+          obj.datetime = moment(
+            item.countersValuesDate.kitchenHotCounter
+          ).format("DD.MM.YYYY h:mm:ss");
+          counters.push(obj);
+        });
+      });
+
+      console.log('counters---------------------------------------------<>>>>', counters)
+      console.log('historia----------------------------===========================>>>', history)
+      // history.push(...counters)
+
+      usingHook((prevState) => ({
+        // prevState: prevState[route.params.ProfileID].push(...counters),
+        prevState: prevState[id].push(...counters),
+      }));
+    });
+  } catch (err) {
+    if (DocumentPicker.isCancel(err)) {
+      console.log(err);
+    } else {
+      throw err;
+    }
+  }
+};

@@ -558,6 +558,11 @@ export default {
       justifyContent: 'space-between'
     },
 
+    HeaderRememberCaption: {
+      fontSize: 14,
+      color: '#fff'
+    },
+
     InputDefault: {      
       paddingVertical: 2,
       paddingHorizontal: 7,
