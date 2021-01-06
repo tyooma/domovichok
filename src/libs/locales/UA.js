@@ -25,6 +25,10 @@ export default {
 
   // home_profiles_empty_6: "Інструкція",
 
+  //FILTER
+  filter: 'Фільтрувати',
+  sort: 'Сортувати',
+
   // PROFILE
   profile_new_caption: 'Створення профілю',
   profile_edit_caption: 'Управління профілем',

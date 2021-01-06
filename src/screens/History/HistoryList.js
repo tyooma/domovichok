@@ -1,15 +1,20 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { FlatList, ScrollView, Text, View } from 'react-native'
-import { connect } from 'react-redux'
 import LinearGradient from 'react-native-linear-gradient'
+import { connect } from 'react-redux'
 import { StateToProps } from '../../store/MapToProps'
 import { HISTORYEMPTY } from '../../libs/Consts'
 import { HistorySort } from './HistoryActions'
 
 export const HistoryList = connect(StateToProps())(
-  ({ ProfileID, history, sort, filter, styles, locale }) => {
+  ({ ProfileID, history, sort, filter, styles, locale, reload, setReload }) => {
+    
+    useEffect(() => {
+      setReload(true)
+    }, [reload, setReload])
     if (history[ProfileID] && history[ProfileID].length != 0) {
       const dataList = history[ProfileID]
+      console.log('dataList', dataList)
       return (
         <FlatList
           data={HistorySort(dataList, sort, locale)}
@@ -27,7 +32,7 @@ export const HistoryList = connect(StateToProps())(
               >
                 <View style={styles.History.RecordHead}>
                   <Text style={styles.History.RecordHeadCaption}>
-                    {locale.history_record_caption}&nbsp;
+                    {locale.history_record_caption}:&nbsp;
                   </Text>
                   <Text style={styles.History.RecordHeadCaption}>
                     {item.datetime}
@@ -38,26 +43,26 @@ export const HistoryList = connect(StateToProps())(
                 item.kitchenCold !== HISTORYEMPTY) && (
                 <View style={styles.History.RecordSection}>
                   <Text style={styles.History.RecordSectionCaption}>
-                    {locale.profile_kitchen}
+                    {locale.profile_kitchen}:&nbsp;
                   </Text>
                   <View style={styles.History.RecordSectionItems}>
                     {item.kitchenHot !== HISTORYEMPTY && (
                       <View style={styles.History.RecordItemContainer}>
                         <Text style={styles.History.RecordItemHead}>
-                          {locale.profile_kitchen_hot}
+                          {locale.profile_kitchen_hot}:&nbsp;
                         </Text>
                         <Text style={styles.History.RecordItemBody}>
-                          {item.kitchenHot}:&nbsp;
+                          {item.kitchenHot}
                         </Text>
                       </View>
                     )}
                     {item.kitchenCold !== HISTORYEMPTY && (
                       <View style={styles.History.RecordItemContainer}>
                         <Text style={styles.History.RecordItemHead}>
-                          {locale.profile_kitchen_cold}
+                          {locale.profile_kitchen_cold}:&nbsp;
                         </Text>
                         <Text style={styles.History.RecordItemBody}>
-                          {item.kitchenCold}:&nbsp;
+                          {item.kitchenCold}
                         </Text>
                       </View>
                     )}
@@ -68,7 +73,7 @@ export const HistoryList = connect(StateToProps())(
                 item.bathCold !== HISTORYEMPTY) && (
                 <View style={styles.History.RecordSection}>
                   <Text style={styles.History.RecordSectionCaption}>
-                    {locale.profile_bath}
+                    {locale.profile_bath}:&nbsp;
                   </Text>
                   <View style={styles.History.RecordSectionItems}>
                     {item.bathHot !== HISTORYEMPTY && (
@@ -98,7 +103,7 @@ export const HistoryList = connect(StateToProps())(
                 item.sewage !== HISTORYEMPTY) && (
                 <View style={styles.History.RecordSection}>
                   <Text style={styles.History.RecordSectionCaption}>
-                    {locale.profile_other}
+                    {locale.profile_other}:&nbsp;
                   </Text>
                   <View style={styles.History.RecordSectionItems}>
                     {item.watering !== HISTORYEMPTY && (
@@ -142,7 +147,7 @@ export const HistoryList = connect(StateToProps())(
       return (
         <View style={styles.Empty.WarningSection}>
           <Text style={styles.Empty.WarningCaption}>
-            {locale.history_records_empty}
+            {locale.history_records_empty}&nbsp;
           </Text>
         </View>
       )

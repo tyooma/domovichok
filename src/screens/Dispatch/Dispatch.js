@@ -77,6 +77,7 @@ const Dispatch = ({
   })
   const [modalVisible, setModalVisible] = useState(false)
 
+  console.log("DISPATH ::: route -->",route, 'lastValue',lastValue, 'profiles ', profiles)
   useEffect(() => {
     PeriodUpdate(locale, toPeriod, 'HOME', navigation)
   }, [])

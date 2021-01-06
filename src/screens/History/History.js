@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { SafeAreaView, Text, View } from 'react-native'
-import { Divider, Icon } from 'react-native-elements'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { SafeAreaView, Text, View, Alert, TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 import { connect } from 'react-redux'
 import LinearGradient from 'react-native-linear-gradient'
 import { StateToProps, DispatchToProps } from '../../store/MapToProps'
-import { ActionBack, Spinner } from '../components/Actions'
-import { HistoryDelete } from './HistoryActions'
+import { Spinner } from '../components/Actions'
 import { HistoryList } from './HistoryList'
 import {importMeterReadingFromFile} from '../Profile/ProfileActions'
 
@@ -18,9 +16,11 @@ const History = ({ locale, styles, history, route }) => {
   useEffect(() => {
     setSort(true)
     setFilter(undefined)
-  }, [route, reload])
+    setReload(false)
+  }, [route, setReload, reload])
 
 
+  console.log('history', history, 'route', route, 'sort', sort)
   return (
     <SafeAreaView style={styles.Container}>
       {needLoad && (
@@ -30,8 +30,9 @@ const History = ({ locale, styles, history, route }) => {
             <View style={styles.Dispatch.Toolbar}>
           <TouchableOpacity
           onPress={() => {
-            importMeterReadingFromFile(history)
             setReload(!reload)
+            // setSort(!sort)
+            importMeterReadingFromFile(history)
           }}
           >
             <LinearGradient
@@ -67,11 +68,78 @@ const History = ({ locale, styles, history, route }) => {
                 </Text>
               </View>
             </View>
+            {/* ----------------------------------------------------------------- */}
+            {history[route.params.ProfileID] &&
+            history[route.params.ProfileID].length != 0 ? (
+              <View style={styles.sortBlockStyle}>
+                <TouchableOpacity
+                  onPress={() => {
+                    Alert.alert(
+                      locale.info_warning,
+                      'В стадії розробки',
+                      [{ text: 'ОК', onPress: () => null }],
+                      { cancelable: false }
+                    )
+                  }}
+                >
+                  <LinearGradient
+                    colors={[
+                      styles.GradientColorFirst.color,
+                      styles.GradientColorSecond.color
+                    ]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.History.SortGradient}
+                  >
+                    <View style={styles.History.InputDefault}>
+                      <Icon
+                        name='filter'
+                        size={18}
+                        color={styles.MainColor.color}
+                      />
+                      <Text style={styles.History.HeaderRememberCaption}>
+                        {locale.filter}
+                      </Text>
+                    </View>
+                  </LinearGradient>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => {
+                    setSort(!sort)
+                  }}
+                >
+                  <LinearGradient
+                    colors={[
+                      styles.GradientColorFirst.color,
+                      styles.GradientColorSecond.color
+                    ]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.History.SortGradient}
+                  >
+                    <View style={styles.History.InputDefault}>
+                      <Icon
+                        name={sort ? 'sort-amount-up' : 'sort-amount-down'}
+                        size={18}
+                        color={styles.MainColor.color}
+                      />
+                      <Text style={styles.History.HeaderRememberCaption}>
+                        {locale.sort}
+                      </Text>
+                    </View>
+                  </LinearGradient>
+                </TouchableOpacity>
+              </View>
+            ) : null}
+            {/* ----------------------------------------------------------------- */}
             {/* <View style={styles.History.ContentRecords}> */}
             <HistoryList
               ProfileID={route.params.ProfileID}
               sort={sort}
               filter={filter}
+              reload={reload}
+              setReload={setReload}
             />
             {/* </View> */}
           </View>

@@ -42,6 +42,10 @@ export default {
     color: '#fff'
   },
 
+  SubMainColor: {
+    color: '#212121'
+  },
+
   // MAIN
   Container: { flex: 1, backgroundColor: '#212121' },
 
@@ -145,6 +149,14 @@ export default {
     },
 
     ProfileCaption: {
+      marginBottom: 8,
+
+      fontSize: 14,
+      fontWeight: 'normal',
+      color: '#fff'
+    },
+
+    ProfileDescription: {
       marginBottom: 8,
 
       fontSize: 14,
@@ -558,6 +570,28 @@ export default {
       justifyContent: 'space-between'
     },
 
+    HeaderRememberCaption: {
+      fontSize: 14,
+      color: '#fff'
+    },
+
+    SortGradient: {
+      paddingVertical: 4,
+      paddingHorizontal: 7,
+
+      borderTopRightRadius: 10,
+      borderTopLeftRadius: 10
+    },
+
+    InputDefault: {
+      flexDirection: 'row',
+      alignItems: 'center',
+
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: '#fff'
+    },
+
     ContentHead: { paddingTop: 30, paddingHorizontal: 10, marginTop: 50 },
 
     ContentItem: { marginBottom: 20 },
@@ -892,8 +926,7 @@ export default {
     },
 
     Policy: {
-      marginLeft: 10,
-
+      marginHorizontal: 10,
       flexDirection: 'row',
       flexWrap: 'wrap'
     },
@@ -959,5 +992,17 @@ export default {
     actionText: {
       color: '#fff'
     }
+  },
+
+  sortBlockStyle: {
+    paddingHorizontal: 15,
+    marginBottom: 20,
+
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+
+    borderBottomWidth: 1,
+    borderColor: '#725CAE'
   }
 }
