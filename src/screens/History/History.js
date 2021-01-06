@@ -1,32 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
-import {
-  SafeAreaView,
-  Text,
-  View,
-  Alert,
-  TouchableOpacity,
-} from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import { connect } from "react-redux";
-import { StateToProps, DispatchToProps } from "../../store/MapToProps";
-import { Spinner } from "../components/Actions";
-import { HistoryList } from "./HistoryList";
+import React, { useEffect, useRef, useState } from 'react'
+import { SafeAreaView, Text, View, Alert, TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome5'
+import { connect } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient'
+import { StateToProps, DispatchToProps } from '../../store/MapToProps'
+import { Spinner } from '../components/Actions'
+import { HistoryList } from './HistoryList'
 
-const History = ({ 
-  locale,
-  styles,
-  history, 
-  route,
-}) => {
-  const needLoad = useRef(route.params.NeedLoad);
-  const [sort, setSort] = useState(true);
-  const [filter, setFilter] = useState(undefined);
+const History = ({ locale, styles, history, route }) => {
+  const needLoad = useRef(route.params.NeedLoad)
+  const [sort, setSort] = useState(true)
+  const [filter, setFilter] = useState(undefined)
   useEffect(() => {
-    setSort(true);
-    setFilter(undefined);
-  }, [route]);
+    setSort(true)
+    setFilter(undefined)
+  }, [route])
 
-  console.log("history", history, "route", route, "sort", sort);
+  console.log('history', history, 'route', route, 'sort', sort)
   return (
     <SafeAreaView style={styles.Container}>
       {needLoad && (
@@ -52,49 +42,65 @@ const History = ({
             </View>
             {/* ----------------------------------------------------------------- */}
             {history[route.params.ProfileID] &&
-                    history[route.params.ProfileID].length != 0 ? (
+            history[route.params.ProfileID].length != 0 ? (
               <View style={styles.sortBlockStyle}>
                 <TouchableOpacity
                   onPress={() => {
                     Alert.alert(
                       locale.info_warning,
-                      "В стадії розробки",
-                      [{ text: "ОК", onPress: () => null }],
+                      'В стадії розробки',
+                      [{ text: 'ОК', onPress: () => null }],
                       { cancelable: false }
-                    );
+                    )
                   }}
                 >
-                  <View style={styles.History.InputDefault}>
-                    <Text style={styles.History.HeaderRememberCaption}>
-                      {"  "}
-                      {locale.filter}
-                      {"  "}
+                  <LinearGradient
+                    colors={[
+                      styles.GradientColorFirst.color,
+                      styles.GradientColorSecond.color
+                    ]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.History.SortGradient}
+                  >
+                    <View style={styles.History.InputDefault}>
                       <Icon
-                        name="filter"
-                        size={25}
+                        name='filter'
+                        size={18}
                         color={styles.MainColor.color}
                       />
-                    </Text>
-                  </View>
+                      <Text style={styles.History.HeaderRememberCaption}>
+                        {locale.filter}
+                      </Text>
+                    </View>
+                  </LinearGradient>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   onPress={() => {
-                    setSort(!sort);
+                    setSort(!sort)
                   }}
                 >
-                  <View style={styles.History.InputDefault}>
-                    <Text style={styles.History.HeaderRememberCaption}>
-                      {"  "}
-                      {locale.sort}
-                      {"  "}
+                  <LinearGradient
+                    colors={[
+                      styles.GradientColorFirst.color,
+                      styles.GradientColorSecond.color
+                    ]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.History.SortGradient}
+                  >
+                    <View style={styles.History.InputDefault}>
                       <Icon
-                        name={sort ? "sort-amount-up" : "sort-amount-down"}
-                        size={25}
+                        name={sort ? 'sort-amount-up' : 'sort-amount-down'}
+                        size={18}
                         color={styles.MainColor.color}
                       />
-                    </Text>
-                  </View>
+                      <Text style={styles.History.HeaderRememberCaption}>
+                        {locale.sort}
+                      </Text>
+                    </View>
+                  </LinearGradient>
                 </TouchableOpacity>
               </View>
             ) : null}
@@ -120,7 +126,7 @@ const History = ({
         </View>
       )}
     </SafeAreaView>
-  );
-};
+  )
+}
 
-export default connect(StateToProps(), DispatchToProps())(History);
+export default connect(StateToProps(), DispatchToProps())(History)
