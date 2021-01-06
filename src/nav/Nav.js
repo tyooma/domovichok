@@ -19,6 +19,7 @@ import About from '../screens/About'
 import Policy from '../screens/Policy'
 import Settings from '../screens/Settings'
 import History from '../screens/History/History'
+import { HistoryDelete } from "../screens/History/HistoryActions";
 import PreviewDispatchFeedback from '../screens/Dispatch/PreviewDispatchFeedback'
 import { HeaderIcon } from '../components/HeaderIcon'
 import { StateToProps, DispatchToProps } from '../store/MapToProps'

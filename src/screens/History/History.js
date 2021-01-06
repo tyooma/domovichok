@@ -51,20 +51,21 @@ const History = ({
               </View>
             </View>
             {/* ----------------------------------------------------------------- */}
-            {history && history.length != 0 ? (
+            {history[route.params.ProfileID] &&
+                    history[route.params.ProfileID].length != 0 ? (
               <View style={styles.sortBlockStyle}>
                 <TouchableOpacity
                   onPress={() => {
                     Alert.alert(
                       locale.info_warning,
-                      "Тимчасово не працюэ",
+                      "В стадії розробки",
                       [{ text: "ОК", onPress: () => null }],
                       { cancelable: false }
                     );
                   }}
                 >
                   <View style={styles.History.InputDefault}>
-                    <Text style={styles.Dispatch.HeaderRememberCaption}>
+                    <Text style={styles.History.HeaderRememberCaption}>
                       {"  "}
                       {locale.filter}
                       {"  "}
@@ -83,7 +84,7 @@ const History = ({
                   }}
                 >
                   <View style={styles.History.InputDefault}>
-                    <Text style={styles.Dispatch.HeaderRememberCaption}>
+                    <Text style={styles.History.HeaderRememberCaption}>
                       {"  "}
                       {locale.sort}
                       {"  "}

@@ -3,7 +3,6 @@ import { LASTVALUE } from "../../libs/Consts";
 import DocumentPicker from "react-native-document-picker";
 import * as RNFS from "react-native-fs";
 import moment from "moment";
-
 export const runProfileSave = (
   profile,
   ProfileID,
@@ -19,8 +18,7 @@ export const runProfileSave = (
     let result = true
     if (!ProfileID) {
       // Add new Profile
-      profiles.forEach((item) => {
-        console.log('item==============>', item)
+      profiles.forEach((item) => {        
         if (item.id === profile.id || item.address === profile.address) {
           result = false
         }
@@ -29,7 +27,6 @@ export const runProfileSave = (
       // Update current Profile
       let newProfiles = []
       profiles.forEach((item) => {
-        
         if (item.id !== profile.id) {
           newProfiles.push(item)
         }
@@ -44,16 +41,12 @@ export const runProfileSave = (
   }
 
   const validation = (profile, profiles, ProfileID, locale, checkPolicy = true) => {
-    
     let result = true
     let details = ''
     if (!checkProfile(profile, profiles, ProfileID)) {
       result = false
       details += `${locale.valid_profile_unique}\n`
     }
-    // if (checkProfile(profile, profiles, ProfileID)) {
-    //   result = true
-    // }
     if (profile.id && profile.id.length === 10) {
     } else {
       result = false
@@ -276,7 +269,6 @@ export const runHistorySearch = (history, profile) => {
   }
   return result
 }
-
 export const importProfileFromFile = async (
   ProfileID,
   locale,
@@ -292,18 +284,22 @@ export const importProfileFromFile = async (
     const res = await DocumentPicker.pick({
       type: [DocumentPicker.types.plainText],
     });
-    RNFS.readFile(res.uri).then((res) => {
-      const toStore = JSON.parse(JSON.parse(res));
-      const personalNumber = toStore.personalNumber.slice(0, 10);
+    RNFS.readFile(res.uri).then((res) => {  
+      const toStore = JSON.parse(JSON.parse(res));    
+      const personalNumber = toStore.personalNumber.slice(0, 10);      
       const storeFromFile = {
         address: toStore.personalNumber,
-        bathCold: toStore.years[0].months[0].countersValues.toiletHotCounter
+        bathCold: toStore.years[0].months[0].countersValues.toiletColdCounter
           ? true
           : false,
-        bathHot: false,
+        bathHot: toStore.years[0].months[0].countersValues.toiletHotCounter
+        ? true
+        : false,
         fio: "",
         id: toStore.personalNumber.slice(0, 10),
-        kitchenCold: false,
+        kitchenCold:  toStore.years[0].months[0].countersValues.kitchenColdCounter
+        ? true
+        : false,
         kitchenHot: toStore.years[0].months[0].countersValues.kitchenHotCounter
           ? true
           : false,
@@ -311,6 +307,7 @@ export const importProfileFromFile = async (
         sewage: false,
         watering: false,
       };
+      console.log("storeFromFile ==>", storeFromFile )
       const counters = [];
       toStore.years.map((item) => {
         item.months.map((item) => {

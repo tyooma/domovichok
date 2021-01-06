@@ -77,9 +77,7 @@ export default Home = connect(
                 </LinearGradient>
               </TouchableOpacity>
                 
-                <TouchableOpacity style={styles.Home.ProfileSubBtn} onPress={() => {
-                  console.log('profiles----------------------------->>>', profiles)  
-
+                <TouchableOpacity style={styles.Home.ProfileSubBtn} onPress={() => {                  
                   importProfileFromFile(
                     ProfileID,
                     locale,
