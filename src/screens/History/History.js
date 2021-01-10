@@ -4,36 +4,61 @@ import {
   Text,
   View,
   Alert,
-  Modal,
   TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { connect } from "react-redux";
+import LinearGradient from "react-native-linear-gradient";
 import { StateToProps, DispatchToProps } from "../../store/MapToProps";
 import { Spinner } from "../components/Actions";
 import { HistoryList } from "./HistoryList";
-
 import CalendarCustom from "../components/CalendarCustom";
+import { importMeterReadingFromFile } from "../Profile/ProfileActions";
 
 const History = ({ locale, styles, history, route }) => {
   const needLoad = useRef(route.params.NeedLoad);
-  const [sort, setSort] = useState(true);  
+  const [sort, setSort] = useState(true);
+  const [reload, setReload] = useState(false);
   const [markedDates, setMarkedDates] = useState({});
   const [chooseDay, setChooseDay] = useState({});
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
 
   useEffect(() => {
-    setSort(true);    
-  }, [route]);
+    setSort(true);
+    setReload(false);
+  }, [route, setReload, reload]);
 
-
-  console.log("chooseDay in HISTORY", chooseDay);
   return (
     <SafeAreaView style={styles.Container}>
       {needLoad && (
         <>
           <View style={styles.History.Content}>
             <View style={styles.History.ContentHead}>
+              <View style={styles.Dispatch.Toolbar}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setReload(!reload);
+                    // setSort(!sort)
+                    importMeterReadingFromFile(history);
+                  }}
+                >
+                  <LinearGradient
+                    colors={[
+                      styles.GradientColorFirst.color,
+                      styles.GradientColorSecond.color,
+                    ]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.Dispatch.SendBtn}
+                  >
+                    <View>
+                      <Text style={styles.Dispatch.SendBtnText}>
+                        Импортувати покази
+                      </Text>
+                    </View>
+                  </LinearGradient>
+                </TouchableOpacity>
+              </View>
               <View style={styles.History.ContentItem}>
                 <Text style={styles.History.ContentItemCaption}>
                   {locale.dispatch_profile_name}
@@ -63,7 +88,7 @@ const History = ({ locale, styles, history, route }) => {
                       {"  "}
                       <Icon
                         name="filter"
-                        size={25}
+                        size={18}
                         color={styles.MainColor.color}
                       />
                     </Text>
@@ -75,18 +100,26 @@ const History = ({ locale, styles, history, route }) => {
                     setSort(!sort);
                   }}
                 >
-                  <View style={styles.History.InputDefault}>
-                    <Text style={styles.History.HeaderRememberCaption}>
-                      {"  "}
-                      {locale.sort}
-                      {"  "}
+                  <LinearGradient
+                    colors={[
+                      styles.GradientColorFirst.color,
+                      styles.GradientColorSecond.color,
+                    ]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.History.SortGradient}
+                  >
+                    <View style={styles.History.InputDefault}>
                       <Icon
                         name={sort ? "sort-amount-up" : "sort-amount-down"}
-                        size={25}
+                        size={18}
                         color={styles.MainColor.color}
                       />
-                    </Text>
-                  </View>
+                      <Text style={styles.History.HeaderRememberCaption}>
+                        {locale.sort}
+                      </Text>
+                    </View>
+                  </LinearGradient>
                 </TouchableOpacity>
               </View>
             ) : null}
@@ -96,6 +129,8 @@ const History = ({ locale, styles, history, route }) => {
               ProfileID={route.params.ProfileID}
               sort={sort}
               filter={chooseDay}
+              reload={reload}
+              setReload={setReload}
             />
             {/* </View> */}
           </View>

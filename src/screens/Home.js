@@ -3,7 +3,7 @@ import { FlatList, Text, View, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import { connect } from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
-import { importProfileFromFile,importMeterReadingFromFile } from "./Profile/ProfileActions";
+import { importProfileFromFile } from "./Profile/ProfileActions";
 
 import { StateToProps, DispatchToProps } from '../store/MapToProps'
 import { PeriodUpdate } from './Dispatch/DispatchSend'
@@ -28,13 +28,13 @@ export default Home = connect(
     ProfileID,
     route
   }) => {
-    const [dropDown, setDrowDown] = useState(false);
-    
-    const [prevHistory, setPrevHistory] = useState(history);
+    const [dropDown, setDrowDown] = useState(false)
+
+    const [prevHistory, setPrevHistory] = useState(history)
 
     useEffect(() => {
-      PeriodUpdate(locale, toPeriod, "HOME", navigation);
-    }, []);
+      PeriodUpdate(locale, toPeriod, 'HOME', navigation)
+    }, [])
 
     return (
       <View style={styles.Container}>
@@ -51,64 +51,65 @@ export default Home = connect(
           <View style={styles.Home.ProfileCreateContainer}>
             {dropDown ? (
               <View>
-                
-                 <TouchableOpacity
-                onPress={() => {
-                  setDrowDown(!dropDown)
-                  navigation.navigate('Profile', { ProfileID: undefined })
-                }}
-                style={styles.Home.ProfileSubBtn}
-              >
-                <Text style={styles.Home.ProfileSubBtnText}>Створити</Text>
-                <LinearGradient
-                  colors={[
-                    styles.GradientColorFirst.color,
-                    styles.GradientColorSecond.color
-                  ]}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
-                  style={styles.Home.ProfileCreateSubSection}
+                <TouchableOpacity
+                  onPress={() => {
+                    setDrowDown(!dropDown)
+                    navigation.navigate('Profile', { ProfileID: undefined })
+                  }}
+                  style={styles.Home.ProfileSubBtn}
                 >
-                  <Icon
-                    name='user-plus'
-                    iconStyle={styles.Home.ProfileCreateSubIcon}
-                    type='font-awesome-5'
-                  ></Icon>
-                </LinearGradient>
-              </TouchableOpacity>
-                
-                <TouchableOpacity style={styles.Home.ProfileSubBtn} onPress={() => {                  
-                  importProfileFromFile(
-                    ProfileID,
-                    locale,
-                    profiles,
-                    toProfiles,
-                    lastValue,
-                    toLastValue,
-                    navigation,
-                    toHistory,
-                    // true
-                    history
-                  )                                                       
-                  }
-                }>
-                <Text style={styles.Home.ProfileSubBtnText}>Імпортувати</Text>
-                <LinearGradient
-                  colors={[
-                    styles.GradientColorFirst.color,
-                    styles.GradientColorSecond.color
-                  ]}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
-                  style={styles.Home.ProfileCreateSubSection}
+                  <Text style={styles.Home.ProfileSubBtnText}>Створити</Text>
+                  <LinearGradient
+                    colors={[
+                      styles.GradientColorFirst.color,
+                      styles.GradientColorSecond.color
+                    ]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.Home.ProfileCreateSubSection}
+                  >
+                    <Icon
+                      name='user-plus'
+                      iconStyle={styles.Home.ProfileCreateSubIcon}
+                      type='font-awesome-5'
+                    ></Icon>
+                  </LinearGradient>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.Home.ProfileSubBtn}
+                  onPress={() => {
+                    importProfileFromFile(
+                      ProfileID,
+                      locale,
+                      profiles,
+                      toProfiles,
+                      lastValue,
+                      toLastValue,
+                      navigation,
+                      toHistory,
+                      // true
+                      history
+                    )
+                  }}
                 >
-                  <Icon
-                    name='upload'
-                    iconStyle={styles.Home.ProfileCreateSubIcon}
-                    type='font-awesome-5'
-                  ></Icon>
-                </LinearGradient>
-              </TouchableOpacity>
+                  <Text style={styles.Home.ProfileSubBtnText}>Імпортувати</Text>
+                  <LinearGradient
+                    colors={[
+                      styles.GradientColorFirst.color,
+                      styles.GradientColorSecond.color
+                    ]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.Home.ProfileCreateSubSection}
+                  >
+                    <Icon
+                      name='upload'
+                      iconStyle={styles.Home.ProfileCreateSubIcon}
+                      type='font-awesome-5'
+                    ></Icon>
+                  </LinearGradient>
+                </TouchableOpacity>
               </View>
             ) : null}
 
@@ -116,36 +117,36 @@ export default Home = connect(
               <LinearGradient
                 colors={[
                   styles.GradientColorFirst.color,
-                  styles.GradientColorSecond.color,
+                  styles.GradientColorSecond.color
                 ]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 style={styles.Home.ProfileCreateSection}
               >
                 <Icon
-                  name="plus"
+                  name='plus'
                   iconStyle={styles.Home.ProfileCreateIcon}
-                  type="font-awesome-5"
+                  type='font-awesome-5'
                 ></Icon>
               </LinearGradient>
             </TouchableOpacity>
           </View>
         </View>
       </View>
-    );
+    )
   }
-);
+)
 
 const ProfileList = ({ profiles, styles, locale, navigation }) => {
-  let validate = false;
-  let errors = false;
-  let content = undefined;
+  let validate = false
+  let errors = false
+  let content = undefined
   if (profiles && styles && locale && navigation) {
     if (profiles.length > 0) {
-      validate = true;
+      validate = true
     }
   } else {
-    errors = true;
+    errors = true
   }
 
   if (!errors) {
@@ -158,15 +159,15 @@ const ProfileList = ({ profiles, styles, locale, navigation }) => {
             <TouchableOpacity
               style={styles.Home.Profile}
               onPress={() =>
-                navigation.navigate("Dispatch", {
+                navigation.navigate('Dispatch', {
                   ProfileID: item.id,
-                  IsNewDispatch: true,
+                  IsNewDispatch: true
                 })
               }
             >
               <View style={styles.Home.ProfileInfo}>
                 <Text style={styles.Home.ProfileCaption}>{item.address}</Text>
-                <Text style={styles.Home.ProfileCaption}>
+                <Text style={styles.Home.ProfileDescription}>
                   О/Р:&nbsp;{item.id}
                 </Text>
               </View>
@@ -174,35 +175,35 @@ const ProfileList = ({ profiles, styles, locale, navigation }) => {
               <View style={styles.Home.ProfileIcons}>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate("Profile", { ProfileID: item.id })
+                    navigation.navigate('Profile', { ProfileID: item.id })
                   }
                 >
                   <Icon
-                    name="edit"
+                    name='edit'
                     iconStyle={styles.Home.ProfileIcon}
-                    type="font-awesome-5"
+                    type='font-awesome-5'
                   ></Icon>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate("History", {
+                    navigation.navigate('History', {
                       ProfileID: item.id,
                       ProfileName: item.address,
-                      NeedLoad: true,
+                      NeedLoad: true
                     })
                   }
                 >
                   <Icon
-                    name="inbox"
+                    name='inbox'
                     iconStyle={styles.Home.ProfileIcon}
-                    type="font-awesome-5"
+                    type='font-awesome-5'
                   ></Icon>
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
           )}
         />
-      );
+      )
     } else {
       content = (
         <ScrollView
@@ -230,7 +231,7 @@ const ProfileList = ({ profiles, styles, locale, navigation }) => {
         </View>
         <View style={styles.Empty.Filler}></View>
       </>
-    );
+    )
   }
-  return content;
-};
+  return content
+}

@@ -42,6 +42,10 @@ export default {
     color: '#212121'
   },
 
+  SubMainColor: {
+    color: '#fff'
+  },
+
   // MAIN
   Container: { flex: 1, backgroundColor: '#fff' },
 
@@ -150,6 +154,14 @@ export default {
       fontSize: 14,
       fontWeight: 'normal',
       color: '#212121'
+    },
+
+    ProfileDescription: {
+      marginBottom: 8,
+
+      fontSize: 14,
+      fontWeight: 'normal',
+      color: '#7C7C7C'
     },
 
     ProfileIcons: {
@@ -558,18 +570,21 @@ export default {
       justifyContent: 'space-between'
     },
 
+    SortGradient: {
+      paddingVertical: 4,
+      paddingHorizontal: 7,
+
+      borderTopRightRadius: 10,
+      borderTopLeftRadius: 10
+    },
 
     InputDefault: {
-      paddingVertical: 2,
-      paddingHorizontal: 7,
+      flexDirection: 'row',
+      alignItems: 'center',
 
       fontSize: 16,
       fontWeight: 'bold',
-      color: '#212121',
-
-      borderColor: '#00AEEF',
-      borderWidth: 1,
-      borderRadius: 6
+      color: '#212121'
     },
 
     ContentHead: { paddingTop: 30, paddingHorizontal: 10, marginTop: 50 },
@@ -993,10 +1008,15 @@ export default {
       color: '#212121'
     }
   },
-  sortBlockStyle:{  
-    padding: 15,  
+  sortBlockStyle: {
+    paddingHorizontal: 15,
+    marginBottom: 20,
+
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
-  },
+    justifyContent: 'flex-start',
+
+    borderBottomWidth: 1,
+    borderColor: '#00AEEF'
+  }
 }
