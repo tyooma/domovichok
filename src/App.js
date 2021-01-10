@@ -13,7 +13,7 @@ export default function App() {
 
   useEffect(() => {
     const Init = async () => {
-      //  await setAppInit(store) // PROD
+     // await setAppInit(store) // PROD
 
       await setAppInitDefault(store) // For DEV, clear AsyncStorage, work only with REDUX
 

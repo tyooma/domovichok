@@ -1,7 +1,7 @@
 import { LANG, THEME } from "./Consts";
 
 import NetInfo from "@react-native-community/netinfo";
-import NoNetwork from "../screens/NoNetwork";
+
 
 export const LOCALES = [
   {
@@ -130,7 +130,7 @@ export const CheckOnline = async (navigation) => {
     navigation.goBack()
     //return true;
   } else {
-    <NoNetwork/>
+    navigation.navigate('NoNetwork')
     //return false;
   }
   /*

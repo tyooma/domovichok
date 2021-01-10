@@ -4,6 +4,7 @@ import {
   Text,
   View,
   Alert,
+  Modal,
   TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
@@ -12,21 +13,21 @@ import { StateToProps, DispatchToProps } from "../../store/MapToProps";
 import { Spinner } from "../components/Actions";
 import { HistoryList } from "./HistoryList";
 
-const History = ({ 
-  locale,
-  styles,
-  history, 
-  route,
-}) => {
+import CalendarCustom from "../components/CalendarCustom";
+
+const History = ({ locale, styles, history, route }) => {
   const needLoad = useRef(route.params.NeedLoad);
-  const [sort, setSort] = useState(true);
-  const [filter, setFilter] = useState(undefined);
+  const [sort, setSort] = useState(true);  
+  const [markedDates, setMarkedDates] = useState({});
+  const [chooseDay, setChooseDay] = useState({});
+  const [isCalendarVisible, setIsCalendarVisible] = useState(false);
+
   useEffect(() => {
-    setSort(true);
-    setFilter(undefined);
+    setSort(true);    
   }, [route]);
 
-  console.log("history", history, "route", route, "sort", sort);
+
+  console.log("chooseDay in HISTORY", chooseDay);
   return (
     <SafeAreaView style={styles.Container}>
       {needLoad && (
@@ -52,18 +53,9 @@ const History = ({
             </View>
             {/* ----------------------------------------------------------------- */}
             {history[route.params.ProfileID] &&
-                    history[route.params.ProfileID].length != 0 ? (
+            history[route.params.ProfileID].length != 0 ? (
               <View style={styles.sortBlockStyle}>
-                <TouchableOpacity
-                  onPress={() => {
-                    Alert.alert(
-                      locale.info_warning,
-                      "В стадії розробки",
-                      [{ text: "ОК", onPress: () => null }],
-                      { cancelable: false }
-                    );
-                  }}
-                >
+                <TouchableOpacity onPress={() => setIsCalendarVisible(true)}>
                   <View style={styles.History.InputDefault}>
                     <Text style={styles.History.HeaderRememberCaption}>
                       {"  "}
@@ -103,7 +95,7 @@ const History = ({
             <HistoryList
               ProfileID={route.params.ProfileID}
               sort={sort}
-              filter={filter}
+              filter={chooseDay}
             />
             {/* </View> */}
           </View>
@@ -118,6 +110,16 @@ const History = ({
             </Text>
           </View>
         </View>
+      )}
+      {/* КАЛЕНДАРЬ !*/}
+      {isCalendarVisible && (
+        <CalendarCustom
+          chooseDay={(info) => setChooseDay(info)}
+          onClose={setIsCalendarVisible}
+          history={history}
+          ProfileID={route.params.ProfileID}
+          clearCalendar={setMarkedDates}
+        />
       )}
     </SafeAreaView>
   );

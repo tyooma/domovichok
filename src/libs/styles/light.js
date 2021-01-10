@@ -578,7 +578,7 @@ export default {
 
     HeaderRememberCaption: {
       fontSize: 14,
-      color: '##212121'
+      color: '#212121'
     },
 
     ContentItemCaption: {

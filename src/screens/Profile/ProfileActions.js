@@ -136,6 +136,7 @@ export const runProfileSave = (
       locale.info_warning,
       locale.info_profile_save,
       [
+        { text: locale.action_cancel, onPress: () => null },
         {
           text: locale.action_ok,
           onPress: () =>
@@ -149,8 +150,7 @@ export const runProfileSave = (
               toLastValue,
               navigation
             )
-        },
-        { text: locale.action_cancel, onPress: () => null }
+        },     
       ],
       { cancelable: false }
     )

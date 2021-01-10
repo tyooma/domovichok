@@ -1,6 +1,6 @@
-import React, { useRef, useCallback, useState } from 'react'
+import React, { useRef, useCallback, useState } from "react";
 
-import moment from 'moment'
+import moment from "moment";
 
 import {
   SafeAreaView,
@@ -9,22 +9,20 @@ import {
   Modal,
   TouchableOpacity,
   FlatList,
-  Alert
-} from 'react-native'
-import { Divider, Icon } from 'react-native-elements'
-import { connect } from 'react-redux'
-import LinearGradient from 'react-native-linear-gradient'
-import { StateToProps, DispatchToProps } from '../../store/MapToProps'
-import { ActionBack, Spinner } from '../components/Actions'
-import { Validation } from './DispatchActions'
+  ScrollView,
+} from "react-native";
+import { Divider, Icon } from "react-native-elements";
+import { connect } from "react-redux";
+import LinearGradient from "react-native-linear-gradient";
+import { StateToProps, DispatchToProps } from "../../store/MapToProps";
+import { ActionBack, Spinner } from "../components/Actions";
+import { Validation } from "./DispatchActions";
 
-import DispatchFeedback from './DispatchFeedback'
+import DispatchFeedback from "./DispatchFeedback";
 
-import NoNetwork from '../NoNetwork'
+import NetInfo from "@react-native-community/netinfo";
 
-import NetInfo from '@react-native-community/netinfo'
-
-import { Success4Dispatch } from '../../libs/Tools'
+import { Success4Dispatch } from "../../libs/Tools";
 
 const PreviewDispatchFeedback = ({
   send,
@@ -32,18 +30,18 @@ const PreviewDispatchFeedback = ({
   styles,
   navigation,
   route,
-  period
+  period,
 }) => {
-  console.log('route ==>', route, 'period  ==>', period)
-  const needLoad = useRef(route.params.NeedLoad)
-  const [modal, setModal] = useState(false)
+  console.log("route ==>", route, "period  ==>", period);
+  const needLoad = useRef(route.params.NeedLoad);
+  const [modal, setModal] = useState(false);
 
   const SendOnline = useCallback(() => {
     // const validate = Validation(route.params.send, locale);
     // if (validate.state) {
     NetInfo.fetch().then((state) => {
       if (state.isConnected) {
-        setModal(true)
+        setModal(true);
         // if (Success4Dispatch(period)) {
         //   setModal(true);
         // } else {
@@ -58,9 +56,9 @@ const PreviewDispatchFeedback = ({
         //   );
         // }
       } else {
-        ;<NoNetwork />
+        navigation.navigate("NoNetwork");
       }
-    })
+    });
     // } else {
     //   Alert.alert(
     //     locale.valid_main_caption,
@@ -69,12 +67,12 @@ const PreviewDispatchFeedback = ({
     //     { cancelable: false }
     //   );
     // }
-  }, [route.params.send, setModal])
+  }, [route.params.send, setModal]);
 
   return (
     <SafeAreaView style={styles.Container}>
       {needLoad && (
-        <>
+        <ScrollView>
           <View style={styles.History.Content}>
             <View style={styles.History.ContentHead}>
               <View style={styles.History.ContentItem}>
@@ -102,7 +100,7 @@ const PreviewDispatchFeedback = ({
                     <LinearGradient
                       colors={[
                         styles.GradientColorFirst.color,
-                        styles.GradientColorSecond.color
+                        styles.GradientColorSecond.color,
                       ]}
                       start={{ x: 0, y: 0 }}
                       end={{ x: 1, y: 0 }}
@@ -113,17 +111,17 @@ const PreviewDispatchFeedback = ({
                           {locale.history_record_caption}&nbsp;
                         </Text>
                         <Text style={styles.History.RecordHeadCaption}>
-                          {moment().format('DD.MM.YYYY')}
+                          {moment().format("DD.MM.YYYY")}
                         </Text>
                       </View>
                     </LinearGradient>
-                    {(item.kitchenHot !== '' || item.kitchenCold !== '') && (
+                    {(item.kitchenHot !== "" || item.kitchenCold !== "") && (
                       <View style={styles.History.RecordSection}>
                         <Text style={styles.History.RecordSectionCaption}>
                           {locale.profile_kitchen}
                         </Text>
                         <View style={styles.History.RecordSectionItems}>
-                          {item.kitchenHot !== '' && (
+                          {item.kitchenHot !== "" && (
                             <View style={styles.History.RecordItemContainer}>
                               <Text style={styles.History.RecordItemHead}>
                                 {locale.profile_kitchen_hot}:&nbsp;
@@ -133,7 +131,7 @@ const PreviewDispatchFeedback = ({
                               </Text>
                             </View>
                           )}
-                          {item.kitchenCold !== '' && (
+                          {item.kitchenCold !== "" && (
                             <View style={styles.History.RecordItemContainer}>
                               <Text style={styles.History.RecordItemHead}>
                                 {locale.profile_kitchen_cold}:&nbsp;
@@ -147,13 +145,13 @@ const PreviewDispatchFeedback = ({
                       </View>
                     )}
 
-                    {(item.bathHot !== '' || item.bathCold !== '') && (
+                    {(item.bathHot !== "" || item.bathCold !== "") && (
                       <View style={styles.History.RecordSection}>
                         <Text style={styles.History.RecordSectionCaption}>
                           {locale.profile_bath}
                         </Text>
                         <View style={styles.History.RecordSectionItems}>
-                          {item.bathHot !== '' && (
+                          {item.bathHot !== "" && (
                             <View style={styles.History.RecordItemContainer}>
                               <Text style={styles.History.RecordItemHead}>
                                 {locale.profile_bath_hot}:&nbsp;
@@ -163,7 +161,7 @@ const PreviewDispatchFeedback = ({
                               </Text>
                             </View>
                           )}
-                          {item.bathCold !== '' && (
+                          {item.bathCold !== "" && (
                             <View style={styles.History.RecordItemContainer}>
                               <Text style={styles.History.RecordItemHead}>
                                 {locale.profile_bath_cold}:&nbsp;
@@ -176,13 +174,13 @@ const PreviewDispatchFeedback = ({
                         </View>
                       </View>
                     )}
-                    {(item.watering !== '' || item.sewage !== '') && (
+                    {(item.watering !== "" || item.sewage !== "") && (
                       <View style={styles.History.RecordSection}>
                         <Text style={styles.History.RecordSectionCaption}>
                           {locale.profile_other}
                         </Text>
                         <View style={styles.History.RecordSectionItems}>
-                          {item.watering !== '' && (
+                          {item.watering !== "" && (
                             <View style={styles.History.RecordItemContainer}>
                               <Text style={styles.History.RecordItemHead}>
                                 {locale.profile_other_watering}:&nbsp;
@@ -192,7 +190,7 @@ const PreviewDispatchFeedback = ({
                               </Text>
                             </View>
                           )}
-                          {item.sewage !== '' && (
+                          {item.sewage !== "" && (
                             <View style={styles.History.RecordItemContainer}>
                               <Text style={styles.History.RecordItemHead}>
                                 {locale.profile_other_sewage}:&nbsp;
@@ -205,7 +203,7 @@ const PreviewDispatchFeedback = ({
                         </View>
                       </View>
                     )}
-                    {item.notes !== '' && (
+                    {item.notes !== "" && (
                       <View style={styles.History.RecordSection}>
                         <Text style={styles.History.RecordSectionCaption}>
                           {locale.profile_notes}
@@ -225,7 +223,7 @@ const PreviewDispatchFeedback = ({
                 <LinearGradient
                   colors={[
                     styles.GradientColorFirst.color,
-                    styles.GradientColorSecond.color
+                    styles.GradientColorSecond.color,
                   ]}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
@@ -238,7 +236,7 @@ const PreviewDispatchFeedback = ({
               </TouchableOpacity>
             </View>
           </View>
-        </>
+        </ScrollView>
       )}
       {!needLoad && (
         <View style={styles.Feedback.Spinner}>
@@ -250,7 +248,7 @@ const PreviewDispatchFeedback = ({
           </View>
         </View>
       )}
-      <Modal visible={modal} animationType='fade' transparent={false}>
+      <Modal visible={modal} animationType="fade" transparent={false}>
         <DispatchFeedback
           dispatch={route.params.send}
           navigation={navigation}
@@ -258,10 +256,10 @@ const PreviewDispatchFeedback = ({
         />
       </Modal>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 export default connect(
   StateToProps(),
   DispatchToProps()
-)(PreviewDispatchFeedback)
+)(PreviewDispatchFeedback);

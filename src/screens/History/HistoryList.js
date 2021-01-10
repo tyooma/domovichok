@@ -1,20 +1,24 @@
 import React from "react";
 import { FlatList, ScrollView, Text, View } from "react-native";
-import LinearGradient from 'react-native-linear-gradient'
+import LinearGradient from "react-native-linear-gradient";
 import { connect } from "react-redux";
 import { StateToProps } from "../../store/MapToProps";
 import { HISTORYEMPTY } from "../../libs/Consts";
-import { HistorySort } from "./HistoryActions";
+import { HistorySort, HistoryFilter } from "./HistoryActions";
 
 
 export const HistoryList = connect(StateToProps())(
   ({ ProfileID, history, sort, filter, styles, locale }) => {
+    console.log("HistoryList ---  Object.keys(filter).length --- >", Object.keys(filter).length);
     if (history[ProfileID] && history[ProfileID].length != 0) {
       const dataList = history[ProfileID];
-      console.log("dataList", dataList);
       return (
         <FlatList
-          data={HistorySort(dataList, sort, locale)}
+          data={
+           Object.keys(filter).length
+              ? HistoryFilter(dataList, filter, locale)
+              : HistorySort(dataList, sort, locale)
+          }
           keyExtractor={(item) => item.timestamp.toString()}
           renderItem={({ item }) => (
             <View style={styles.History.Record} key={item.timestamp.toString()}>
@@ -29,7 +33,7 @@ export const HistoryList = connect(StateToProps())(
               >
                 <View style={styles.History.RecordHead}>
                   <Text style={styles.History.RecordHeadCaption}>
-                  {locale.history_record_caption}:&nbsp;
+                    {locale.history_record_caption}:&nbsp;
                   </Text>
                   <Text style={styles.History.RecordHeadCaption}>
                     {item.datetime}
