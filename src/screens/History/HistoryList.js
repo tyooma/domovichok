@@ -35,7 +35,7 @@ export const HistoryList = connect(StateToProps())(
               >
                 <View style={styles.History.RecordHead}>
                   <Text style={styles.History.RecordHeadCaption}>
-                    {locale.history_record_caption}:&nbsp;
+                    {locale.history_record_caption}&nbsp;
                   </Text>
                   <Text style={styles.History.RecordHeadCaption}>
                     {item.datetime}

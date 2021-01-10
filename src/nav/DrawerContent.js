@@ -73,9 +73,17 @@ const DrawerContent = ({
             >
               <View pointerEvents='none'>
                 {theme === THEME.dark ? (
-                  <Icon name='moon' size={25} color={styles.MainColor.color} />
+                  <Icon
+                    name='moon'
+                    size={25}
+                    color={styles.Drawer.LogoColor.color}
+                  />
                 ) : (
-                  <Icon name='sun' size={25} color={styles.MainColor.color} />
+                  <Icon
+                    name='sun'
+                    size={25}
+                    color={styles.Drawer.LogoColor.color}
+                  />
                 )}
               </View>
             </TouchableRipple>
@@ -83,7 +91,13 @@ const DrawerContent = ({
           <Drawer.Section style={styles.Drawer.List}>
             <DrawerItem
               icon={() => (
-                <Icon name='home' size={25} color={styles.MainColor.color} />
+                <View style={styles.Drawer.IconContainer}>
+                  <Icon
+                    name='home'
+                    size={25}
+                    color={styles.Drawer.LogoColor.color}
+                  />
+                </View>
               )}
               label='Головна'
               activeTintColor={styles.MainColor.color}
@@ -94,7 +108,13 @@ const DrawerContent = ({
             />
             <DrawerItem
               icon={() => (
-                <Icon name='book' size={25} color={styles.MainColor.color} />
+                <View style={styles.Drawer.IconContainer}>
+                  <Icon
+                    name='book'
+                    size={25}
+                    color={styles.Drawer.LogoColor.color}
+                  />
+                </View>
               )}
               label='Iнструкцiя'
               activeTintColor={styles.MainColor.color}
@@ -105,11 +125,13 @@ const DrawerContent = ({
             />
             <DrawerItem
               icon={() => (
-                <Icon
-                  name='shield-alt'
-                  size={25}
-                  color={styles.MainColor.color}
-                />
+                <View style={styles.Drawer.IconContainer}>
+                  <Icon
+                    name='shield-alt'
+                    size={25}
+                    color={styles.Drawer.LogoColor.color}
+                  />
+                </View>
               )}
               label='Політика конфіденційності'
               activeTintColor={styles.MainColor.color}
@@ -122,11 +144,13 @@ const DrawerContent = ({
             />
             <DrawerItem
               icon={() => (
-                <Icon
-                  name='info-circle'
-                  size={25}
-                  color={styles.MainColor.color}
-                />
+                <View style={styles.Drawer.IconContainer}>
+                  <Icon
+                    name='info-circle'
+                    size={25}
+                    color={styles.Drawer.LogoColor.color}
+                  />
+                </View>
               )}
               label='Довідка'
               activeTintColor={styles.MainColor.color}

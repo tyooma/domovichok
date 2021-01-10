@@ -206,7 +206,7 @@ const Profile = ({
                   selectionColor={styles.InputSelection}
                   placeholder={locale.profile_name_placeholder}
                   placeholderTextColor={styles.PlaceholderTextColor}
-                  maxLength={20}
+                  maxLength={60}
                   value={profile.address}
                   style={styles.Profile.InputDefault}
                 />

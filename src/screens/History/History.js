@@ -1,58 +1,59 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react'
 import {
   SafeAreaView,
   Text,
   View,
   Alert,
   TouchableOpacity,
-} from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import { connect } from "react-redux";
-import LinearGradient from "react-native-linear-gradient";
-import { StateToProps, DispatchToProps } from "../../store/MapToProps";
-import { Spinner } from "../components/Actions";
-import { HistoryList } from "./HistoryList";
-import CalendarCustom from "../components/CalendarCustom";
-import { importMeterReadingFromFile } from "../Profile/ProfileActions";
+  ScrollView
+} from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome5'
+import { connect } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient'
+import { StateToProps, DispatchToProps } from '../../store/MapToProps'
+import { Spinner } from '../components/Actions'
+import { HistoryList } from './HistoryList'
+import CalendarCustom from '../components/CalendarCustom'
+import { importMeterReadingFromFile } from '../Profile/ProfileActions'
 
 const History = ({ locale, styles, history, route }) => {
-  const needLoad = useRef(route.params.NeedLoad);
-  const [sort, setSort] = useState(true);
-  const [reload, setReload] = useState(false);
-  const [markedDates, setMarkedDates] = useState({});
-  const [chooseDay, setChooseDay] = useState({});
-  const [isCalendarVisible, setIsCalendarVisible] = useState(false);
+  const needLoad = useRef(route.params.NeedLoad)
+  const [sort, setSort] = useState(true)
+  const [reload, setReload] = useState(false)
+  const [markedDates, setMarkedDates] = useState({})
+  const [chooseDay, setChooseDay] = useState({})
+  const [isCalendarVisible, setIsCalendarVisible] = useState(false)
 
   useEffect(() => {
-    setSort(true);
-    setReload(false);
-  }, [route, setReload, reload]);
+    setSort(true)
+    setReload(false)
+  }, [route, setReload, reload])
 
   return (
     <SafeAreaView style={styles.Container}>
       {needLoad && (
-        <>
+        <ScrollView>
           <View style={styles.History.Content}>
             <View style={styles.History.ContentHead}>
-              <View style={styles.Dispatch.Toolbar}>
+              <View style={styles.History.Toolbar}>
                 <TouchableOpacity
                   onPress={() => {
-                    setReload(!reload);
+                    setReload(!reload)
                     // setSort(!sort)
-                    importMeterReadingFromFile(history);
+                    importMeterReadingFromFile(history)
                   }}
                 >
                   <LinearGradient
                     colors={[
                       styles.GradientColorFirst.color,
-                      styles.GradientColorSecond.color,
+                      styles.GradientColorSecond.color
                     ]}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 0 }}
-                    style={styles.Dispatch.SendBtn}
+                    style={styles.History.SendBtn}
                   >
                     <View>
-                      <Text style={styles.Dispatch.SendBtnText}>
+                      <Text style={styles.History.SendBtnText}>
                         Импортувати покази
                       </Text>
                     </View>
@@ -81,29 +82,10 @@ const History = ({ locale, styles, history, route }) => {
             history[route.params.ProfileID].length != 0 ? (
               <View style={styles.sortBlockStyle}>
                 <TouchableOpacity onPress={() => setIsCalendarVisible(true)}>
-                  <View style={styles.History.InputDefault}>
-                    <Text style={styles.History.HeaderRememberCaption}>
-                      {"  "}
-                      {locale.filter}
-                      {"  "}
-                      <Icon
-                        name="filter"
-                        size={18}
-                        color={styles.MainColor.color}
-                      />
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  onPress={() => {
-                    setSort(!sort);
-                  }}
-                >
                   <LinearGradient
                     colors={[
                       styles.GradientColorFirst.color,
-                      styles.GradientColorSecond.color,
+                      styles.GradientColorSecond.color
                     ]}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 0 }}
@@ -111,7 +93,33 @@ const History = ({ locale, styles, history, route }) => {
                   >
                     <View style={styles.History.InputDefault}>
                       <Icon
-                        name={sort ? "sort-amount-up" : "sort-amount-down"}
+                        name='filter'
+                        size={18}
+                        color={styles.MainColor.color}
+                      />
+                      <Text style={styles.History.HeaderRememberCaption}>
+                        {locale.filter}
+                      </Text>
+                    </View>
+                  </LinearGradient>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setSort(!sort)
+                  }}
+                >
+                  <LinearGradient
+                    colors={[
+                      styles.GradientColorFirst.color,
+                      styles.GradientColorSecond.color
+                    ]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.History.SortGradient}
+                  >
+                    <View style={styles.History.InputDefault}>
+                      <Icon
+                        name={sort ? 'sort-amount-up' : 'sort-amount-down'}
                         size={18}
                         color={styles.MainColor.color}
                       />
@@ -134,7 +142,7 @@ const History = ({ locale, styles, history, route }) => {
             />
             {/* </View> */}
           </View>
-        </>
+        </ScrollView>
       )}
       {!needLoad && (
         <View style={styles.Feedback.Spinner}>
@@ -149,7 +157,7 @@ const History = ({ locale, styles, history, route }) => {
       {/* КАЛЕНДАРЬ !*/}
       {isCalendarVisible && (
         <CalendarCustom
-          chooseDay={(info) => setChooseDay(info)}
+          chooseDay={info => setChooseDay(info)}
           onClose={setIsCalendarVisible}
           history={history}
           ProfileID={route.params.ProfileID}
@@ -158,7 +166,7 @@ const History = ({ locale, styles, history, route }) => {
         />
       )}
     </SafeAreaView>
-  );
-};
+  )
+}
 
-export default connect(StateToProps(), DispatchToProps())(History);
+export default connect(StateToProps(), DispatchToProps())(History)
