@@ -1,56 +1,56 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
+import { Calendar, LocaleConfig } from 'react-native-calendars'
+import LinearGradient from 'react-native-linear-gradient'
 
-import { Calendar, LocaleConfig } from "react-native-calendars";
+import { ButtonDefault, ButtonDisabled } from './Button'
+import moment from 'moment'
 
-import { ButtonDefault, ButtonDisabled } from "./Button";
-import moment from "moment";
-
-import { Text, View, ScrollView, TouchableOpacity } from "react-native";
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native'
 const dayNames = [
-  "Неділя",
-  "Понеділок",
-  "Вівторок",
-  "Середа",
-  "Четвер",
-  "П’ятниця",
-  "Субота",
-];
+  'Неділя',
+  'Понеділок',
+  'Вівторок',
+  'Середа',
+  'Четвер',
+  'П’ятниця',
+  'Субота'
+]
 const shortMonthName = [
-  "Січ.",
-  "Лют.",
-  "Бер.",
-  "Кв.",
-  "Тр.",
-  "Черв.",
-  "Лип.",
-  "Серп.",
-  "Вер.",
-  "Жовт.",
-  "Лист.",
-  "Гр.",
-];
+  'Січ.',
+  'Лют.',
+  'Бер.',
+  'Кв.',
+  'Тр.',
+  'Черв.',
+  'Лип.',
+  'Серп.',
+  'Вер.',
+  'Жовт.',
+  'Лист.',
+  'Гр.'
+]
 
-LocaleConfig.locales["ua"] = {
+LocaleConfig.locales['ua'] = {
   monthNames: [
-    "Січень",
-    "Лютий",
-    "Березень",
-    "Квітень",
-    "Травень",
-    "Червень",
-    "Липень",
-    "Серпень",
-    "Вересень",
-    "Жовтень",
-    "Листопад",
-    "Грудень",
+    'Січень',
+    'Лютий',
+    'Березень',
+    'Квітень',
+    'Травень',
+    'Червень',
+    'Липень',
+    'Серпень',
+    'Вересень',
+    'Жовтень',
+    'Листопад',
+    'Грудень'
   ],
   monthNamesShort: shortMonthName,
   dayNames,
-  dayNamesShort: ["Нд.", "Пн.", "Вт.", "Ср.", "Чт.", "Пт.", "Сб."],
-  today: "Сьогодні",
-};
-LocaleConfig.defaultLocale = "ua";
+  dayNamesShort: ['Нд.', 'Пн.', 'Вт.', 'Ср.', 'Чт.', 'Пт.', 'Сб.'],
+  today: 'Сьогодні'
+}
+LocaleConfig.defaultLocale = 'ua'
 
 const CalendarCustom = ({
   onClose,
@@ -58,65 +58,65 @@ const CalendarCustom = ({
   history,
   clearCalendar,
   chooseDay,
-  styles,
+  styles
 }) => {
-  let date = new Date().getDate();
-  date.toString().length == 1 ? (date = "0" + date) : null;
-  let month = new Date().getMonth() + 1;
-  month.toString().length == 1 ? (month = "0" + month) : null;
-  const year = new Date().getFullYear();
+  let date = new Date().getDate()
+  date.toString().length == 1 ? (date = '0' + date) : null
+  let month = new Date().getMonth() + 1
+  month.toString().length == 1 ? (month = '0' + month) : null
+  const year = new Date().getFullYear()
 
-  const now = `${year}-${month}-${date}`;
+  const now = `${year}-${month}-${date}`
 
-  const [markedDates, setMarkedDates] = useState({});
-  const [dates, setDates] = useState();
+  const [markedDates, setMarkedDates] = useState({})
+  const [dates, setDates] = useState()
 
-  const getDateStr = (date) => {
-    return date.toISOString().slice(0, 10);
-  };
+  const getDateStr = date => {
+    return date.toISOString().slice(0, 10)
+  }
 
   useEffect(() => {
-    const markedDatesObject = {};
-    console.log("styles", styles.Calendar);
+    const markedDatesObject = {}
+    console.log('styles', styles.Calendar)
 
     if (history[ProfileID] && history[ProfileID].length != 0) {
       history[ProfileID].forEach(
-        (date) =>
+        date =>
           (markedDatesObject[getDateStr(moment(date.timestamp).toDate())] = {
             selected: true,
             selectedColor: styles.Calendar.btnTextClose.color,
-            marked: true,
+            marked: true
           })
-      );
+      )
     }
 
     setMarkedDates({
       ...markedDatesObject,
-      [now]: { selected: true, marked: true },
-    });
-  }, [now]);
+      [now]: { selected: true, marked: true }
+    })
+  }, [now])
 
-  const onSelectDays = (day) => {
+  const onSelectDays = day => {
     for (let key in markedDates) {
       if (key === day.dateString) {
-        setDates(day);
+        setDates(day)
         setMarkedDates({
           ...markedDates,
           [day.dateString]: {
             selected: true,
-            selectedColor: "#39b033",
-            marked: true,
-          },
-        });
-        chooseDay(day);
-        onClose(false);
+            selectedColor: '#39b033',
+            marked: true
+          }
+        })
+        chooseDay(day)
+        onClose(false)
       }
     }
 
     // setMarkedDates({
     //   [day.dateString]: { selected: true, selectedColor: "#B986DA" },
     // });
-  };
+  }
 
   return (
     <View style={styles.Calendar.bg}>
@@ -127,22 +127,30 @@ const CalendarCustom = ({
               {dayNames[new Date().getDay()]}
             </Text>
           </View>
-          <View style={styles.Calendar.middleBlock}>
+          <LinearGradient
+            colors={[
+              styles.GradientColorFirst.color,
+              styles.GradientColorSecond.color
+            ]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.Calendar.middleBlock}
+          >
             <Text style={styles.Calendar.monthText}>
               {shortMonthName[month - 1]}
             </Text>
             <Text style={styles.Calendar.dayText}>{date}</Text>
             <Text style={styles.Calendar.yearText}>{year}</Text>
-          </View>
+          </LinearGradient>
           <Calendar
-            markingType="multi-dot"
+            markingType='multi-dot'
             markedDates={markedDates}
             firstDay={1}
             disabledByDefault
             hideExtraDays={true}
-            onDayPress={(day) => onSelectDays(day)}
-            onPressArrowLeft={(subtractMonth) => subtractMonth()}
-            onPressArrowRight={(addMonth) => addMonth()}
+            onDayPress={day => onSelectDays(day)}
+            onPressArrowLeft={subtractMonth => subtractMonth()}
+            onPressArrowRight={addMonth => addMonth()}
             theme={{
               textSectionTitleDisabledColor:
                 styles.Calendar.textSectionTitleDisabledColor,
@@ -153,28 +161,37 @@ const CalendarCustom = ({
                 styles.Calendar.selectedDayBackgroundColor,
               selectedDayTextColor: styles.Calendar.selectedDayTextColor,
               monthTextColor: styles.Calendar.monthTextColor,
-              "stylesheet.calendar.header": {
+              'stylesheet.calendar.header': {
                 week: {
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                },
-              },
+                  flexDirection: 'row',
+                  justifyContent: 'space-between'
+                }
+              }
             }}
           />
-          <View style={styles.Calendar.btnDisabledWrap}>
-            <ButtonDefault
-              title="Закрити"
+          <LinearGradient
+            colors={[
+              styles.GradientColorFirst.color,
+              styles.GradientColorSecond.color
+            ]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.Calendar.btnDisabledWrap}
+          >
+            <TouchableOpacity
               styles={styles}
               onPress={() => {
-                clearCalendar && clearCalendar({});
-                onClose(false);
+                clearCalendar && clearCalendar({})
+                onClose(false)
               }}
-            />
-          </View>
+            >
+              <Text style={styles.Calendar.btnTextClose}>Закрити</Text>
+            </TouchableOpacity>
+          </LinearGradient>
         </ScrollView>
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default CalendarCustom;
+export default CalendarCustom

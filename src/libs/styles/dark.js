@@ -24,6 +24,18 @@ export default {
       height: 82
     },
 
+    LogoColor: {
+      color: '#725CAE'
+    },
+
+    IconContainer: {
+      marginRight: -12, 
+
+      width: 28,
+
+      alignItems: 'center'
+    },
+
     List: {
       padding: 8
     }
@@ -132,7 +144,10 @@ export default {
     },
 
     Profile: {
+      paddingVertical: 10,
       marginBottom: 15,
+
+      width: sWidth - 30,
 
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -144,8 +159,14 @@ export default {
     },
 
     ProfileInfo: {
-      paddingTop: 14,
-      paddingLeft: 17
+      paddingTop: 7,
+      paddingLeft: 17,
+      paddingRight: 17,
+
+      width: '85%',
+
+      borderRightWidth: 1,
+      borderRightColor: '#725CAE'
     },
 
     ProfileCaption: {
@@ -165,16 +186,15 @@ export default {
     },
 
     ProfileIcons: {
-      paddingTop: 8,
+      paddingVertical: 4,
       paddingRight: 11,
-      paddingBottom: 11,
 
       flexDirection: 'column',
-      justifyContent: 'center'
+      alignItems: 'center'
     },
 
     ProfileIcon: {
-      marginBottom: 10,
+      marginBottom: 12,
 
       fontSize: 26,
       fontWeight: 'normal',
@@ -680,7 +700,27 @@ export default {
       color: '#fff'
     },
 
-    RecordItemBodyNotes: { fontSize: 13, fontWeight: 'normal', color: '#fff' }
+    RecordItemBodyNotes: { fontSize: 13, fontWeight: 'normal', color: '#fff' },
+
+    Toolbar: {
+      marginBottom: 20,
+
+      flexDirection: 'column'
+    },
+
+    SendBtn: {
+      paddingVertical: 10,
+      paddingHorizontal: 30,
+
+      borderRadius: 10
+    },
+
+    SendBtnText: {
+      fontSize: 16,
+      fontWeight: 'normal',
+      textAlign: 'center',
+      color: '#fff'
+    }
   },
 
   Menu: {
@@ -1008,86 +1048,91 @@ export default {
   Calendar: {
     bg: {
       flex: 1,
-      width: "100%",
-      position: "absolute",
+      width: '100%',
+      position: 'absolute',
       top: 0,
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: "rgba(0,0,0,.4)",
-      justifyContent: "center",
-      alignItems: "center",
+      backgroundColor: 'rgba(0,0,0,.4)',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     container: {
-      width: "85%",
-      alignSelf: "center",
-      justifyContent: "center",
+      paddingTop: 20,
+
+      width: '85%',
+
+      alignSelf: 'center',
+      justifyContent: 'center'
     },
     topBlock: {
       height: 40,
-      backgroundColor: "#725CAE",
-      justifyContent: "center",
-      alignItems: "center",
+      backgroundColor: '#725CAE',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     text: {
-      color: "#FFF",
+      color: '#FFF'
     },
     btnDisabledWrap: {
-      backgroundColor: "#fff",
-      padding: 8,
+      backgroundColor: '#fff',
+      padding: 8
     },
     middleBlock: {
-      backgroundColor: "#212121",
-      justifyContent: "center",
-      alignItems: "center",
+      backgroundColor: '#212121',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     monthText: {
-      color: "#FFF",
+      color: '#FFF',
       fontSize: 24,
-      textTransform: "uppercase",
-      fontFamily: "FuturaPT-Medium",
+      textTransform: 'uppercase',
+      fontFamily: 'FuturaPT-Medium'
     },
     dayText: {
-      color: "#FFF",
+      color: '#FFF',
       fontSize: 75,
-      fontFamily: "FuturaPT-Medium",
+      fontFamily: 'FuturaPT-Medium'
     },
     yearText: {
       opacity: 0.5,
-      color: "#FFF",
+      color: '#FFF',
       fontSize: 24,
-      fontFamily: "FuturaPT-Medium",
+      fontFamily: 'FuturaPT-Medium'
     },
-    textSectionTitleDisabledColor: "#d9e1e8",
-    todayTextColor: "#725CAE",
-    backgroundColor: "#ffffff",
-    calendarBackground: "#ffffff",
-    selectedDayBackgroundColor: "#725CAE",
-    selectedDayTextColor: "#fff",
-    monthTextColor: "black",
+    textSectionTitleDisabledColor: '#d9e1e8',
+    todayTextColor: '#725CAE',
+    backgroundColor: '#ffffff',
+    calendarBackground: '#ffffff',
+    selectedDayBackgroundColor: '#725CAE',
+    selectedDayTextColor: '#fff',
+    monthTextColor: 'black',
     mb: {
-      marginBottom: 8,
+      marginBottom: 8
     },
     btn: {
       height: 50,
       paddingHorizontal: 16,
-      justifyContent: "center",
-      alignItems: "center",
+      justifyContent: 'center',
+      alignItems: 'center',
       borderRadius: 2,
-      backgroundColor: "#fff",
+      backgroundColor: '#fff'
     },
     notActiveBtn: {
-      borderWidth: 1.5,      
-      borderColor: "#725CAE",      
+      borderWidth: 1.5,
+      borderColor: '#725CAE'
     },
     btnText: {
-      textAlign: "center",
       fontSize: 13,
-      fontFamily: "FuturaPT-Bold",
-      textTransform: "uppercase",     
+      fontFamily: 'FuturaPT-Bold',
+      textAlign: 'center',
+      textTransform: 'uppercase'
     },
-    btnTextClose:{
-      color: "#725CAE",
+    btnTextClose: {
+      textAlign: 'center',
+      textTransform: 'uppercase',
+      color: '#fff'
     }
-  },
+  }
 }
