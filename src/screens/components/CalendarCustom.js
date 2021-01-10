@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 
+import { Calendar, LocaleConfig } from "react-native-calendars";
+
 import { ButtonDefault, ButtonDisabled } from "./Button";
-
-import { Calendar, CalendarList, LocaleConfig } from "react-native-calendars";
-
 import moment from "moment";
 
-import { Text, View, StyleSheet, ScrollView } from "react-native";
+import { Text, View, ScrollView, TouchableOpacity } from "react-native";
 const dayNames = [
   "Неділя",
   "Понеділок",
@@ -59,19 +58,8 @@ const CalendarCustom = ({
   history,
   clearCalendar,
   chooseDay,
+  styles,
 }) => {
-  const {
-    monthText,
-    dayText,
-    yearText,
-    middleBlock,
-    topBlock,
-    container,
-    bg,
-    btnDisabledWrap,
-    mb,
-  } = styles;
-
   let date = new Date().getDate();
   date.toString().length == 1 ? (date = "0" + date) : null;
   let month = new Date().getMonth() + 1;
@@ -89,12 +77,14 @@ const CalendarCustom = ({
 
   useEffect(() => {
     const markedDatesObject = {};
+    console.log("styles", styles.Calendar);
+
     if (history[ProfileID] && history[ProfileID].length != 0) {
       history[ProfileID].forEach(
         (date) =>
           (markedDatesObject[getDateStr(moment(date.timestamp).toDate())] = {
             selected: true,
-            selectedColor: "#B986DA",
+            selectedColor: styles.Calendar.btnTextClose.color,
             marked: true,
           })
       );
@@ -129,18 +119,20 @@ const CalendarCustom = ({
   };
 
   return (
-    <View style={bg}>
-      <View style={container}>
+    <View style={styles.Calendar.bg}>
+      <View style={styles.Calendar.container}>
         <ScrollView>
-          <View style={topBlock}>
-            <Text style={{ color: "#FFF" }}>
+          <View style={styles.Calendar.topBlock}>
+            <Text style={styles.Calendar.text}>
               {dayNames[new Date().getDay()]}
             </Text>
           </View>
-          <View style={middleBlock}>
-            <Text style={monthText}>{shortMonthName[month - 1]}</Text>
-            <Text style={dayText}>{date}</Text>
-            <Text style={yearText}>{year}</Text>
+          <View style={styles.Calendar.middleBlock}>
+            <Text style={styles.Calendar.monthText}>
+              {shortMonthName[month - 1]}
+            </Text>
+            <Text style={styles.Calendar.dayText}>{date}</Text>
+            <Text style={styles.Calendar.yearText}>{year}</Text>
           </View>
           <Calendar
             markingType="multi-dot"
@@ -152,13 +144,15 @@ const CalendarCustom = ({
             onPressArrowLeft={(subtractMonth) => subtractMonth()}
             onPressArrowRight={(addMonth) => addMonth()}
             theme={{
-              textSectionTitleDisabledColor: "#d9e1e8",
-              todayTextColor: "#00adf5",
-              backgroundColor: "#ffffff",
-              calendarBackground: "#ffffff",
-              selectedDayBackgroundColor: "green",
-              selectedDayTextColor: "#fff",
-              monthTextColor: "black",
+              textSectionTitleDisabledColor:
+                styles.Calendar.textSectionTitleDisabledColor,
+              todayTextColor: styles.Calendar.todayTextColor,
+              backgroundColor: styles.Calendar.backgroundColor,
+              calendarBackground: styles.Calendar.calendarBackground,
+              selectedDayBackgroundColor:
+                styles.Calendar.selectedDayBackgroundColor,
+              selectedDayTextColor: styles.Calendar.selectedDayTextColor,
+              monthTextColor: styles.Calendar.monthTextColor,
               "stylesheet.calendar.header": {
                 week: {
                   flexDirection: "row",
@@ -167,18 +161,10 @@ const CalendarCustom = ({
               },
             }}
           />
-          <View style={btnDisabledWrap}>
-            {/* <ButtonDefault
-              title="Вибрати дату"
-              active={true}
-              style={mb}
-              onPress={() => {
-                cho(markedDates);
-                onClose(false);
-              }}
-            /> */}
+          <View style={styles.Calendar.btnDisabledWrap}>
             <ButtonDefault
               title="Закрити"
+              styles={styles}
               onPress={() => {
                 clearCalendar && clearCalendar({});
                 onClose(false);
@@ -190,60 +176,5 @@ const CalendarCustom = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  bg: {
-    flex: 1,
-    width: "100%",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0,0,0,.4)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  container: {
-    width: "85%",
-    alignSelf: "center",
-    justifyContent: "center",
-  },
-  topBlock: {
-    height: 40,
-    backgroundColor: "#C092DE",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  btnDisabledWrap: {
-    backgroundColor: "#fff",
-    padding: 8,
-  },
-  middleBlock: {
-    backgroundColor: "#B986DA",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  monthText: {
-    color: "#FFF",
-    fontSize: 24,
-    textTransform: "uppercase",
-    fontFamily: "FuturaPT-Medium",
-  },
-  dayText: {
-    color: "#FFF",
-    fontSize: 75,
-    fontFamily: "FuturaPT-Medium",
-  },
-  yearText: {
-    opacity: 0.5,
-    color: "#FFF",
-    fontSize: 24,
-    fontFamily: "FuturaPT-Medium",
-  },
-  mb: {
-    marginBottom: 8,
-  },
-});
 
 export default CalendarCustom;

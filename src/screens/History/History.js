@@ -154,6 +154,7 @@ const History = ({ locale, styles, history, route }) => {
           history={history}
           ProfileID={route.params.ProfileID}
           clearCalendar={setMarkedDates}
+          styles={styles}
         />
       )}
     </SafeAreaView>
