@@ -1004,5 +1004,90 @@ export default {
 
     borderBottomWidth: 1,
     borderColor: '#725CAE'
-  }
+  },
+  Calendar: {
+    bg: {
+      flex: 1,
+      width: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "rgba(0,0,0,.4)",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    container: {
+      width: "85%",
+      alignSelf: "center",
+      justifyContent: "center",
+    },
+    topBlock: {
+      height: 40,
+      backgroundColor: "#725CAE",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    text: {
+      color: "#FFF",
+    },
+    btnDisabledWrap: {
+      backgroundColor: "#fff",
+      padding: 8,
+    },
+    middleBlock: {
+      backgroundColor: "#212121",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    monthText: {
+      color: "#FFF",
+      fontSize: 24,
+      textTransform: "uppercase",
+      fontFamily: "FuturaPT-Medium",
+    },
+    dayText: {
+      color: "#FFF",
+      fontSize: 75,
+      fontFamily: "FuturaPT-Medium",
+    },
+    yearText: {
+      opacity: 0.5,
+      color: "#FFF",
+      fontSize: 24,
+      fontFamily: "FuturaPT-Medium",
+    },
+    textSectionTitleDisabledColor: "#d9e1e8",
+    todayTextColor: "#725CAE",
+    backgroundColor: "#ffffff",
+    calendarBackground: "#ffffff",
+    selectedDayBackgroundColor: "#725CAE",
+    selectedDayTextColor: "#fff",
+    monthTextColor: "black",
+    mb: {
+      marginBottom: 8,
+    },
+    btn: {
+      height: 50,
+      paddingHorizontal: 16,
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: 2,
+      backgroundColor: "#fff",
+    },
+    notActiveBtn: {
+      borderWidth: 1.5,      
+      borderColor: "#725CAE",      
+    },
+    btnText: {
+      textAlign: "center",
+      fontSize: 13,
+      fontFamily: "FuturaPT-Bold",
+      textTransform: "uppercase",     
+    },
+    btnTextClose:{
+      color: "#725CAE",
+    }
+  },
 }

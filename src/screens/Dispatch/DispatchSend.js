@@ -2,7 +2,7 @@ import { Alert } from 'react-native';
 import NetInfo from "@react-native-community/netinfo";
 import firestore from '@react-native-firebase/firestore';
 import RNSmtpMailer from "react-native-smtp-mailer";
-import NoNetwork from '../NoNetwork';
+
 
 const dbDispatch = 'Indication';
 const dbPeriod = 'constants';
@@ -192,7 +192,7 @@ export const PeriodUpdate = async (locale, toPeriod, screen, navigation) => {
           ], { cancelable: false },
         );
       } else {
-        <NoNetwork />
+        navigation.navigate('NoNetwork')
         // Alert.alert(
         //   locale.info_warning, `${locale.err_check_link}`,
         //   [{ text: locale.action_ok, onPress: () => null }], { cancelable: false },

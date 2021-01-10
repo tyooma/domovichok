@@ -25,6 +25,7 @@ import { HeaderIcon } from '../components/HeaderIcon'
 import { StateToProps, DispatchToProps } from '../store/MapToProps'
 import { runProfileDelete } from '../screens/Profile/ProfileActions'
 import DrawerContent from './DrawerContent'
+import NoNetwork from "../screens/NoNetwork";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -50,7 +51,8 @@ const MainStack = connect(
         headerTitleStyle: {
           fontFamily: "Montserrat-SemiBold",
           fontSize: 22,
-        },
+          fontWeight: 'bold',
+        },        
         headerTintColor: "#fff",
         headerBackground: () => (
           <LinearGradient
@@ -70,6 +72,9 @@ const MainStack = connect(
         component={Home}
         options={{
           title: "Домовичок",
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
           headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HeaderIcon}>
               <Item
@@ -95,6 +100,9 @@ const MainStack = connect(
         component={Instruction}
         options={{
           title: "Iнструкцiя",
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       />
       <Stack.Screen
@@ -102,6 +110,9 @@ const MainStack = connect(
         component={Dispatch}
         options={{
           title: "Передача показників",
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       />
       <Stack.Screen
@@ -140,6 +151,9 @@ const MainStack = connect(
         component={History}
         options={({ navigation, route }) => ({
           title: "Історія",
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
           headerRight: () =>
             route.params.ProfileID !== undefined ? (
               <HeaderButtons HeaderButtonComponent={HeaderIcon}>
@@ -171,6 +185,19 @@ const MainStack = connect(
         component={PreviewDispatchFeedback}
         options={{
           title: "Підтвердження показань",
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      />
+        <Stack.Screen
+        name="NoNetwork"
+        component={NoNetwork}
+        options={{
+          title: "Домовичок",
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       />
       <Stack.Screen
@@ -178,6 +205,9 @@ const MainStack = connect(
         component={Settings}
         options={{
           title: 'Налаштування',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
           headerLeft: () => (
             <HeaderButtons HeaderButtonComponent={HeaderIcon}>
               <Item
@@ -194,6 +224,9 @@ const MainStack = connect(
         component={Policy}
         options={{
           title: 'Політика конфіденційності',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
           headerLeft: () => (
             <HeaderButtons HeaderButtonComponent={HeaderIcon}>
               <Item
@@ -210,6 +243,9 @@ const MainStack = connect(
         component={About}
         options={{
           title: 'Довідка',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
           headerLeft: () => (
             <HeaderButtons HeaderButtonComponent={HeaderIcon}>
               <Item

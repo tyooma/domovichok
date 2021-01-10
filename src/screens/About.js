@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { StateToProps } from '../store/MapToProps'
-import NoNetwork from './NoNetwork'
+
 
 const url = 'https://vodaslav.com.ua/'
 const tel = 'tel:+38045792-26-55'
@@ -20,7 +20,7 @@ const OpenUrlTouchableOpacity = ({ url, children }) => {
       await Linking.openURL(url)
     } else {
       // Alert.alert(`${locale.err_check_link} ${url}`);
-      ;<NoNetwork />
+      navigation.navigate('NoNetwork')
     }
   }, [url])
   return <TouchableOpacity onPress={handlePress}>{children}</TouchableOpacity>

@@ -1,5 +1,7 @@
 import { Alert } from "react-native";
 
+import moment from "moment";
+
 export const HistoryDelete = (
   profileID,
   history,
@@ -64,13 +66,40 @@ export const HistoryDelete = (
 
 //-------------------------------------------------------------------------------------------------------
 
-export const HistoryFilter = (history, filter, locale) => {
+export const minDate = (history) => {
   let current = [];
   try {
-    const startDate = filter.startDate;
-    const endDate = filter.endDate;
     history.forEach((item) => {
+      // current = history.sort((a, b) => a.timestamp - b.timestamp).reverse();
       if (item.timestamp >= startDate && item.timestamp <= endDate) {
+        current.push(item);
+      }
+    });
+  } catch (error) {
+    console.log("HistorySort => CatchError:", error);
+    Alert.alert(
+      locale.err_main_caption,
+      locale.err_history_sort,
+      [{ text: locale.action_ok, onPress: () => null }],
+      { cancelable: false }
+    );
+  }  
+  return current;
+};
+
+const getDateStr = (date) => {
+  return date.toISOString().slice(0, 10);
+};
+
+export const HistoryFilter = (history, filter, locale) => {
+  let current = [];
+
+  try {
+    console.log('history',history,'filter',filter,)
+    console.log('getDateStr(moment(filter.timestamp).toDate()',getDateStr(moment(filter.timestamp).toDate()))
+    history.forEach((item) => {            
+      console.log('getDateStr(moment(item.timestamp).toDate())',getDateStr(moment(item.timestamp).toDate()))
+      if (getDateStr(moment(filter.timestamp).toDate()) === getDateStr(moment(item.timestamp).toDate())) {
         current.push(item);
       }
     });
@@ -83,13 +112,13 @@ export const HistoryFilter = (history, filter, locale) => {
       { cancelable: false }
     );
   }
+  console.log("CURRENT",current)
   return current;
 };
 
 //-------------------------------------------------------------------------------------------------------
 
 export const HistorySort = (history, DESC, locale) => {
-  console.log("HISTORY in HistorySort", history, " DESC in HistorySort", DESC);
   let current = [];
   try {
     if (DESC) {
