@@ -103,7 +103,7 @@ const DrawerContent = ({
               activeTintColor={styles.MainColor.color}
               inactiveTintColor={styles.MainColor.color}
               onPress={() => {
-                navigation.navigate('Home')
+                navigation.navigate('Home') 
               }}
             />
             <DrawerItem

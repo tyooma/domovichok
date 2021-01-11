@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { FlatList, Text, View, TouchableOpacity } from "react-native";
-import { Icon } from "react-native-elements";
-import { connect } from "react-redux";
-import LinearGradient from "react-native-linear-gradient";
-import { importProfileFromFile } from "./Profile/ProfileActions";
+import React, { useEffect, useState } from 'react'
+import { FlatList, Text, View, TouchableOpacity, Animated } from 'react-native'
+import { Icon } from 'react-native-elements'
+import { connect } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient'
+import { importProfileFromFile } from './Profile/ProfileActions'
 
 import { StateToProps, DispatchToProps } from '../store/MapToProps'
 import { PeriodUpdate } from './Dispatch/DispatchSend'
@@ -29,12 +29,27 @@ export default Home = connect(
     route
   }) => {
     const [dropDown, setDrowDown] = useState(false)
-
     const [prevHistory, setPrevHistory] = useState(history)
+    const up = useState(new Animated.Value(60))[0]
+    const opacity = useState(new Animated.Value(0))[0]
 
     useEffect(() => {
       PeriodUpdate(locale, toPeriod, 'HOME', navigation)
     }, [])
+
+    const moveBtns = (opacityValue, upValue) => {
+      Animated.timing(opacity, {
+        toValue: opacityValue,
+        duration: 300,
+        useNativeDriver: true
+      }).start()
+
+      Animated.timing(up, {
+        toValue: upValue,
+        duration: 300,
+        useNativeDriver: true
+      }).start()
+    }
 
     return (
       <View style={styles.Container}>
@@ -50,7 +65,14 @@ export default Home = connect(
           </View>
           <View style={styles.Home.ProfileCreateContainer}>
             {dropDown ? (
-              <View>
+              <Animated.View
+                style={[
+                  {
+                    opacity,
+                    transform: [{ translateY: up }]
+                  }
+                ]}
+              >
                 <TouchableOpacity
                   onPress={() => {
                     setDrowDown(!dropDown)
@@ -110,10 +132,15 @@ export default Home = connect(
                     ></Icon>
                   </LinearGradient>
                 </TouchableOpacity>
-              </View>
+              </Animated.View>
             ) : null}
 
-            <TouchableOpacity onPress={() => setDrowDown(!dropDown)}>
+            <TouchableOpacity
+              onPress={() => {
+                setDrowDown(!dropDown)
+                !dropDown ? moveBtns(1, 0) : moveBtns(0, 60)
+              }}
+            >
               <LinearGradient
                 colors={[
                   styles.GradientColorFirst.color,
@@ -154,7 +181,7 @@ const ProfileList = ({ profiles, styles, locale, navigation }) => {
       content = (
         <FlatList
           data={profiles}
-          keyExtractor={(item) => item.id}
+          keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.Home.Profile}
